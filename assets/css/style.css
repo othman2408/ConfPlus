@@ -1,0 +1,58 @@
+/* Satrt Global Rules */
+:root {
+    --main-font: 'DM Sans', sans-serif;
+    --blue: #3772FF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-columns: repeat(12, auto);
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+        ". . header header header header header header header header . . "
+        "main main main main main main main main main main main main"
+    ;
+    background-color: #23262F;
+    font-family: var(--main-font);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* End Global Rules */
+
+/* Start Header */
+.header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem 0;
+}
+
+.header a {
+    color: #D6D8DC;
+}
+
+.header nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style-type: none;
+}
+
+.header .header-btns a {
+    background-color: var(--blue);
+    font-weight: bold;
+    padding: 1em 2em;
+    padding: .6rem 1.5rem;
+    border-radius: 2rem;
+}
+
+/* End Header */
