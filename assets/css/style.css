@@ -1,4 +1,12 @@
 /* Satrt Global Rules */
+
+/* xs: 0,
+sm: 576px,
+md: 768px,
+lg: 992px,
+xl: 1200px,
+xxl: 1400px */
+
 :root {
     --main-font: 'DM Sans', sans-serif;
     --blue: #3772FF;
@@ -28,6 +36,19 @@ a {
 
 /* End Global Rules */
 
+/* Start Media Query */
+@media (max-width: 567px) {
+    .header .nav ul {
+        display: none;
+    }
+
+    .header .nav .menu-icon {
+        display: block !important;
+    }
+}
+
+/* End Media Query */
+
 /* Start Header */
 .header {
     grid-area: header;
@@ -38,6 +59,16 @@ a {
 }
 
 .header a {
+    color: #D6D8DC;
+}
+
+.header .nav {
+    display: flex;
+}
+
+.header .nav .menu-icon {
+    display: none;
+    font-size: 1.5rem;
     color: #D6D8DC;
 }
 
