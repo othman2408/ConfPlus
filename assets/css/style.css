@@ -21,12 +21,13 @@ xxl: 1400px */
 body {
     display: grid;
     grid-template-columns: repeat(12, auto);
-    grid-template-rows: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
     grid-template-areas:
         ". . header header header header header header header header . . "
-        "main main main main main main main main main main main main"
+        ". . main main main main main main main main . ."
+        ". . footer footer footer footer footer footer footer footer . ."
     ;
-    background-color: #23262F;
+    background-color: #1E1E1E;
     font-family: var(--main-font);
 }
 
@@ -45,6 +46,13 @@ a {
     .header .nav .menu-icon {
         display: block !important;
     }
+}
+
+.button {
+    background-color: var(--blue);
+    font-weight: bold;
+    border-radius: 2rem;
+    color: #D6D8DC;
 }
 
 /* End Media Query */
@@ -79,11 +87,73 @@ a {
 }
 
 .header .header-btns a {
-    background-color: var(--blue);
-    font-weight: bold;
-    padding: 1em 2em;
     padding: .6rem 1.5rem;
-    border-radius: 2rem;
 }
 
 /* End Header */
+
+/* Start Main */
+.main {
+    grid-area: main;
+    margin: 7rem 0 7rem 0;
+}
+
+.main .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    position: relative;
+}
+
+.main .hero .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    text-align: center;
+}
+
+.main .hero .hero-text p {
+    color: #777E90;
+    font-weight: 700;
+    font-size: 1.07rem;
+    line-height: 16px;
+}
+
+.main .hero .hero-text h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 48px;
+    color: #FCFCFD;
+}
+
+/* .main .hero .hero-text svg {
+    position: absolute;
+    z-index: -1;
+    top: 2rem;
+    width: 35rem;
+    fill: #3772ff80;
+} */
+
+.main .hero .hero-text .start {
+    margin-top: 2rem;
+    padding: .6rem 1.5rem;
+}
+
+.main .hero img{
+    max-width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* End Main */
+
+/* Start Footer */
+.footer {
+    grid-area: footer;
+}
+
+/* End Footer */
