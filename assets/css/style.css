@@ -269,8 +269,9 @@ a {
 .main .schedule .card-container {
     grid-area: cards;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
     row-gap: 5rem;
+    column-gap: 3rem;
     place-items: center;
     margin-top: 6.25rem;
 }
