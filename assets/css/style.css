@@ -67,6 +67,10 @@ a {
         flex-direction: column;
         gap: 4rem;
     }
+
+    .footer .footer-row-1 .list ul {
+        text-align: center;
+    }
 }
 
 .button {
@@ -412,6 +416,10 @@ a {
 
 .footer .footer-row-1 .list ul {
     list-style: none;
+}
+
+.footer .footer-row-1 .list ul li{
+    margin-top: .5rem;
 }
 
 .footer .footer-row-1 .list ul li a {
