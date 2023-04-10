@@ -9,6 +9,7 @@ xxl: 1400px */
 
 :root {
     --main-font: 'DM Sans', sans-serif;
+    --second-font: 'Poppins', sans-serif;
     --blue: #3772FF;
 }
 
@@ -20,12 +21,12 @@ xxl: 1400px */
 
 body {
     display: grid;
-    grid-template-columns: repeat(12, auto);
-    grid-template-rows: repeat(3, auto);
+    /* grid-template-columns: repeat(12, auto);
+    grid-template-rows: repeat(3, auto); */
     grid-template-areas:
-        ". . header header header header header header header header . . "
-        ". . main main main main main main main main . ."
-        ". . footer footer footer footer footer footer footer footer . ."
+        " header header header header header header header header header header header header "
+        " main main main main main main main main main main main main "
+        "footer footer footer footer footer footer footer footer footer footer footer footer"
     ;
     background-color: #1E1E1E;
     font-family: var(--main-font);
@@ -38,7 +39,7 @@ a {
 /* End Global Rules */
 
 /* Start Media Query */
-@media (max-width: 567px) {
+@media (max-width: 768px) {
     .header .nav ul {
         display: none;
     }
@@ -63,7 +64,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 3rem 0;
+    padding: 3rem 4rem;
 }
 
 .header a {
@@ -105,6 +106,7 @@ a {
     justify-content: center;
     gap: 4rem;
     position: relative;
+    padding: 0 4rem;
 }
 
 .main .hero .hero-text {
@@ -142,12 +144,195 @@ a {
     padding: .6rem 1.5rem;
 }
 
-.main .hero img{
+.main .hero img {
     max-width: 100%;
     height: auto;
     pointer-events: none;
     user-select: none;
 }
+
+/* Start Schedule */
+.main .schedule {
+    display: grid;
+    grid-template-areas:
+        "row1 row1 row1 row1 row1 row1 row1 row1 row1 row1 row1 row1"
+        "row2 row2 row2 row2 row2 row2 row2 row2 row2 row2 row2 row2"
+        "row3 row3 row3 row3 row3 row3 row3 row3 row3 row3 row3 row3"
+    ;
+    padding: 8.8rem 4rem;
+    margin: 3.4rem 0;
+    background-color: #1A1A1B;
+}
+
+.main .schedule .row-1 {
+    grid-area: row1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .schedule .row-1 .title p {
+    font-family: var(--second-font);
+    color: #777E90;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.main .schedule .row-1 .title h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FCFCFD;
+}
+
+.main .schedule .row-1 .filter p {
+    color: #B1B5C3;
+    font-size: .75rem;
+    font-family: var(--second-font);
+    font-weight: 700;
+}
+
+.main .schedule .row-1 .filter .select-menu {
+    position: relative;
+}
+
+.main .schedule .row-1 .filter .select-menu select {
+    height: 3rem;
+    width: 16rem;
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #353945;
+    border-radius: 12px;
+    color: white;
+    font-family: 'Poppins';
+    padding: .5rem .5rem .5rem 1rem;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+.main .schedule .row-1 .filter .select-menu select option {
+    background-color: #141416;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.main .schedule .row-1 .filter .custom-arrow {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 3em;
+    pointer-events: none;
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .schedule .row-1 .filter .custom-arrow i {
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #353945;
+    color: #FCFCFD;
+    font-weight: bolder;
+    padding: .3rem;
+    font-size: 1em;
+}
+
+.main .schedule .row-2 {
+    grid-area: row2;
+    background-color: red;
+    margin-top: 6.25rem;
+}
+
+.main .schedule .row-2 .card {
+    width: 256px;
+    text-decoration: none;
+}
+
+.main .schedule .row-2 .card .card-links {
+    padding: .2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.main .schedule .row-2 .card .card-links .row1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.main .schedule .row-2 .card .card-links .row1 a {
+    color: #FCFCFD;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: var(--second-font);
+}
+
+.main .schedule .row-2 .card .card-links .row1 span {
+    color: #45B26B;
+    font-weight: 700;
+    font-size: 12px;
+    font-family: var(--second-font);
+    padding: 2px 4px;
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #45B26B;
+    border-radius: 4px;
+}
+
+.main .schedule .row-2 .card .card-links .row2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .schedule .row-2 .card .card-links .row2 p {
+    font-family: var(--second-font);
+    color: #E6E8EC;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.main .schedule .row-2 .card .card-links .row3 {
+    border-top: 0.8px solid #353945;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .schedule .row-2 .card .card-links .row3 a {
+    color: #FCFCFD;
+    font-weight: 600;
+    font-size: 12px;
+    font-family: var(--second-font);
+}
+
+.main .schedule .row-2 .card .card-links .row3 a i {
+    color: #777E90;
+    font-size: 14px;
+    padding-right: 4px;
+}
+
+.main .schedule .row-2 .card .card-links .row3 span {
+    background: #9757D7;
+    border-radius: 33px;
+    padding: 0.2rem .5rem;
+    color: #FCFCFD;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.main .schedule .row-2 .card .card-links .row3 a,
+.main .schedule .row-2 .card .card-links .row3 span {
+    margin-top: 8px;
+}
+
+/* End Schedule */
 
 /* End Main */
 
