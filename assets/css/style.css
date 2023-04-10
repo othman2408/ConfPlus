@@ -47,6 +47,17 @@ a {
     .header .nav .menu-icon {
         display: block !important;
     }
+
+    .main .schedule .row-1 {
+        flex-wrap: wrap;
+        justify-content: center !important;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .main .schedule .row-1 .title {
+        text-align: center;
+    }
 }
 
 .button {
@@ -156,10 +167,10 @@ a {
     display: grid;
     grid-template-areas:
         "row1 row1 row1 row1 row1 row1 row1 row1 row1 row1 row1 row1"
-        "row2 row2 row2 row2 row2 row2 row2 row2 row2 row2 row2 row2"
+        "cards cards cards cards cards cards cards cards cards cards cards cards"
         "row3 row3 row3 row3 row3 row3 row3 row3 row3 row3 row3 row3"
     ;
-    padding: 8.8rem 4rem;
+    padding: 8.8rem 8rem;
     margin: 3.4rem 0;
     background-color: #1A1A1B;
 }
@@ -242,39 +253,46 @@ a {
     font-size: 1em;
 }
 
-.main .schedule .row-2 {
-    grid-area: row2;
-    background-color: red;
+.main .schedule .card-container {
+    grid-area: cards;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    row-gap: 5rem;
+    place-items: center;
     margin-top: 6.25rem;
 }
 
-.main .schedule .row-2 .card {
-    width: 256px;
+.main .schedule .card-container .card {
+    width: 300px;
     text-decoration: none;
 }
 
-.main .schedule .row-2 .card .card-links {
+.main .schedule .card-container .card .card-image img {
+    width: 300px;
+}
+
+.main .schedule .card-container .card .card-links {
     padding: .2rem;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.main .schedule .row-2 .card .card-links .row1 {
+.main .schedule .card-container .card .card-links .row1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
 }
 
-.main .schedule .row-2 .card .card-links .row1 a {
+.main .schedule .card-container .card .card-links .row1 a {
     color: #FCFCFD;
     font-weight: 500;
     font-size: 16px;
     font-family: var(--second-font);
 }
 
-.main .schedule .row-2 .card .card-links .row1 span {
+.main .schedule .card-container .card .card-links .row1 span {
     color: #45B26B;
     font-weight: 700;
     font-size: 12px;
@@ -285,40 +303,40 @@ a {
     border-radius: 4px;
 }
 
-.main .schedule .row-2 .card .card-links .row2 {
+.main .schedule .card-container .card .card-links .row2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.main .schedule .row-2 .card .card-links .row2 p {
+.main .schedule .card-container .card .card-links .row2 p {
     font-family: var(--second-font);
     color: #E6E8EC;
     font-weight: 400;
     font-size: 14px;
 }
 
-.main .schedule .row-2 .card .card-links .row3 {
+.main .schedule .card-container .card .card-links .row3 {
     border-top: 0.8px solid #353945;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.main .schedule .row-2 .card .card-links .row3 a {
+.main .schedule .card-container .card .card-links .row3 a {
     color: #FCFCFD;
     font-weight: 600;
     font-size: 12px;
     font-family: var(--second-font);
 }
 
-.main .schedule .row-2 .card .card-links .row3 a i {
+.main .schedule .card-container .card .card-links .row3 a i {
     color: #777E90;
     font-size: 14px;
     padding-right: 4px;
 }
 
-.main .schedule .row-2 .card .card-links .row3 span {
+.main .schedule .card-container .card .card-links .row3 span {
     background: #9757D7;
     border-radius: 33px;
     padding: 0.2rem .5rem;
@@ -327,9 +345,26 @@ a {
     font-size: 12px;
 }
 
-.main .schedule .row-2 .card .card-links .row3 a,
-.main .schedule .row-2 .card .card-links .row3 span {
+.main .schedule .card-container .card .card-links .row3 a,
+.main .schedule .card-container .card .card-links .row3 span {
     margin-top: 8px;
+}
+
+.main .schedule .row-3 {
+    grid-area: row3;
+    margin-top: 5.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .schedule .row-3 a {
+    background: #3772FF;
+    border-radius: 24px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FCFCFD;
+    padding: .5rem 2rem;
 }
 
 /* End Schedule */
