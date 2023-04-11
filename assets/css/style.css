@@ -529,6 +529,10 @@ a {
     transform: translate(-50%, -50%);
 }
 
+.login-container .img {
+    display: flex;
+}
+
 .login-container .login-form {
     height: 100%;
     border-radius: 0 24px 24px 0;
@@ -548,11 +552,11 @@ a {
     gap: 1.625rem;
 }
 
-.login-container .login-form form label {
+.login-container .login-form label {
     font-weight: 500;
     font-size: 26px;
     color: #FFFFFF;
-    color: red;
+    margin-bottom: 1.625rem;
 }
 
 .login-container .login-form form input {
