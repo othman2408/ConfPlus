@@ -1,11 +1,23 @@
 <!-- Start Login -->
+<style>
+    @media (max-width: 850px) {
+        .login-container {
+            width: auto;
+            padding: 0 5rem;
+        }
+        .login-container .img {
+            display: none;
+        }
+    }
+</style>
 <div class="login-container">
     <div class="img"><img src="./assets/images/sign-in.png" alt="login image"></div>
     <div class="login-form">
         <form action="">
             <label for="">Sign in to your account</label>
             <div class="email"><input class="email-input" type="email" placeholder="Enter your email" required></div>
-            <div class="password"><input class="password-input" type="password" placeholder="Eenter your password"></div>
+            <div class="password"><input class="password-input" type="password" placeholder="Eenter your password">
+            </div>
             <button class="login-btn">Sign in</button>
             <a href="#">Not registered? <span>Join us</span></a>
         </form>

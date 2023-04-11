@@ -576,7 +576,6 @@ a {
 
 .login-container .login-form form .email::before {
     content: "Email";
-
     position: absolute;
     left: 12px;
     top: -7px;
@@ -588,6 +587,7 @@ a {
     line-height: 14px;
     color: rgba(255, 255, 255, 0.75);
     background-color: #262626;
+    border-radius: 20px;
 }
 
 .login-container .login-form form .password::before {
@@ -603,6 +603,7 @@ a {
     line-height: 14px;
     color: rgba(255, 255, 255, 0.75);
     background-color: #262626;
+    border-radius: 20px;
 }
 
 .login-container .login-form form button {
