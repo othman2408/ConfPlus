@@ -119,7 +119,7 @@ a {
 /* Start Main */
 .main {
     grid-area: main;
-    margin: 7rem 0 7rem 0;
+    margin: 7rem 0 0 0;
 }
 
 .main .hero {
