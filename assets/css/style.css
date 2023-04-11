@@ -419,7 +419,7 @@ a {
     list-style: none;
 }
 
-.footer .footer-row-1 .list ul li{
+.footer .footer-row-1 .list ul li {
     margin-top: .5rem;
 }
 
@@ -509,5 +509,37 @@ a {
 
 }
 
-
 /* End Footer */
+
+/* Start Login */
+.login {
+    width: 52.5rem;
+    height: 23.75rem;
+    background: #262626;
+    box-shadow: 0px 8px 80px rgba(0, 0, 0, 0.4);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login .login-form {
+    height: 100%;
+    border-radius: 0 24px 24px 0;
+    background-color: red;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login .login-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1.6rem;
+
+}
+
+/* End Login */
