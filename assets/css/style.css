@@ -21,8 +21,6 @@ xxl: 1400px */
 
 body {
     display: grid;
-    /* grid-template-columns: repeat(12, auto);
-    grid-template-rows: repeat(3, auto); */
     grid-template-areas:
         " header header header header header header header header header header header header "
         " main main main main main main main main main main main main "
@@ -514,6 +512,7 @@ a {
 
 /* Start Login */
 .login-container {
+    /* display: none !important; */
     width: 52.5rem;
     height: 23.75rem;
     background: #262626;
@@ -522,11 +521,6 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    z-index: 999;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .login-container .img {
