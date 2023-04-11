@@ -30,6 +30,7 @@ body {
     ;
     background-color: #1E1E1E;
     font-family: var(--main-font);
+    position: relative;
 }
 
 a {
@@ -41,7 +42,7 @@ a {
 /* Start Media Query */
 
 
-@media (max-width: 768px) {
+@media (max-width: 797px) {
     .header .nav ul {
         display: none;
     }
@@ -88,7 +89,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 3rem 4rem;
+    padding: 3rem 8rem;
 }
 
 .header a {
@@ -269,7 +270,7 @@ a {
 .main .schedule .card-container {
     grid-area: cards;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     row-gap: 5rem;
     column-gap: 3rem;
     place-items: center;
@@ -512,7 +513,7 @@ a {
 /* End Footer */
 
 /* Start Login */
-.login {
+.login-container {
     width: 52.5rem;
     height: 23.75rem;
     background: #262626;
@@ -521,25 +522,112 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.login .login-form {
+.login-container .login-form {
     height: 100%;
     border-radius: 0 24px 24px 0;
-    background-color: red;
+    background-color: #262626;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
-.login .login-form form {
+.login-container .login-form form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    gap: 1.6rem;
+    gap: 1.625rem;
+}
 
+.login-container .login-form form label {
+    font-weight: 500;
+    font-size: 26px;
+    color: #FFFFFF;
+    color: red;
+}
+
+.login-container .login-form form input {
+    width: 21.25rem;
+    padding: 0 16px;
+    width: 340px;
+    height: 48px;
+    background: #262626;
+    border: 2px solid #4D4D4D;
+    border-radius: 8px;
+    outline: none;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    position: relative;
+}
+
+.login-container .login-form form .email,
+.login-container .login-form form .password {
+    position: relative;
+}
+
+.login-container .login-form form .email::before {
+    content: "Email";
+
+    position: absolute;
+    left: 12px;
+    top: -7px;
+    width: 45px;
+    height: 20px;
+    z-index: 999;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: #262626;
+}
+
+.login-container .login-form form .password::before {
+    content: "Password";
+    position: absolute;
+    left: 12px;
+    top: -7px;
+    width: 66px;
+    height: 20px;
+    z-index: 999;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: #262626;
+}
+
+.login-container .login-form form button {
+    background: #2D68FF;
+    border: 2px solid #2D68FF;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-family: var(--second-font);
+    font-size: 16px;
+    padding: 11px 144.359px 13px 143.641px;
+    cursor: pointer;
+}
+
+.login-container .login-form form a {
+    letter-spacing: -0.28px;
+    font-weight: 500;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.login-container .login-form form a span {
+    color: #FFFFFF;
 }
 
 /* End Login */
