@@ -630,3 +630,148 @@ a {
 }
 
 /* End Login */
+
+/* Start Paper */
+.paper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.paper h1 {
+    color: #FCFCFD;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 56px;
+}
+
+.paper p {
+    color: #FCFCFD;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 24px;
+    font-family: var(--second-font);
+}
+
+.paper .form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.paper .form .title,
+.paper .form .abstract {
+    display: flex;
+    flex-direction: column;
+}
+
+.paper .form .title label,
+.paper .form .abstract label {
+    margin-bottom: 10px;
+    color: #B1B5C3;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    font-family: var(--second-font);
+}
+
+.paper .form .title .input-title {
+    padding: 0 16px;
+    height: 48px;
+    background: #262626;
+    border: 2px solid #353945;
+    border-radius: 12px;
+    outline: none;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.paper .form .abstract .input-abstract {
+    border: 2px solid #353945;
+    border-radius: 12px;
+    background-color: #262626;
+    border: 2px solid #353945;
+    outline: none;
+    padding: 10px 16px;
+    color: #FFFFFF;
+}
+
+.paper .form .title .input-title::placeholder,
+.paper .form .abstract .input-abstract::placeholder {
+    font-family: var(--second-font);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: #FCFCFD;
+}
+
+.paper .form .menus {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paper .form .menus .authors-menu,
+.paper .form .menus .presenter-menu {
+    position: relative;
+}
+
+.paper .form .menus select {
+    height: 3rem;
+    width: 16rem;
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #353945;
+    border-radius: 12px;
+    color: white;
+    font-family: var(--second-font);
+    padding: .5rem .5rem .5rem 1rem;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+.paper .form .menus option {
+    background-color: #141416;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.paper .form .menus .custom-add {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 12px;
+    height: 100%;
+    width: 3em;
+    pointer-events: none;
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paper .form .menus i {
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #353945;
+    color: #FCFCFD;
+    font-weight: bolder;
+    padding: .4rem;
+}
+
+.paper .form button {
+    background-color: #3772FF;
+    border-radius: 24px;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 11px 144.359px 13px 143.641px;
+    cursor: pointer;
+    border: none;
+}
+
+/* End Paper */
