@@ -1,5 +1,7 @@
 import * as paper from "./paper.js"
 const url = 'https://raw.githubusercontent.com/cmps350s2023/cmps350-content-m/main/project/users.json'
+
+
 export async function loadPage(pageUrl) {
     //Load Login Form
     const mainContent = document.querySelector('.main');
@@ -22,11 +24,12 @@ export async function loadPage(pageUrl) {
     loginBtn.addEventListener("click", async (e) => {
         e.preventDefault()
 
-        if (checker(emailInput.value, passwordInput.value, data)) {
+        if (checker(emailInput.value, passwordInput.value, data) == "author")
             paper.paperSubmission()
-        }
+        else if (checker(emailInput.value, passwordInput.value, data) == "reviewer")
+            alert("reviewr")
         else
-            alert("noo")
+            alert("organizer")
     })
 }
 
@@ -34,7 +37,7 @@ export async function loadPage(pageUrl) {
 function checker(email, password, data) {
     for (let user of data) {
         if (user.email == email && user.password == password)
-            return true
+            return user.role
     }
     return false
 }
