@@ -884,8 +884,8 @@ a {
 }
 
 .fieldset {
-    /* display: none; */
-    display: flex;
+    display: none;
+    /* display: flex; */
     flex-direction: column;
     padding: 1rem 1rem;
     border: 2px solid #353945;

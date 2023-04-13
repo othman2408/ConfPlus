@@ -1,3 +1,27 @@
+class paper {
+    static counter = 0;
+    constructor(title, abstract, authors, presenter) {
+        this.id = paper.counter++
+        this.title = title
+        this.abstract = abstract
+        this.authors = authors
+        this.presenter = presenter
+    }
+}
+
+
+class author {
+    static counter = 0;
+    constructor(fname, lname, email, affiliation) {
+        this.id = author.counter++
+        this.fname = fname
+        this.lname = lname
+        this.email = email
+        this.affiliation = affiliation
+    }
+}
+
+
 export async function paperSubmission() {
 
     //Load page content 
@@ -21,20 +45,55 @@ export async function paperSubmission() {
     let submitBtn = document.querySelector(".submit")
     let addAuthorBtn = document.querySelector(".add-author")
     let authorForm = document.querySelector(".fieldset")
-    console.log(authorForm);
+    let fnameInput = document.querySelector("#fname")
+    let lnameInput = document.querySelector("#lname")
+    let emailInput = document.querySelector("#email")
+    let affiliationSelect = document.querySelector("#affiliation")
+    let addBtn = document.querySelector(".add")
+    let cancelBtn = document.querySelector(".cancel")
 
-    addAuthorBtn.addEventListener("click", () => {
+    let authorsArray = []
+    //Add Author Onclick Action
+    addAuthorBtn.addEventListener("click", async () => {
         authorForm.style.display = "flex"
+
+        let request = await fetch("https://gist.githubusercontent.com/Athman-aa1808162/d7f5f9c884b3f26f5e490912cdb6713d/raw/81ce86423c51339f1ff2986c11b94da240cb9c30/institutions")
+        let data = await request.json()
+
+
+        affiliationSelect.innerHTML = data.map(affiliation => `<option value="${affiliation.name}">${affiliation.name}</option>`)
+
+
+        //New Auhtor Object
+
+        addBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            authorsArray.push(new author(fnameInput.value, lnameInput.value, emailInput.value, affiliationSelect.value))
+        })
+
+        cancelBtn.addEventListener("click", () => {
+            authorForm.style.display = "none"
+        })
+
     })
 
 
+    presentersDropList.innerHTML = authorsArray.map(author => `<option value="${author.id}">${author.fname} ${author.lname}</option>`)
 
-    // //Fetch data
-    // let request = await fetch("https://raw.githubusercontent.com/cmps350s2023/cmps350-content-m/main/project/users.json")
-    // let data = await request.json()
 
-    // // Append authors name to the list
-    // authorsList.innerHTML = data.map(author => `<option value="${author.first_name}">${author.first_name} ${author.last_name}</option>`)
+    submitBtn.addEventListener("click", (e) => {
+        // e.preventDefault()
+        let newPaper = new paper(titleInput.value, abstractInput.value, authorsArray, "presenter.value");
+        let papersArr;
+        if (localStorage.getItem("papers")) {
+            papersArr = JSON.parse(localStorage.getItem("papers"));
+        } else {
+            papersArr = [];
+        }
+        papersArr.push(newPaper);
+        localStorage.setItem("papers", JSON.stringify(papersArr));
+    });
+
 
 
 }
