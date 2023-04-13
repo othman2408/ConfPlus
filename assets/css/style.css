@@ -192,6 +192,8 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    user-select: none;
+
 }
 
 .main .schedule .row-1 .title p {
@@ -645,6 +647,7 @@ a {
     font-weight: 700;
     font-size: 3rem;
     line-height: 56px;
+    user-select: none;
 }
 
 .paper p {
