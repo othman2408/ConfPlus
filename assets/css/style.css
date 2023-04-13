@@ -768,10 +768,20 @@ a {
 .paper .form .authors .authors-list,
 .paper .form .presenters .presenters-list {
     margin-top: 1rem;
-    padding: 1rem 0 1rem 2rem;
+    padding: 1rem 0 1rem 0;
     background: rgba(255, 255, 255, 0.002);
     box-shadow: inset 0px 0px 0px 2px #353945;
     border-radius: .2rem;
+}
+
+.paper .form .authors .authors-list h4,
+.paper .form .presenters .presenters-list h4 {
+    color: #ffd037;
+    padding: 0 0 .5rem .5rem;
+}
+
+.paper .form .menus ol {
+    padding-left: 2rem;
 }
 
 .paper .form .menus ol li {
