@@ -14,16 +14,27 @@ export async function paperSubmission() {
     //HTML Element Selection
     let titleInput = document.querySelector(".input-title")
     let abstractInput = document.querySelector(".input-abstract")
-    let authorsList = document.querySelector("#authors-list")
+    let authorsContainer = document.querySelector(".authors-list")
+    let presentersContainer = document.querySelector(".presenters-list")
+    let presentersDropList = document.querySelector("#presentersDropList")
     let presentersList = document.querySelector("#presenters-list")
     let submitBtn = document.querySelector(".submit")
+    let addAuthorBtn = document.querySelector(".add-author")
+    let authorForm = document.querySelector(".fieldset")
+    console.log(authorForm);
 
-    //Fetch data
-    let request = await fetch("https://raw.githubusercontent.com/cmps350s2023/cmps350-content-m/main/project/users.json")
-    let data = await request.json()
+    addAuthorBtn.addEventListener("click", () => {
+        authorForm.style.display = "flex"
+    })
 
-    // Append authors name to the list
-    authorsList.innerHTML = data.map(author => `<option value="${author.first_name}">${author.first_name} ${author.last_name}</option>`)
 
-    
+
+    // //Fetch data
+    // let request = await fetch("https://raw.githubusercontent.com/cmps350s2023/cmps350-content-m/main/project/users.json")
+    // let data = await request.json()
+
+    // // Append authors name to the list
+    // authorsList.innerHTML = data.map(author => `<option value="${author.first_name}">${author.first_name} ${author.last_name}</option>`)
+
+
 }

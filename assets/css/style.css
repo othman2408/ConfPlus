@@ -706,23 +706,30 @@ a {
 .paper .form .title .input-title::placeholder,
 .paper .form .abstract .input-abstract::placeholder {
     font-family: var(--second-font);
-    font-weight: 500;
+    font-weight: 400;
     font-size: 14px;
     line-height: 24px;
     color: #FCFCFD;
 }
+
 
 .paper .form .menus {
     display: flex;
     justify-content: space-between;
 }
 
-.paper .form .menus .authors .authors-menu,
-.paper .form .menus .presenters .presenter-menu {
+/*
+
+.paper .form .menus {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paper .form .menus .presentersContainer .presenters .presenter-menu {
     position: relative;
 }
 
-.paper .form .menus select {
+.paper .form .menus .presentersContainer .presenters .presenter-menu select {
     height: 3rem;
     width: 16rem;
     background: rgba(255, 255, 255, 0.002);
@@ -737,19 +744,45 @@ a {
     appearance: none;
 }
 
-.paper .form .menus option {
+.paper .form .menus .presentersContainer .presenters .presenter-menu select option {
     background-color: #141416;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+} */
+
+.paper .form .menus {
+    display: flex;
+    gap: 2rem;
 }
 
-.paper .form .menus .custom-add {
-    display: block;
+
+.paper .form .menus .authors,
+.paper .form .menus .presenters {
+    position: relative;
+}
+
+
+.paper .form .menus .authorsContainer {
+    width: 50%;
+}
+
+.paper .form .menus .authorsContainer .authors .addAuthorButton {
+    position: relative;
+}
+
+.paper .form .menus .authorsContainer .authors .addAuthorButton button {
+    white-space: nowrap;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.paper .form .menus .authorsContainer .authors .addAuthorButton .custom-add {
     position: absolute;
-    right: 0;
-    top: 12px;
+    right: -1.5rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
     height: 100%;
     width: 3em;
     pointer-events: none;
@@ -762,23 +795,71 @@ a {
 .paper .form .menus i {
     border-radius: 100%;
     background: rgba(255, 255, 255, 0.002);
-    box-shadow: inset 0px 0px 0px 2px #353945;
+    box-shadow: inset 0px 0px 0px 2px #FCFCFD;
     color: #FCFCFD;
     font-weight: bolder;
     padding: .4rem;
 }
 
-.paper .form .authors .authors-list,
-.paper .form .presenters .presenters-list {
-    margin-top: 1rem;
+.paper .form .menus .presentersContainer {
+    width: 50%;
+}
+
+.paper .form .menus .presentersContainer .presenters .presenter-menu {
+    position: relative;
+}
+
+.paper .form .menus .presentersContainer .presenters .presenter-menu select {
+    height: 3rem;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #353945;
+    border-radius: 12px;
+    color: white;
+    font-family: var(--second-font);
+    padding: .5rem .5rem .5rem 1rem;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+.paper .form .menus .presentersContainer .presenters .presenter-menu .custom-add {
+    position: absolute;
+    right: 0;
+    top: 12px;
+    height: 100%;
+    width: 3em;
+    pointer-events: none;
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paper .form .menus .presentersContainer .presenters .presenter-menu select option {
+    background-color: #141416;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.paper .form .authorsContainer .authors-list,
+.paper .form .presentersContainer .presenters-list {
+    margin-top: 1.2rem;
     padding: 1rem 0 1rem 0;
     background: rgba(255, 255, 255, 0.002);
     box-shadow: inset 0px 0px 0px 2px #353945;
     border-radius: .2rem;
 }
 
-.paper .form .authors .authors-list h4,
-.paper .form .presenters .presenters-list h4 {
+.paper .form .presentersContainer .presenters-list {
+    margin-top: .8rem;
+}
+
+.paper .form .authorsContainer .authors-list h4,
+.paper .form .presentersContainer .presenters-list h4 {
     color: #ffd037;
     padding: 0 0 .5rem .5rem;
 }
@@ -803,11 +884,14 @@ a {
 }
 
 .fieldset {
+    /* display: none; */
     display: flex;
     flex-direction: column;
     padding: 1rem 1rem;
     border: 2px solid #353945;
     height: max-content;
+    margin-top: 1rem;
+    border-radius: .2rem;
 }
 
 .fieldset legend {
@@ -835,5 +919,69 @@ a {
     font-size: 15px;
     line-height: 18px;
 }
+
+.fieldset .affiliationSelect {
+    position: relative;
+}
+
+.fieldset .affiliationSelect select {
+    height: 3rem;
+    width: 100%;
+    background: rgb(38 38 38);
+    box-shadow: inset 0px 0px 0px 2px #353945;
+    border-radius: 12px;
+    color: white;
+    font-family: var(--second-font);
+    padding: .5rem .5rem .5rem 1rem;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+.fieldset .affiliationSelect select option {
+    background-color: rgb(38 38 38);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.fieldset .affiliationSelect .custom-arrow {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    height: 100%;
+    width: 3em;
+    pointer-events: none;
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fieldset .affiliationSelect .custom-arrow i {
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #FCFCFD;
+    color: #FCFCFD;
+    font-weight: bolder;
+    padding: .4rem;
+}
+
+.fieldset .action {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: space-evenly;
+}
+
+.fieldset .action button {
+    border-radius: 4px;
+    width: 10rem;
+    height: 2.5rem;
+    padding: 0;
+}
+    
 
 /* End Paper */

@@ -27,7 +27,7 @@
 <body>
 
     <!-- Start Paper -->
-    <section class="paper">
+    <!-- <section class="paper">
         <h1>Create Paper</h1>
         <p>Paper Details</p>
         <form class="form" action="">
@@ -89,17 +89,121 @@
             <label for="name">Last Name:</label><input type="text" name="" id="" placeholder="Enter last Name: ">
             <label for="name">Email Address:</label><input type="text" name="" id="" placeholder="Enter email address: ">
         </fieldset>
-    </section>
+    </section> -->
     <!-- End Paper -->
+
+
+
+    <section class="paper">
+        <h1>Create Paper</h1>
+        <p>Paper Details</p>
+        <form class="form" action="">
+
+            <div class="title">
+                <label for="">Paper Title</label>
+                <input class="input-title" type="text" placeholder="Enter paper Title">
+            </div>
+
+            <div class="abstract">
+                <label for="">Abstract</label>
+                <textarea name="" class="input-abstract" cols="30" rows="10"
+                    placeholder="Enter paper Abstarct"></textarea>
+            </div>
+
+            <div class="menus">
+                <!-- Authors Container -->
+                <div class="authorsContainer">
+                    <div class="authors">
+                        <p>Authors</p>
+                        <!-- Add Author Button -->
+                        <div class="addAuthorButton">
+                            <button class="add-author">Add Author</button>
+                            <span class="custom-add"><i class="ti ti-plus"></i></span>
+                        </div>
+                        <!-- Add Button -->
+                        <!-- Add Author Form -->
+                        <fieldset class="fieldset">
+                            <legend><b>Add Author Information</b></legend>
+                            <label for="name">First Name:</label><input type="text" name="" id=""
+                                placeholder="Enter first name: ">
+                            <label for="name">Last Name:</label><input type="text" name="" id=""
+                                placeholder="Enter last name: ">
+                            <label for="name">Email Address:</label><input type="text" name="" id=""
+                                placeholder="Enter email address: ">
+                            <label for="affiliation">Affiliation:</label>
+                            <div class="affiliationSelect">
+                                <select id="affiliation" name="affiliation" required>
+                                    <option value="" selected disabled>Select Affiliation</option>
+                                    <option value="Qatar University">Qatar University</option>
+                                    <option value="University of Doha for Science and Technology">University of Doha for
+                                        Science and Technology</option>
+                                    <option value="Carnegie Mellon University in Qatar">Carnegie Mellon University in
+                                        Qatar</option>
+                                </select>
+                                <span class="custom-arrow"><i class="ti ti-chevron-down"></i></span>
+                            </div>
+                            <div class="action">
+                                <button>Add</button>
+                                <button>Cancel</button>
+                            </div>
+                        </fieldset>
+                        <!-- Add Author Form -->
+                    </div>
+                    <!-- Authors List -->
+                    <div class="authors-list">
+                        <h4>Authors List:</h4>
+                        <ol type="1">
+                            <li>Omar</li>
+                            <li>Osama</li>
+                        </ol>
+                    </div>
+                    <!-- Authors List -->
+                </div>
+                <!-- Authors Container -->
+                <!-- Presenters Container -->
+                <div class="presentersContainer">
+                    <div class="presenters">
+                    <div class="presenter-menu">
+                        <p>Presenter</p>
+                        <select name="" id="presentersDropList">
+                            <option value="">One</option>
+                            <option value="">Two</option>
+                            <option value="">Three</option>
+                        </select>
+                        <span class="custom-add"><i class="ti ti-chevron-down"></i></span>
+                    </div>
+                    </div>
+                    <div class="presenters-list">
+                        <h4>Presenters List:</h4>
+                        <ol type="1">
+                            <li>Omar</li>
+                            <li>Osama</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- Presenters Container -->
+            </div>
+            <button class="submit">Submit</button>
+        </form>
+    </section>
 
 
     <!-- <fieldset class="fieldset">
         <legend><b>Author Information</b></legend>
-        <label for="name">First Name:</label><input type="text" name="" id="" placeholder="Enter first Name: ">
-        <label for="name">Last Name:</label><input type="text" name="" id="" placeholder="Enter last Name: ">
+        <label for="name">First Name:</label><input type="text" name="" id="" placeholder="Enter first name: ">
+        <label for="name">Last Name:</label><input type="text" name="" id="" placeholder="Enter last name: ">
         <label for="name">Email Address:</label><input type="text" name="" id="" placeholder="Enter email address: ">
+        <label for="affiliation">Affiliation:</label>
+        <div class="affiliationSelect">
+            <select id="affiliation" name="affiliation" required>
+                <option value="" selected disabled>Select Affiliation</option>
+                <option value="Qatar University">Qatar University</option>
+                <option value="University of Doha for Science and Technology">University of Doha for Science and Technology</option>
+                <option value="Carnegie Mellon University in Qatar">Carnegie Mellon University in Qatar</option>
+            </select>
+            <span class="custom-arrow"><i class="ti ti-chevron-down"></i></span>
+        </div>  
     </fieldset> -->
-
 
 </body>
 
