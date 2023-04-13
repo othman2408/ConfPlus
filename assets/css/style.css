@@ -712,8 +712,8 @@ a {
     justify-content: space-between;
 }
 
-.paper .form .menus .authors-menu,
-.paper .form .menus .presenter-menu {
+.paper .form .menus .authors .authors-menu,
+.paper .form .menus .presenters .presenter-menu {
     position: relative;
 }
 
@@ -761,6 +761,19 @@ a {
     color: #FCFCFD;
     font-weight: bolder;
     padding: .4rem;
+}
+
+.paper .form .authors .authors-list,
+.paper .form .presenters .presenters-list {
+    margin-top: 1rem;
+    padding: 1rem 0 1rem 2rem;
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #353945;
+    border-radius: .2rem;
+}
+
+.paper .form .menus ol li {
+    color: #FCFCFD;
 }
 
 .paper .form button {

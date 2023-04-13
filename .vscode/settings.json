@@ -1,0 +1,19 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "oracleOptions": {
+                "autoCommit": false,
+                "lowerCase": false
+            },
+            "previewLimit": 50,
+            "server": "coestudb.qu.edu.qa",
+            "port": 1521,
+            "driver": "Oracle",
+            "name": "MyConnection",
+            "database": "STUD.qu.edu.qa",
+            "username": "aa1808162",
+            "password": "aa1808162"
+        }
+    ]
+}
