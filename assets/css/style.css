@@ -789,4 +789,38 @@ a {
     border: none;
 }
 
+.fieldset {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    border: 2px solid #353945;
+    height: max-content;
+}
+
+.fieldset legend {
+    color: #FCFCFD;
+}
+
+.fieldset label {
+    color: #FCFCFD;
+    margin-bottom: .2rem;
+}
+
+.fieldset input {
+    margin-bottom: 1.5rem;
+}
+
+.fieldset input {
+    padding: 0 16px;
+    height: 48px;
+    background: #262626;
+    border: 2px solid #353945;
+    border-radius: 12px;
+    outline: none;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+}
+
 /* End Paper */
