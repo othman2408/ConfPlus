@@ -38,8 +38,8 @@ export async function paperSubmission() {
     //HTML Element Selection
     let titleInput = document.querySelector(".input-title")
     let abstractInput = document.querySelector(".input-abstract")
-    let authorsContainer = document.querySelector(".authors-list")
-    let presentersContainer = document.querySelector(".presenters-list")
+    let authorsContainer = document.querySelector(".authors-list ol")
+    let presentersContainer = document.querySelector(".presenters-list ol")
     let presentersDropList = document.querySelector("#presentersDropList")
     let presentersList = document.querySelector("#presenters-list")
     let submitBtn = document.querySelector(".submit")
@@ -57,28 +57,57 @@ export async function paperSubmission() {
     addAuthorBtn.addEventListener("click", async () => {
         authorForm.style.display = "flex"
 
+        //Fetch the affiliations
         let request = await fetch("https://gist.githubusercontent.com/Athman-aa1808162/d7f5f9c884b3f26f5e490912cdb6713d/raw/81ce86423c51339f1ff2986c11b94da240cb9c30/institutions")
         let data = await request.json()
 
 
+        //Add the fetched affiliations from the repo to the add author form 
         affiliationSelect.innerHTML = data.map(affiliation => `<option value="${affiliation.name}">${affiliation.name}</option>`)
 
 
         //New Auhtor Object
-
         addBtn.addEventListener("click", (e) => {
             e.preventDefault()
-            authorsArray.push(new author(fnameInput.value, lnameInput.value, emailInput.value, affiliationSelect.value))
+
+            //Close the add author form after clic add
+            if ((fnameInput.value || lnameInput.value || emailInput.value) == "") {
+                alert("empty")
+            } else {
+                authorsArray.push(new author(fnameInput.value, lnameInput.value, emailInput.value, affiliationSelect.value))
+                authorsContainer.innerHTML = authorsArray.map(author => `<li>${author.fname} ${author.lname}<i class="ti ti-x"></i></li>`).join("")
+
+                //Append the added authors to the presenetrs drop-down list
+                authorsArray.forEach(author => {
+                    const existingOption = presentersDropList.querySelector(`option[value="${author.id}"]`);
+                    if (!existingOption) {
+                        const option = document.createElement('option');
+                        option.value = author.id;
+                        option.textContent = `${author.fname} ${author.lname}`;
+                        presentersDropList.appendChild(option);
+                    }
+                })
+
+
+            } 
+
+            fnameInput.value = ""
+            lnameInput.value = ""
+            emailInput.value = ""
+
         })
 
-        cancelBtn.addEventListener("click", () => {
-            authorForm.style.display = "none"
+        //Add the select presnter to the presenters container
+        presentersDropList.addEventListener("change", (e) => {
+            presentersContainer.innerHTML = `<li>${e.target.options[e.target.selectedIndex].innerHTML}<i class="ti ti-x"></i></li>`
         })
 
     })
 
-
-    presentersDropList.innerHTML = authorsArray.map(author => `<option value="${author.id}">${author.fname} ${author.lname}</option>`)
+    cancelBtn.addEventListener("click", (e) => {
+        e.preventDefault()
+        authorForm.style.display = "none"
+    })
 
 
     submitBtn.addEventListener("click", (e) => {
@@ -93,7 +122,5 @@ export async function paperSubmission() {
         papersArr.push(newPaper);
         localStorage.setItem("papers", JSON.stringify(papersArr));
     });
-
-
 
 }

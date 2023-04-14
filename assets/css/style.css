@@ -6,7 +6,6 @@ md: 768px,
 lg: 992px,
 xl: 1200px,
 xxl: 1400px */
-
 :root {
     --main-font: 'DM Sans', sans-serif;
     --second-font: 'Poppins', sans-serif;
@@ -69,6 +68,15 @@ a {
 
     .footer .footer-row-1 .list ul {
         text-align: center;
+    }
+
+    .paper .form .menus {
+        flex-wrap: wrap;
+    }
+
+    .paper .form .menus .authorsContainer,
+    .paper .form .menus .presentersContainer {
+        width: 100% !important;
     }
 }
 
@@ -716,6 +724,8 @@ a {
 .paper .form .menus {
     display: flex;
     justify-content: space-between;
+    /* flex-wrap: wrap; */
+    align-items: center;
 }
 
 /*
@@ -776,6 +786,9 @@ a {
     white-space: nowrap;
     width: 100%;
     border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .paper .form .menus .authorsContainer .authors .addAuthorButton .custom-add {
@@ -848,7 +861,7 @@ a {
 .paper .form .authorsContainer .authors-list,
 .paper .form .presentersContainer .presenters-list {
     margin-top: 1.2rem;
-    padding: 1rem 0 1rem 0;
+    padding: 1rem 2rem;
     background: rgba(255, 255, 255, 0.002);
     box-shadow: inset 0px 0px 0px 2px #353945;
     border-radius: .2rem;
@@ -861,15 +874,28 @@ a {
 .paper .form .authorsContainer .authors-list h4,
 .paper .form .presentersContainer .presenters-list h4 {
     color: #ffd037;
-    padding: 0 0 .5rem .5rem;
+    margin-bottom: .8rem;
 }
 
 .paper .form .menus ol {
-    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
 }
 
 .paper .form .menus ol li {
     color: #FCFCFD;
+    display: flex;
+    justify-content: space-between;
+    background: #353945;
+    align-items: center;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+}
+
+.paper .form .menus ol li i {
+    box-shadow: none;
+    cursor: pointer;
 }
 
 .paper .form button {
@@ -982,6 +1008,6 @@ a {
     height: 2.5rem;
     padding: 0;
 }
-    
+
 
 /* End Paper */

@@ -31,7 +31,7 @@ export async function loadPage(pageUrl) {
         else
             alert("organizer")
     })
-}
+}   
 
 // Loop over the users objects array and check for match
 function checker(email, password, data) {
