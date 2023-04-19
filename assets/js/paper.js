@@ -1,11 +1,12 @@
 class paper {
     static counter = 0;
-    constructor(title, abstract, authors, presenter) {
+    constructor(title, abstract, authors, presenter, reviewrs) {
         this.id = paper.counter++
         this.title = title
         this.abstract = abstract
         this.authors = authors
         this.presenter = presenter
+        this.reviewrs = reviewrs
     }
 }
 
@@ -21,6 +22,23 @@ class author {
     }
 }
 
+
+function assignReviewr(reviewersArray) {
+    return [reviewersArray[Math.floor(Math.random() * reviewersArray.length)],reviewersArray[Math.floor(Math.random() * reviewersArray.length)]]
+}
+
+async function getReviewr(url) {
+   let request = await fetch(url);
+   let data = await request.json();
+   let reviewers = [];
+
+   data.filter((item) => {
+      if(item.role === "reviewer")
+         reviewers.push(item);
+   });
+
+   return reviewers;
+}
 
 export async function paperSubmission() {
 
@@ -52,7 +70,10 @@ export async function paperSubmission() {
     let addBtn = document.querySelector(".add")
     let cancelBtn = document.querySelector(".cancel")
 
+
+    let usersRepo = "https://raw.githubusercontent.com/cmps350s2023/cmps350-content-m/main/project/users.json";
     let authorsArray = []
+    let reviewrsArray = await getReviewr(usersRepo);
     //Add Author Onclick Action
     addAuthorBtn.addEventListener("click", async () => {
         authorForm.style.display = "flex"
@@ -88,8 +109,7 @@ export async function paperSubmission() {
                     }
                 })
 
-
-            } 
+            }
 
             fnameInput.value = ""
             lnameInput.value = ""
@@ -99,10 +119,11 @@ export async function paperSubmission() {
 
         //Add the select presnter to the presenters container
         presentersDropList.addEventListener("change", (e) => {
-            presentersContainer.innerHTML = `<li>${e.target.options[e.target.selectedIndex].innerHTML}<i class="ti ti-x"></i></li>`
+            presentersContainer.innerHTML = `<li class = "selectedPresenter">${e.target.options[e.target.selectedIndex].innerHTML}<i class="ti ti-x"></i></li>`
         })
 
     })
+
 
     cancelBtn.addEventListener("click", (e) => {
         e.preventDefault()
@@ -110,9 +131,11 @@ export async function paperSubmission() {
     })
 
 
+
+
     submitBtn.addEventListener("click", (e) => {
         // e.preventDefault()
-        let newPaper = new paper(titleInput.value, abstractInput.value, authorsArray, "presenter.value");
+        let newPaper = new paper(titleInput.value, abstractInput.value, authorsArray, document.querySelector(".selectedPresenter").innerText, assignReviewr(reviewrsArray));
         let papersArr;
         if (localStorage.getItem("papers")) {
             papersArr = JSON.parse(localStorage.getItem("papers"));
