@@ -101,7 +101,8 @@ export async function paperSubmission() {
   // Submit the paper
   submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    createPaper(titleInput, abstractInput, authorsArray, "presenter", reviewrsArray);
+    let presenter = document.querySelector(".selectedPresenter").innerText;
+    createPaper(titleInput, abstractInput, authorsArray, presenter, reviewrsArray);
   });
 
 }
