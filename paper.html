@@ -117,22 +117,22 @@
                         <p>Authors</p>
                         <!-- Add Author Button -->
                         <div class="addAuthorButton">
-                            <button class="add-author">Add Author</button>
+                            <button class="add-author" onsubmit="event.preventDefault()">Add Author</button>
                             <span class="custom-add"><i class="ti ti-plus"></i></span>
                         </div>
                         <!-- Add Button -->
                         <!-- Add Author Form -->
                         <fieldset class="fieldset">
                             <legend><b>Add Author Information</b></legend>
-                            <label for="name">First Name:</label><input required type="text" name="" id="fname"
+                            <label for="name">First Name:</label><input type="text" name="#" id="fname"
                                 placeholder="Enter first name: ">
-                            <label for="name">Last Name:</label><input required type="text" name="" id="lname"
+                            <label for="name">Last Name:</label><input type="text" name="#" id="lname"
                                 placeholder="Enter last name: ">
-                            <label for="name">Email Address:</label><input required type="email" name="" id="email"
+                            <label for="name">Email Address:</label><input type="email" name="#" id="email"
                                 placeholder="Enter email address: ">
                             <label for="affiliation">Affiliation:</label>
                             <div class="affiliationSelect">
-                                <select id="affiliation" name="affiliation" required>
+                                <select id="affiliation" name="affiliation">
                                     <option value="" selected disabled>Select Affiliation</option>
                                 </select>
                                 <span class="custom-arrow"><i class="ti ti-chevron-down"></i></span>

@@ -728,40 +728,6 @@ a {
     align-items: center;
 }
 
-/*
-
-.paper .form .menus {
-    display: flex;
-    justify-content: space-between;
-}
-
-.paper .form .menus .presentersContainer .presenters .presenter-menu {
-    position: relative;
-}
-
-.paper .form .menus .presentersContainer .presenters .presenter-menu select {
-    height: 3rem;
-    width: 16rem;
-    background: rgba(255, 255, 255, 0.002);
-    box-shadow: inset 0px 0px 0px 2px #353945;
-    border-radius: 12px;
-    color: white;
-    font-family: var(--second-font);
-    padding: .5rem .5rem .5rem 1rem;
-    font-weight: 700;
-    border: none;
-    outline: none;
-    appearance: none;
-}
-
-.paper .form .menus .presentersContainer .presenters .presenter-menu select option {
-    background-color: #141416;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-} */
-
 .paper .form .menus {
     display: flex;
     gap: 2rem;
@@ -907,6 +873,11 @@ a {
     padding: 11px 144.359px 13px 143.641px;
     cursor: pointer;
     border: none;
+}
+
+
+.show {
+    display: flex !important;
 }
 
 .fieldset {
