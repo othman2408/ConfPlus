@@ -724,8 +724,6 @@ a {
 .paper .form .menus {
     display: flex;
     justify-content: space-between;
-    /* flex-wrap: wrap; */
-    align-items: center;
 }
 
 .paper .form .menus {
