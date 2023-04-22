@@ -117,13 +117,21 @@ export async function paperSubmission() {
 }
 
 function deleteAuthor(e, authorsArray, presentersDropList) {
-  let id = e.target.parentElement.dataset.id;
-  authorsArray = authorsArray.filter((author) => author.id != id);
+  let authorIndex = authorsArray.findIndex(author => author.id === e.target.parentElement.dataset.id);
+  authorsArray.splice(authorIndex, 1);
   e.target.parentElement.remove();
 
-  //Remove the new author to the presenters drop list
-  presentersDropList.innerHTML = authorsArray.map((author) => `<option value="${author.id}">${author.fname} ${author.lname}</option>`).join("");
+  presentersDropList.innerHTML = `<option value="" selected disabled>Select Presenter</option>` + authorsArray.map((author) => `<option value="${author.id}">${author.fname} ${author.lname}</option>`).join("");
 }
+
+// function deleteAuthor(e, authorsArray, presentersDropList) {
+//   let id = e.target.parentElement.dataset.id;
+//   authorsArray = authorsArray.filter((author) => author.id != id);
+//   e.target.parentElement.remove();
+
+//   //Remove the new author to the presenters drop list
+//   presentersDropList.innerHTML = `<option value="" selected disabled>Select Presenter</option>` + authorsArray.map((author) => `<option value="${author.id}">${author.fname} ${author.lname}</option>`).join("");
+// }
 
 // Assign tan random reviewer to the paper
 function assignReviewr(reviewersArray) {
