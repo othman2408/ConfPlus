@@ -50,7 +50,7 @@ export async function paperSubmission() {
   let affiliationSelect = document.querySelector("#affiliation");
   let addBtn = document.querySelector(".add");
   let cancelBtn = document.querySelector(".cancel");
-  let deleteAuthorBtn = document.querySelector(".delete")
+  let deleteAuthorBtn = document.querySelector(".targetAuthor i")
 
 
 
@@ -77,22 +77,17 @@ export async function paperSubmission() {
 
     //Add the new author to the authors container
     authorsContainer.innerHTML = authorsArray.map((author) =>
-      `<li >${author.fname} ${author.lname}<i class="delete ti ti-x"></i></li>`
-
-    ).join("");
+      `<li class = "targetAuthor" data-id = ${author.id}>${author.fname} ${author.lname}<i class="ti ti-x"></i></li>`).join("");
 
     //Close the add author form
     authorForm.classList.toggle("show");
 
+    document.querySelector(".targetAuthor i").addEventListener("click", async (e) => {
+      deleteAuthor(e, authorsArray, presentersDropList);
+    })
+
     //Add the new author to the presenters drop list
     appendAuthorsToPresenterList(authorsArray, presentersDropList)
-
-
-    let x = document.querySelector(".targetAuthor i");
-
-    x.addEventListener("click", (e) => {
-      e.target.parentElement.remove();
-    })
 
 
   });
@@ -119,6 +114,15 @@ export async function paperSubmission() {
     createPaper(titleInput, abstractInput, authorsArray, presenter, reviewrsArray);
   });
 
+}
+
+function deleteAuthor(e, authorsArray, presentersDropList) {
+  let id = e.target.parentElement.dataset.id;
+  authorsArray = authorsArray.filter((author) => author.id != id);
+  e.target.parentElement.remove();
+
+  //Remove the new author to the presenters drop list
+  presentersDropList.innerHTML = authorsArray.map((author) => `<option value="${author.id}">${author.fname} ${author.lname}</option>`).join("");
 }
 
 // Assign tan random reviewer to the paper
