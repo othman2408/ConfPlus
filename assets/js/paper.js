@@ -50,7 +50,7 @@ export async function paperSubmission() {
   let affiliationSelect = document.querySelector("#affiliation");
   let addBtn = document.querySelector(".add");
   let cancelBtn = document.querySelector(".cancel");
-
+  let deleteAuthorBtn = document.querySelector(".ti ti-x");
   //Arrays to store the authors and the reviewers
   let authorsArray = [];
   let reviewrsArray = await getReviewrs();
@@ -75,6 +75,7 @@ export async function paperSubmission() {
     //Add the new author to the authors container
     authorsContainer.innerHTML = authorsArray.map((author) =>
       `<li>${author.fname} ${author.lname}<i class="ti ti-x"></i></li>`
+
     ).join("");
 
     //Close the add author form
@@ -162,8 +163,8 @@ async function getAffiliations(affiliationSelect) {
   let data = await request.json();
 
   //Add the fetched affiliations from the repo to the add author form
-  affiliationSelect.innerHTML = data.map(
-    (affiliation) =>
+  affiliationSelect.innerHTML = `<option value="" selected disabled>Select Affiliation</option>` +
+  data.map((affiliation) =>
       `<option value="${affiliation.name}">${affiliation.name}</option>`
   );
 }
@@ -197,6 +198,4 @@ function appendAuthorsToPresenterList(authorsArray, presentersDropList) {
     }
   });
 }
-
-
 
