@@ -1,5 +1,5 @@
 class paper {
-  static counter = 0;
+  static counter = 1;
   constructor(title, abstract, authors, presenter, reviewrs) {
     this.id = paper.counter++;
     this.title = title;
@@ -11,7 +11,7 @@ class paper {
 }
 
 class author {
-  static counter = 0;
+  static counter = 1;
   constructor(fname, lname, email, affiliation) {
     this.id = author.counter++;
     this.fname = fname;
@@ -50,7 +50,10 @@ export async function paperSubmission() {
   let affiliationSelect = document.querySelector("#affiliation");
   let addBtn = document.querySelector(".add");
   let cancelBtn = document.querySelector(".cancel");
-  let deleteAuthorBtn = document.querySelector(".ti ti-x");
+  let deleteAuthorBtn = document.querySelector(".delete")
+
+
+
   //Arrays to store the authors and the reviewers
   let authorsArray = [];
   let reviewrsArray = await getReviewrs();
@@ -74,7 +77,7 @@ export async function paperSubmission() {
 
     //Add the new author to the authors container
     authorsContainer.innerHTML = authorsArray.map((author) =>
-      `<li>${author.fname} ${author.lname}<i class="ti ti-x"></i></li>`
+      `<li >${author.fname} ${author.lname}<i class="delete ti ti-x"></i></li>`
 
     ).join("");
 
@@ -84,7 +87,17 @@ export async function paperSubmission() {
     //Add the new author to the presenters drop list
     appendAuthorsToPresenterList(authorsArray, presentersDropList)
 
+
+    let x = document.querySelector(".targetAuthor i");
+
+    x.addEventListener("click", (e) => {
+      e.target.parentElement.remove();
+    })
+
+
   });
+
+
 
 
   //Add the select presnter to the presenters container
@@ -164,9 +177,9 @@ async function getAffiliations(affiliationSelect) {
 
   //Add the fetched affiliations from the repo to the add author form
   affiliationSelect.innerHTML = `<option value="" selected disabled>Select Affiliation</option>` +
-  data.map((affiliation) =>
+    data.map((affiliation) =>
       `<option value="${affiliation.name}">${affiliation.name}</option>`
-  );
+    );
 }
 
 // Function handle creating a new author object and add it to the authors array
@@ -198,4 +211,3 @@ function appendAuthorsToPresenterList(authorsArray, presentersDropList) {
     }
   });
 }
-
