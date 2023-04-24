@@ -855,6 +855,7 @@ a {
     align-items: center;
     padding: .5rem 1rem;
     border-radius: .5rem;
+    height: 2.80rem;
 }
 
 .paper .form .menus ol li i {

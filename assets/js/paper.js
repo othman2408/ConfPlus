@@ -96,7 +96,7 @@ export async function paperSubmission() {
   presentersDropList.addEventListener("change", (e) => {
     let id = e.target.options[e.target.selectedIndex].getAttribute("data-id");
     presentersContainer.innerHTML = `<li class = "selectedPresenter" data-id = ${id}>${e.target.options[e.target.selectedIndex].innerHTML
-      }<i class="ti ti-x"></i></li>`;
+      }`;
     //get thhe id from the attribute data-id
     console.log();
   });
@@ -134,7 +134,7 @@ function deleteAuthor(deleteAuthorBtns, authorsArray, presentersDropList, presen
       e.target.parentElement.remove();
 
       //Remove the author from the presenters drop list
-      presentersDropList.innerHTML = `<option value="" selected disabled>Select Affiliation</option>` +
+      presentersDropList.innerHTML = `<option value="" selected disabled>Select Presenter</option>` +
         authorsArray.map((author) => `<option data-id = ${author.id} value="${author.id}">${author.fname} ${author.lname}</option>`).join("");
 
       //Remove the added presenter from the presenters container if the deleted author was the presenter
