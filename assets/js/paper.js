@@ -83,7 +83,7 @@ export async function paperSubmission() {
 
     //Delete the author from the authors container and the authors array and the presenters drop list after clicking the delete button
     let deleteAuthorBtns = document.querySelectorAll(".targetAuthor i")
-    deleteAuthor(deleteAuthorBtns, e, authorsArray, presentersDropList, authorsContainer)
+    deleteAuthor(deleteAuthorBtns, authorsArray, presentersDropList, presentersContainer, presentersList)
 
     //Add the new author to the presenters drop list
     appendAuthorsToPresenterList(authorsArray, presentersDropList)
@@ -94,9 +94,12 @@ export async function paperSubmission() {
 
   //Add the select presnter to the presenters container
   presentersDropList.addEventListener("change", (e) => {
-    presentersContainer.innerHTML = `<li class = "selectedPresenter">${e.target.options[e.target.selectedIndex].innerHTML
+    presentersContainer.innerHTML = `<li class = "selectedPresenter" data-id = ${e.target.options[e.target.selectedIndex].getAttribute("data-id")}>${e.target.options[e.target.selectedIndex].innerHTML
       }<i class="ti ti-x"></i></li>`;
+    //get thhe id from the attribute data-id
+    console.log();
   });
+
 
   // Close the add author form when clicking cancel
   cancelBtn.addEventListener("click", (e) => {
@@ -118,19 +121,31 @@ function appendAuthorsToAuthorList(authorsArray, authorsContainer) {
     `<li class = "targetAuthor" data-id = ${author.id}>${author.fname} ${author.lname}<i class="ti ti-x"></i></li>`).join("");
 }
 
-function deleteAuthor(deleteAuthorBtns, e, authorsArray, presentersDropList, authorsContainer, presentersContainer) {
+function deleteAuthor(deleteAuthorBtns, authorsArray, presentersDropList, presentersContainer, presentersList) {
 
   deleteAuthorBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
+
+      //ID of the author to be deleted
+      let id = e.target.parentElement.dataset.id;
+      console.log(id);
+
       //remove the author from the authors array by splicing it
       authorsArray.splice(authorsArray.findIndex((author) => author.id == e.target.parentElement.dataset.id), 1);
       e.target.parentElement.remove();
 
-      //remove the author from the presenters container after deleting it from the authors array and presnters drop list
-      if (presentersContainer != null) presentersContainer.innerHTML = "";
-
       //Remove the author from the presenters drop list
-      presentersDropList.innerHTML = authorsArray.map((author) => `<option value="${author.id}">${author.fname} ${author.lname}</option>`).join("");
+      presentersDropList.innerHTML = `<option value="" selected disabled>Select Affiliation</option>` +
+        authorsArray.map((author) => `<option value="${author.id}">${author.fname} ${author.lname}</option>`).join("");
+
+      //Remove the added presenter from the presenters container if the deleted author was the presenter
+      let selectedPresenter = presentersContainer.querySelector(".selectedPresenter");
+      if (selectedPresenter.dataset.id == id) {
+        selectedPresenter.remove();
+      }
+
+
+
     })
   })
 
@@ -222,7 +237,7 @@ function appendAuthorsToPresenterList(authorsArray, presentersDropList) {
   authorsArray.forEach((author) => {
     let existingOption = presentersDropList.querySelector(`option[value="${author.id}"]`)
     if (!existingOption) {
-      presentersDropList.innerHTML += `<option value="${author.id}">${author.fname} ${author.lname}</option>`;
+      presentersDropList.innerHTML += `<option data-id="${author.id}" value="${author.id}">${author.fname} ${author.lname}</option>`;
     }
   });
 }
