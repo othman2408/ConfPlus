@@ -1,4 +1,5 @@
 import * as paper from "./paper.js"
+import * as reviewer from "./review.js"
 const url = 'https://raw.githubusercontent.com/cmps350s2023/cmps350-content-m/main/project/users.json'
 
 
@@ -27,11 +28,11 @@ export async function loadPage(pageUrl) {
         if (checker(emailInput.value, passwordInput.value, data) == "author")
             paper.paperSubmission()
         else if (checker(emailInput.value, passwordInput.value, data) == "reviewer")
-            alert("reviewr")
+            reviewer.paperReview()
         else
             alert("organizer")
     })
-}   
+}
 
 // Loop over the users objects array and check for match
 function checker(email, password, data) {

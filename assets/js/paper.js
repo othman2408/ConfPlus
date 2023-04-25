@@ -1,3 +1,4 @@
+// Paper class
 class paper {
   static counter = 1;
   constructor(title, abstract, authors, presenter, reviewrs) {
@@ -10,6 +11,7 @@ class paper {
   }
 }
 
+// Author class
 class author {
   static counter = 1;
   constructor(fname, lname, email, affiliation) {
@@ -40,7 +42,6 @@ export async function paperSubmission() {
   let authorsContainer = document.querySelector(".authors-list ol");
   let presentersContainer = document.querySelector(".presenters-list ol");
   let presentersDropList = document.querySelector("#presentersDropList");
-  let presentersList = document.querySelector("#presenters-list");
   let submitBtn = document.querySelector(".submit");
   let addAuthorBtn = document.querySelector(".add-author");
   let authorForm = document.querySelector(".fieldset");
@@ -50,8 +51,6 @@ export async function paperSubmission() {
   let affiliationSelect = document.querySelector("#affiliation");
   let addBtn = document.querySelector(".add");
   let cancelBtn = document.querySelector(".cancel");
-  let deleteAuthorBtn = document.querySelectorAll(".targetAuthor i")
-
 
 
   //Arrays to store the authors and the reviewers
