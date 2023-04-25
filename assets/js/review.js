@@ -1,3 +1,6 @@
+import * as login from "./login.js";
+
+
 export async function paperReview() {
     //Load page content
     const mainContent = document.querySelector(".main");

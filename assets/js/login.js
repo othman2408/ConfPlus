@@ -2,7 +2,6 @@ import * as paper from "./paper.js"
 import * as reviewer from "./review.js"
 const url = 'https://raw.githubusercontent.com/cmps350s2023/cmps350-content-m/main/project/users.json'
 
-
 export async function loadPage(pageUrl) {
     //Load Login Form
     const mainContent = document.querySelector('.main');
@@ -21,15 +20,24 @@ export async function loadPage(pageUrl) {
     let request = await fetch(url)
     let data = await request.json()
 
+    let userID;
+
     // Action done after click the login button
     loginBtn.addEventListener("click", async (e) => {
         e.preventDefault()
 
-        if (checker(emailInput.value, passwordInput.value, data) == "author")
-            paper.paperSubmission()
-        else if (checker(emailInput.value, passwordInput.value, data) == "reviewer")
-            reviewer.paperReview()
 
+        if (checker(emailInput.value, passwordInput.value, data)[0] == "author") {
+            paper.paperSubmission()
+            userID = checker(emailInput.value, passwordInput.value, data)[1]
+            alert(userID)
+            return userID
+        }
+        else if (checker(emailInput.value, passwordInput.value, data)[0] == "reviewer") {
+            reviewer.paperReview()
+            userID = checker(emailInput.value, passwordInput.value, data)[1]
+            return userID;
+        }
         else
             alert("organizer")
     })
@@ -39,8 +47,7 @@ export async function loadPage(pageUrl) {
 function checker(email, password, data) {
     for (let user of data) {
         if (user.email == email && user.password == password)
-            return user.role
+            return [user.role, user.id]
     }
     return false
 }
-
