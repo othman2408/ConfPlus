@@ -29,6 +29,7 @@ export async function loadPage(pageUrl) {
             paper.paperSubmission()
         else if (checker(emailInput.value, passwordInput.value, data) == "reviewer")
             reviewer.paperReview()
+
         else
             alert("organizer")
     })

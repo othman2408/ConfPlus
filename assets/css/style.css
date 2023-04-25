@@ -983,10 +983,17 @@ a {
 
 /* Start Reveiw */
 .papersContainer {
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
     gap: 1rem;
-    width: 80%;
+    width: 80%; */
+    width: 100%;
+    padding: 3rem 8rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+    /* Make justify-content space between  */
+    justify-items: center;
+    gap: 1rem;
 }
 
 .papersContainer .paperTemplate {
@@ -999,6 +1006,7 @@ a {
     justify-content: space-between;
     gap: 1rem;
     width: 24rem;
+    height: fit-content;
 }
 
 .papersContainer .paperTemplate .title {
@@ -1034,24 +1042,43 @@ a {
     justify-content: space-between;
     background: #29292E;
     border-radius: 16px;
-    padding: .5rem .5rem;
+    padding: .5rem .8rem;
     cursor: pointer;
+    align-items: center;
 }
 
 .papersContainer .paperTemplate .paperAbstract .abstractContent {
     background: #29292E;
     border-radius: 16px;
     padding: .5rem .5rem;
+    display: none;
 }
 
 .papersContainer .paperTemplate .paperEvalution {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    background: #29292E;
-    border-radius: 16px;
-    padding: 1rem .5rem;
+    gap: .3rem;
 
+}
+
+.papersContainer .paperTemplate .paperEvalution .evaluationHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    padding: .5rem .8rem;
+    background: #29292E;
+    cursor: pointer;
+}
+
+.papersContainer .paperTemplate .paperEvalution .evaluationContent {
+    border-radius: 16px;
+    background: #29292E;
+    padding: 1rem .8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    display: none;
 }
 
 .papersContainer .paperTemplate .paperEvalution .paperStrength,
@@ -1077,10 +1104,11 @@ a {
     outline: none;
     color: #FFFFFF;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 18px;
     appearance: none;
     font-family: var(--second-font);
+    cursor: pointer;
 }
 
 .papersContainer .paperTemplate .paperEvalution select option {
@@ -1102,6 +1130,8 @@ a {
     font-size: 12px;
     color: #FCFCFD;
     padding: .3rem .5rem;
+    max-width: 100%;
+    max-height: 10rem;
 }
 
 .papersContainer .paperBtn {
