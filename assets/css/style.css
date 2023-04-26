@@ -1029,6 +1029,17 @@ a {
 
 .papersContainer .paperTemplate ul {
     list-style: none;
+    /* display: flex;
+    flex-direction: column;
+    gap: .3rem; */
+}
+
+.papersContainer .paperTemplate ul li {
+    /* background: #36363c;
+    padding: .5rem .5rem;
+    width: 13rem;
+    border-radius: .2rem;
+    white-space: nowrap; */
 }
 
 .papersContainer .paperTemplate .paperAbstract {

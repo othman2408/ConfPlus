@@ -1,96 +1,101 @@
-import * as login from "./login.js";
+export async function paperReview(userID) {
+  console.log(userID);
 
+  //Load page content
+  const mainContent = document.querySelector(".main");
+  const page = await fetch("../../review.html");
+  const pageHTMLContent = await page.text();
 
-export async function paperReview() {
-    //Load page content
-    const mainContent = document.querySelector(".main");
-    const page = await fetch("../../review.html");
-    const pageHTMLContent = await page.text();
+  //CSS Style for loaded contnets
+  mainContent.innerHTML = pageHTMLContent;
+  mainContent.style.display = "flex";
+  mainContent.style.justifyContent = "center";
+  mainContent.style.margin = "0";
 
-    //CSS Style for loaded contnets
-    mainContent.innerHTML = pageHTMLContent;
-    mainContent.style.display = "flex";
-    mainContent.style.justifyContent = "center";
-    mainContent.style.margin = "0";
+  let papersContainer = document.querySelector(".papersContainer");
+  let abstractHeader = document.querySelectorAll(".abstarctHeader");
+  let abstractContent = document.querySelectorAll(".abstractContent");
+  let evaluationHeader = document.querySelectorAll(".evaluationHeader");
+  let evaluationContent = document.querySelectorAll(".evaluationContent");
 
+  let x = document.querySelector(".paperTemplate");
 
-    let abstractHeader = document.querySelectorAll(".abstarctHeader");
-    let abstractContent = document.querySelectorAll(".abstractContent");
-    let evaluationHeader = document.querySelectorAll(".evaluationHeader");
-    let evaluationContent = document.querySelectorAll(".evaluationContent");
+  console.log(papersContainer);
+  console.log(x);
 
-
-    abstractHeader.forEach((header) => {
-        header.addEventListener("click", () => {
-            header.classList.toggle("active");
-            let panel = header.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    });
-
-    evaluationHeader.forEach((header) => {
-        header.addEventListener("click", () => {
-            evaluationContent.forEach((content) => {
-                content.classList.toggle("show")
-            });
-        });
-    })
-
-
-    // Get Papers from Local Storage
-    console.log(getPapers());
+  // Add Event Listener to Abstract Header
+  console.log(abstractHeader);
+  // Get Papers from Local Storage
+  appendPapers(getPapers(), papersContainer, userID);
 }
 
 // Fetch Assign Paper to specific Reviewer
 function getPapers() {
-    if (localStorage.getItem("papers")) {
-        let papers = JSON.parse(localStorage.getItem("papers"));
-    } else {
-        return "No Papers Found";
+  if (localStorage.getItem("papers")) {
+    // Get Papers from Local Storage
+    let papers = JSON.parse(localStorage.getItem("papers"));
+    return papers;
+  } else {
+    return null;
+  }
+}
+
+//Append papers into the DOM
+function appendPapers(papers, papersContainer, userID) {
+  papers.forEach((paper) => {
+    // console.log(paper);
+    let paperReviewers = paper.reviewrs;
+
+    // Check if the paper has reviewers
+    if (paperReviewers.length > 0) {
+      // Check if the paper has this reviewer, if yes append it to the DOM, if not do nothing
+      paperReviewers.forEach((reviewer) => {
+        if (reviewer.id == userID) {
+          papersContainer.innerHTML += paperTemplate(paper);
+        }
+      });
     }
+  });
 }
 
 function paperTemplate(paper) {
-    return `
-          <!-- Start Paper Template -->
+  return `
+    <!-- Start Paper Template -->
       <div class="paperTemplate">
         <!-- Start Paper Title -->
         <div class="title">
-          <h1>Paper tilte</h1>
+          <h1>${paper.title}</h1>
         </div>
         <!-- End Paper Title -->
         <!-- Start Author Section -->
         <div class="paperAuthors">
-          <h3>Authors</h3>
+          <h3>Authors:</h3>
           <ul>
-            <li>Author 1</li>
-            <li>Author 2</li>
-            <li>Author 3</li>
+            ${paper.authors
+              .map((author) => {
+                return `<li>${author.fname} ${author.lname}</li>`;
+              })
+              .join("")}
           </ul>
         </div>
         <!-- End Author Section -->
         <!-- Start Presenter Section -->
         <div class="paperPresenter">
-          <h3>Presenter</h3>
+          <h3>Presenter:</h3>
           <ul>
-            <li>Presenter 1</li>
+            <li>${paper.presenter}</li>
           </ul>
         </div>
         <!-- End Presenter Section -->
         <!-- Start Abstract -->
         <div class="paperAbstract">
-          <div class="abstarctHeader">
+          <div class="abstarctHeader" >
             <h3>abstract</h3>
             <i class="ti ti-chevron-down"></i>
           </div>
           <div class="abstractContent">
             <p>
-              Abstraction example Abstraction example Abstraction example
-              Abstraction example
+              ${paper.abstract}
             </p>
           </div>
         </div>
@@ -146,7 +151,17 @@ function paperTemplate(paper) {
         <a href="#" class="paperBtn">Evaluate</a>
         <!-- End Paper Submit -->
       </div>
-      <!-- End Paper Template -->
-    `
+    <!-- End Paper Template -->
+    `;
+}
 
+// Expand and Collapse Abstract & Evaluation
+function expand(header) {
+  //   header.classList.toggle("show");
+  let panel = header.nextElementSibling;
+  if (panel.style.display === "block") {
+    panel.style.display = "none";
+  } else {
+    panel.style.display = "block";
+  }
 }

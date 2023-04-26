@@ -142,9 +142,6 @@ function deleteAuthor(deleteAuthorBtns, authorsArray, presentersDropList, presen
       if (selectedPresenter.dataset.id == id) {
         selectedPresenter.remove();
       }
-
-
-
     })
   })
 

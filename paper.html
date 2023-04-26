@@ -1,198 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <!-------- GoogleFonts  -------->
     <!-- DM SANS -->
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <!-- Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <!-------- GoogleFonts  -------->
     <!-- Icons Library -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css"
+    />
 
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <!-- Start Paper -->
-    <!-- <section class="paper">
-        <h1>Create Paper</h1>
-        <p>Paper Details</p>
-        <form class="form" action="">
-
-            <div class="title">
-                <label for="">Paper Title</label>
-                <input class="input-title" type="text" placeholder="Enter paper Title">
-            </div>
-
-            <div class="abstract">
-                <label for="">Abstract</label>
-                <textarea name="" class="input-abstract" cols="30" rows="10"
-                    placeholder="Enter paper Abstarct"></textarea>
-            </div>
-
-            <div class="menus">
-                <div class="authors">
-                    <div class="authors-menu">
-                        <p>Authors</p>
-                        <select name="" id="authors-list">
-                            <option value="">One</option>
-                            <option value="">Two</option>
-                            <option value="">Three</option>
-                        </select>
-                        <span class="custom-add"><i class="ti ti-plus"></i></span>
-                    </div>
-                    <div class="authors-list">
-                        <h4>Authors List:</h4>
-                        <ol type="1">
-                            <li>Omar</li>
-                            <li>Osama</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="presenters">
-                    <div class="presenter-menu">
-                        <p>Presenter</p>
-                        <select name="" id="presenters-list">
-                            <option value="">One</option>
-                            <option value="">Two</option>
-                            <option value="">Three</option>
-                        </select>
-                        <span class="custom-add"><i class="ti ti-plus"></i></span>
-                    </div>
-                    <div class="presenters-list">
-                        <h4>Presenters List:</h4>
-                        <ol type="1">
-                            <li>Omar</li>
-                            <li>Osama</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-            <button class="submit">Submit</button>
-        </form>
-        <fieldset class="fieldset">
-            <legend><b>Author Information</b></legend>
-            <label for="name">First Name:</label><input type="text" name="" id="" placeholder="Enter first Name: ">
-            <label for="name">Last Name:</label><input type="text" name="" id="" placeholder="Enter last Name: ">
-            <label for="name">Email Address:</label><input type="text" name="" id="" placeholder="Enter email address: ">
-        </fieldset>
-    </section> -->
-    <!-- End Paper -->
-
-
-
     <section class="paper">
-        <h1>Create Paper</h1>
-        <p>Paper Details</p>
-        <form class="form" action="">
+      <h1>Create Paper</h1>
+      <p>Paper Details</p>
+      <form class="form" action="">
+        <div class="title">
+          <label for="">Paper Title</label>
+          <input
+            class="input-title"
+            type="text"
+            placeholder="Enter paper Title"
+          />
+        </div>
 
-            <div class="title">
-                <label for="">Paper Title</label>
-                <input class="input-title" type="text" placeholder="Enter paper Title">
-            </div>
+        <div class="abstract">
+          <label for="">Abstract</label>
+          <textarea
+            name=""
+            class="input-abstract"
+            cols="30"
+            rows="10"
+            placeholder="Enter paper Abstarct"
+          ></textarea>
+        </div>
 
-            <div class="abstract">
-                <label for="">Abstract</label>
-                <textarea name="" class="input-abstract" cols="30" rows="10"
-                    placeholder="Enter paper Abstarct"></textarea>
-            </div>
-
-            <div class="menus">
-                <!-- Authors Container -->
-                <div class="authorsContainer">
-                    <div class="authors">
-                        <p>Authors</p>
-                        <!-- Add Author Button -->
-                        <div class="addAuthorButton">
-                            <button class="add-author" onsubmit="event.preventDefault()">Add Author</button>
-                            <span class="custom-add"><i class="ti ti-plus"></i></span>
-                        </div>
-                        <!-- Add Button -->
-                        <!-- Add Author Form -->
-                        <fieldset class="fieldset">
-                            <legend><b>Add Author Information</b></legend>
-                            <label for="name">First Name:</label><input type="text" name="#" id="fname"
-                                placeholder="Enter first name: ">
-                            <label for="name">Last Name:</label><input type="text" name="#" id="lname"
-                                placeholder="Enter last name: ">
-                            <label for="name">Email Address:</label><input type="email" name="#" id="email"
-                                placeholder="Enter email address: ">
-                            <label for="affiliation">Affiliation:</label>
-                            <div class="affiliationSelect">
-                                <select id="affiliation" name="affiliation">
-                                    <option value="" selected disabled>Select Affiliation</option>
-                                </select>
-                                <span class="custom-arrow"><i class="ti ti-chevron-down"></i></span>
-                            </div>
-                            <div class="action">
-                                <button class="add">Add</button>
-                                <button class="cancel">Cancel</button>
-                            </div>
-                        </fieldset>
-                        <!-- Add Author Form -->
-                    </div>
-                    <!-- Authors List -->
-                    <div class="authors-list">
-                        <h4>Authors List:</h4>
-                        <ol type="1">
-                        </ol>
-                    </div>
-                    <!-- Authors List -->
+        <div class="menus">
+          <!-- Authors Container -->
+          <div class="authorsContainer">
+            <div class="authors">
+              <p>Authors</p>
+              <!-- Add Author Button -->
+              <div class="addAuthorButton">
+                <button class="add-author" onsubmit="event.preventDefault()">
+                  Add Author
+                </button>
+                <span class="custom-add"><i class="ti ti-plus"></i></span>
+              </div>
+              <!-- Add Button -->
+              <!-- Add Author Form -->
+              <fieldset class="fieldset">
+                <legend><b>Add Author Information</b></legend>
+                <label for="name">First Name:</label
+                ><input
+                  type="text"
+                  name="#"
+                  id="fname"
+                  placeholder="Enter first name: "
+                />
+                <label for="name">Last Name:</label
+                ><input
+                  type="text"
+                  name="#"
+                  id="lname"
+                  placeholder="Enter last name: "
+                />
+                <label for="name">Email Address:</label
+                ><input
+                  type="email"
+                  name="#"
+                  id="email"
+                  placeholder="Enter email address: "
+                />
+                <label for="affiliation">Affiliation:</label>
+                <div class="affiliationSelect">
+                  <select id="affiliation" name="affiliation">
+                    <option value="" selected disabled>
+                      Select Affiliation
+                    </option>
+                  </select>
+                  <span class="custom-arrow"
+                    ><i class="ti ti-chevron-down"></i
+                  ></span>
                 </div>
-                <!-- Authors Container -->
-                <!-- Presenters Container -->
-                <div class="presentersContainer">
-                    <div class="presenters">
-                        <div class="presenter-menu">
-                            <p>Presenter</p>
-                            <select name="" id="presentersDropList">
-                                <option value="" selected disabled>Select Presenter</option>
-                            </select>
-                            <span class="custom-add"><i class="ti ti-chevron-down"></i></span>
-                        </div>
-                    </div>
-                    <div class="presenters-list">
-                        <h4>Presenters List:</h4>
-                        <ol type="1">
-                        </ol>
-                    </div>
+                <div class="action">
+                  <button class="add">Add</button>
+                  <button class="cancel">Cancel</button>
                 </div>
-                <!-- Presenters Container -->
+              </fieldset>
+              <!-- Add Author Form -->
             </div>
-            <button class="submit">Submit</button>
-        </form>
+            <!-- Authors List -->
+            <div class="authors-list">
+              <h4>Authors List:</h4>
+              <ol type="1"></ol>
+            </div>
+            <!-- Authors List -->
+          </div>
+          <!-- Authors Container -->
+          <!-- Presenters Container -->
+          <div class="presentersContainer">
+            <div class="presenters">
+              <div class="presenter-menu">
+                <p>Presenter</p>
+                <select name="" id="presentersDropList">
+                  <option value="" selected disabled>Select Presenter</option>
+                </select>
+                <span class="custom-add"
+                  ><i class="ti ti-chevron-down"></i
+                ></span>
+              </div>
+            </div>
+            <div class="presenters-list">
+              <h4>Presenters List:</h4>
+              <ol type="1"></ol>
+            </div>
+          </div>
+          <!-- Presenters Container -->
+        </div>
+        <button class="submit">Submit</button>
+      </form>
     </section>
-
-
-    <!-- <fieldset class="fieldset">
-        <legend><b>Author Information</b></legend>
-        <label for="name">First Name:</label><input type="text" name="" id="" placeholder="Enter first name: ">
-        <label for="name">Last Name:</label><input type="text" name="" id="" placeholder="Enter last name: ">
-        <label for="name">Email Address:</label><input type="text" name="" id="" placeholder="Enter email address: ">
-        <label for="affiliation">Affiliation:</label>
-        <div class="affiliationSelect">
-            <select id="affiliation" name="affiliation" required>
-                <option value="" selected disabled>Select Affiliation</option>
-                <option value="Qatar University">Qatar University</option>
-                <option value="University of Doha for Science and Technology">University of Doha for Science and Technology</option>
-                <option value="Carnegie Mellon University in Qatar">Carnegie Mellon University in Qatar</option>
-            </select>
-            <span class="custom-arrow"><i class="ti ti-chevron-down"></i></span>
-        </div>  
-    </fieldset> -->
-</body>
-
+    <!-- End Paper -->
+  </body>
 </html>
