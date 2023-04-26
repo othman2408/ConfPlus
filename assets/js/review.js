@@ -12,21 +12,29 @@ export async function paperReview(userID) {
   mainContent.style.justifyContent = "center";
   mainContent.style.margin = "0";
 
-  let papersContainer = document.querySelector(".papersContainer");
+  let papersContainer = mainContent.querySelector(".papersContainer");
+
+  // Get Papers from Local Storage
+  appendPapers(getPapers(), papersContainer, userID);
+
   let abstractHeader = document.querySelectorAll(".abstarctHeader");
   let abstractContent = document.querySelectorAll(".abstractContent");
   let evaluationHeader = document.querySelectorAll(".evaluationHeader");
   let evaluationContent = document.querySelectorAll(".evaluationContent");
 
-  let x = document.querySelector(".paperTemplate");
+  // Abstract Header Onclick Action
+  abstractHeader.forEach((header) => {
+    header.addEventListener("click", () => {
+      header.nextElementSibling.classList.toggle("show");
+    });
+  });
 
-  console.log(papersContainer);
-  console.log(x);
-
-  // Add Event Listener to Abstract Header
-  console.log(abstractHeader);
-  // Get Papers from Local Storage
-  appendPapers(getPapers(), papersContainer, userID);
+  // Evaluation Header Onclick Action
+  evaluationHeader.forEach((header) => {
+    header.addEventListener("click", () => {
+      header.nextElementSibling.classList.toggle("show");
+    });
+  });
 }
 
 // Fetch Assign Paper to specific Reviewer
@@ -156,12 +164,3 @@ function paperTemplate(paper) {
 }
 
 // Expand and Collapse Abstract & Evaluation
-function expand(header) {
-  //   header.classList.toggle("show");
-  let panel = header.nextElementSibling;
-  if (panel.style.display === "block") {
-    panel.style.display = "none";
-  } else {
-    panel.style.display = "block";
-  }
-}
