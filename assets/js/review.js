@@ -35,6 +35,23 @@ export async function paperReview(userID) {
       header.nextElementSibling.classList.toggle("show");
     });
   });
+
+  let evaluation = document.querySelector("#evaluation");
+  let contribution = document.querySelector("#contribution");
+  let paperStrength = document.querySelector(".paperStrength textArea");
+  let paperWeakness = document.querySelector(".paperWeakness textArea");
+  let evaluateBtn = document.querySelector(".evaluateBtn");
+
+  console.log(
+    evaluation,
+    contribution,
+    paperStrength,
+    paperWeakness,
+    evaluateBtn
+  );
+
+  // Evaluate Paper Onclick Action
+  evaluateBtn.addEventListener("click", evaluate);
 }
 
 // Fetch Assign Paper to specific Reviewer
@@ -69,7 +86,7 @@ function appendPapers(papers, papersContainer, userID) {
 function paperTemplate(paper) {
   return `
     <!-- Start Paper Template -->
-      <div class="paperTemplate">
+      <div class="paperTemplate" data-id = ${paper.id}>
         <!-- Start Paper Title -->
         <div class="title">
           <h1>${paper.title}</h1>
@@ -97,7 +114,7 @@ function paperTemplate(paper) {
         <!-- End Presenter Section -->
         <!-- Start Abstract -->
         <div class="paperAbstract">
-          <div class="abstarctHeader" >
+          <div class="abstarctHeader">
             <h3>abstract</h3>
             <i class="ti ti-chevron-down"></i>
           </div>
@@ -115,7 +132,7 @@ function paperTemplate(paper) {
             <i class="ti ti-chevron-down"></i>
           </div>
           <div class="evaluationContent">
-            <select name="" id="">
+            <select name="" id="evaluation">
               <option value="" selected disabled>Overall evaluation</option>
               <option value="2">Strong Accept</option>
               <option value="1">Accept</option>
@@ -123,13 +140,13 @@ function paperTemplate(paper) {
               <option value="-1">Reject</option>
               <option value="-2">Strong Reject</option>
             </select>
-            <select name="" id="">
+            <select name="" id="contribution">
               <option value="" selected disabled>Overall contribution</option>
               <option value="5">major & significant</option>
               <option value="4">Clear</option>
               <option value="3">Minor</option>
               <option value="2">No Obvious</option>
-              <option value="1">No Obvious</option>
+              <option value="1">Obvious</option>
             </select>
             <div class="paperStrength">
               <label for="">Paper Strength</label>
@@ -156,11 +173,62 @@ function paperTemplate(paper) {
         </div>
         <!-- End Paper Evalution  -->
         <!-- Start Paper Submit -->
-        <a href="#" class="paperBtn">Evaluate</a>
+        <a href="#" class="evaluateBtn">Evaluate</a>
         <!-- End Paper Submit -->
       </div>
     <!-- End Paper Template -->
     `;
 }
 
-// Expand and Collapse Abstract & Evaluation
+//Evaluate Paper Function
+function evaluate(paperID) {
+  let evaluation = document.querySelector("#evaluation");
+  let contribution = document.querySelector("#contribution");
+  let paperStrength = document.querySelector(".paperStrength textArea");
+  let paperWeakness = document.querySelector(".paperWeakness textArea");
+
+  let evaluateCartirea = {
+    2: "Strong Accept",
+    1: "Accept",
+    0: "Borderline",
+    "-1": "Reject",
+    "-2": "Strong Reject",
+  };
+
+  let contributionCartirea = {
+    5: "major & significant",
+    4: "Clear",
+    3: "Minor",
+    2: "Obvious",
+    1: "No Obvious",
+  };
+
+  if (
+    evaluation.value == "" ||
+    contribution.value == "" ||
+    paperStrength.value == "" ||
+    paperWeakness.value == ""
+  ) {
+    alert("Please fill all fields");
+  } else {
+    evaluate = {
+      evaluation: `${evaluation.value} ${
+        evaluateCartirea[`${evaluation.value}`]
+      }`,
+      contribution: `${contribution.value} ${
+        contributionCartirea[`${contribution.value}`]
+      }`,
+      paperStrength: paperStrength.value,
+      paperWeakness: paperWeakness.value,
+    };
+
+    //Append Evaluation to the paper object
+    let papers = getPapers();
+    papers.forEach((paper) => {
+      if (paper.id == paperID) {
+        paper.evaluation = evaluate;
+      }
+    });
+    localStorage.setItem("papers", JSON.stringify(papers));
+  }
+}
