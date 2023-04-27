@@ -34,6 +34,15 @@ export async function paperReview(userID) {
       header.nextElementSibling.classList.toggle("show");
       //Retrive Evaluation of a specific paper, when the evaluation header section is clicked
       retrieveEvaluation(e);
+
+      //Scroll to the evaluation section
+      let evaluationContent =
+        e.target.parentElement.querySelector(".evaluationContent");
+      evaluationContent.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
     });
   });
 
@@ -118,7 +127,7 @@ function paperTemplate(paper) {
         <!-- Start Paper Evalution  -->
         <div class="paperEvalution">
           <div class="evaluationHeader">
-            <h3>Evaluation</h3>
+            <h3>Evaluate</h3>
             <i class="ti ti-chevron-down"></i>
           </div>
           <div class="evaluationContent">
@@ -158,13 +167,12 @@ function paperTemplate(paper) {
                 placeholder="Enter Paper Weakness"
               ></textarea>
             </div>
-            <label for=""></label>
+            <!-- Start Paper Submit -->
+            <a href="#" class="evaluateBtn">Submit</a>
+            <!-- End Paper Submit -->
           </div>
         </div>
         <!-- End Paper Evalution  -->
-        <!-- Start Paper Submit -->
-        <a href="#" class="evaluateBtn">Evaluate</a>
-        <!-- End Paper Submit -->
       </div>
     <!-- End Paper Template -->
     `;
@@ -224,6 +232,7 @@ function evaluatePaper(e) {
     //Update Paper Evaluation
     let target = papers.find((paper) => paper.id == id);
     target.evaluation = evaluateResult;
+    target.status = true;
     //Update Local Storage papers
     localStorage.setItem("papers", JSON.stringify(papers));
   }

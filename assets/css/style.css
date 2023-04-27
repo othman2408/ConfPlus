@@ -1006,7 +1006,21 @@ a {
     justify-content: space-between;
     gap: 1rem;
     width: 24rem;
-    height: fit-content;
+    /* height: fit-content; */
+    max-height: 30rem;
+    overflow-y: scroll;
+}
+
+.papersContainer .paperTemplate::-webkit-scrollbar {
+    background-color: #141416;
+    border-radius: 16px;
+    width: 10px;
+    height: 2px;
+}
+
+.papersContainer .paperTemplate::-webkit-scrollbar-thumb {
+    background: rgb(192, 192, 192);
+    border-radius: 16px;
 }
 
 .papersContainer .paperTemplate .title {
@@ -1104,7 +1118,7 @@ a {
     align-items: center;
     border-radius: 16px;
     padding: .5rem .8rem;
-    background: #29292E;
+    background: #3772FF;
     cursor: pointer;
 }
 
@@ -1172,7 +1186,7 @@ a {
 }
 
 .papersContainer .evaluateBtn {
-    background: #3772FF;
+    background: #45B26B;
     border-radius: 25px;
     color: #FCFCFD;
     font-family: var(--second-font);
