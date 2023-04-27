@@ -33,7 +33,7 @@ export async function paperReview(userID) {
     header.addEventListener("click", (e) => {
       header.nextElementSibling.classList.toggle("show");
       //Retrive Evaluation of a specific paper, when the evaluation header section is clicked
-      retriveEvaluation(e);
+      retrieveEvaluation(e);
     });
   });
 
@@ -242,7 +242,7 @@ function checkEvaluation(paperID) {
 }
 
 // Get Evaluation of tartget paper from local storage and append it into the evaluation from
-function retriveEvaluation(e) {
+function retrieveEvaluation(e) {
   //Select the evaluation form
   let id = e.target.parentElement.parentElement.dataset.id;
   let evaluation = e.target.parentElement.querySelector("#evaluation");
