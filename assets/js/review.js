@@ -42,16 +42,12 @@ export async function paperReview(userID) {
   let paperWeakness = document.querySelector(".paperWeakness textArea");
   let evaluateBtn = document.querySelector(".evaluateBtn");
 
-  console.log(
-    evaluation,
-    contribution,
-    paperStrength,
-    paperWeakness,
-    evaluateBtn
-  );
+  // let target = getPapers().find((paper) => paper.id == 7);
+  // target.evaluation = "test";
+  // console.log(target);
 
   // Evaluate Paper Onclick Action
-  evaluateBtn.addEventListener("click", evaluate);
+  evaluateBtn.addEventListener("click", evaluatePaper(userID));
 }
 
 // Fetch Assign Paper to specific Reviewer
@@ -181,11 +177,12 @@ function paperTemplate(paper) {
 }
 
 //Evaluate Paper Function
-function evaluate(paperID) {
+function evaluatePaper(paperID) {
   let evaluation = document.querySelector("#evaluation");
   let contribution = document.querySelector("#contribution");
   let paperStrength = document.querySelector(".paperStrength textArea");
   let paperWeakness = document.querySelector(".paperWeakness textArea");
+  let evaluateBtn = document.querySelector(".evaluateBtn");
 
   let evaluateCartirea = {
     2: "Strong Accept",
@@ -203,33 +200,33 @@ function evaluate(paperID) {
     1: "No Obvious",
   };
 
-  if (
-    evaluation.value == "" ||
-    contribution.value == "" ||
-    paperStrength.value == "" ||
-    paperWeakness.value == ""
-  ) {
-    alert("Please fill all fields");
-  } else {
-    evaluate = {
-      evaluation: `${evaluation.value} ${
-        evaluateCartirea[`${evaluation.value}`]
-      }`,
-      contribution: `${contribution.value} ${
-        contributionCartirea[`${contribution.value}`]
-      }`,
-      paperStrength: paperStrength.value,
-      paperWeakness: paperWeakness.value,
-    };
+  evaluateBtn.addEventListener("click", () => {
+    if (
+      evaluation.value == "" ||
+      contribution.value == "" ||
+      paperStrength.value == "" ||
+      paperWeakness.value == ""
+    ) {
+      alert("Please fill all fields");
+    } else {
+      let evaluateResult = {
+        evaluation: `${evaluation.value} ${
+          evaluateCartirea[`${evaluation.value}`]
+        }`,
+        contribution: `${contribution.value} ${
+          contributionCartirea[`${contribution.value}`]
+        }`,
+        paperStrength: paperStrength.value,
+        paperWeakness: paperWeakness.value,
+      };
 
-    //Append Evaluation to the paper object
-    let papers = getPapers();
-    papers.forEach((paper) => {
-      if (paper.id == paperID) {
-        //append evaluation to the paper
-        paper.evaluation = evaluate;
-      }
-    });
-    localStorage.setItem("papers", JSON.stringify(papers));
-  }
+      // Get Papers from Local Storage
+      let papers = JSON.parse(localStorage.getItem("papers"));
+      //Update Paper Evaluation
+      let target = papers.find((paper) => paper.id == paperID);
+      target.evaluation = evaluateResult;
+      //Update Local Storage papers
+      localStorage.setItem("papers", JSON.stringify(papers));
+    }
+  });
 }

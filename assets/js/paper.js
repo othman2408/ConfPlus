@@ -9,7 +9,7 @@ class paper {
     this.authors = authors;
     this.presenter = presenter;
     this.reviewrs = reviewrs;
-    this.evaluation = "";
+    this.evaluation = null;
     this.status = false;
   }
 }
