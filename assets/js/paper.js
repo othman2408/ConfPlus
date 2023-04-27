@@ -3,7 +3,9 @@ class paper {
   static counter = 1;
   constructor(title, abstract, authors, presenter, reviewrs) {
     this.id =
-      JSON.parse(localStorage.getItem("papers")).length + 1 || counter++;
+      localStorage.getItem("papers") != null
+        ? JSON.parse(localStorage.getItem("papers")).length + 1
+        : paper.counter++;
     this.title = title;
     this.abstract = abstract;
     this.authors = authors;
