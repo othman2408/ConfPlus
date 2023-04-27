@@ -226,6 +226,7 @@ function evaluate(paperID) {
     let papers = getPapers();
     papers.forEach((paper) => {
       if (paper.id == paperID) {
+        //append evaluation to the paper
         paper.evaluation = evaluate;
       }
     });
