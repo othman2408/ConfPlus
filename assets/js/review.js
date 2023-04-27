@@ -1,6 +1,4 @@
 export async function paperReview(userID) {
-  console.log(userID);
-
   //Load page content
   const mainContent = document.querySelector(".main");
   const page = await fetch("../../review.html");
@@ -21,6 +19,7 @@ export async function paperReview(userID) {
   let abstractContent = document.querySelectorAll(".abstractContent");
   let evaluationHeader = document.querySelectorAll(".evaluationHeader");
   let evaluationContent = document.querySelectorAll(".evaluationContent");
+  let evaluateBtn = document.querySelectorAll(".evaluateBtn");
 
   // Abstract Header Onclick Action
   abstractHeader.forEach((header) => {
@@ -31,23 +30,17 @@ export async function paperReview(userID) {
 
   // Evaluation Header Onclick Action
   evaluationHeader.forEach((header) => {
-    header.addEventListener("click", () => {
+    header.addEventListener("click", (e) => {
       header.nextElementSibling.classList.toggle("show");
+      //Retrive Evaluation of a specific paper, when the evaluation header section is clicked
+      retriveEvaluation(e);
     });
   });
 
-  let evaluation = document.querySelector("#evaluation");
-  let contribution = document.querySelector("#contribution");
-  let paperStrength = document.querySelector(".paperStrength textArea");
-  let paperWeakness = document.querySelector(".paperWeakness textArea");
-  let evaluateBtn = document.querySelector(".evaluateBtn");
-
-  // let target = getPapers().find((paper) => paper.id == 7);
-  // target.evaluation = "test";
-  // console.log(target);
-
   // Evaluate Paper Onclick Action
-  evaluateBtn.addEventListener("click", evaluatePaper(userID));
+  evaluateBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => evaluatePaper(e));
+  });
 }
 
 // Fetch Assign Paper to specific Reviewer
@@ -79,6 +72,7 @@ function appendPapers(papers, papersContainer, userID) {
   });
 }
 
+// Paper Template structure
 function paperTemplate(paper) {
   return `
     <!-- Start Paper Template -->
@@ -176,13 +170,19 @@ function paperTemplate(paper) {
     `;
 }
 
-//Evaluate Paper Function
-function evaluatePaper(paperID) {
-  let evaluation = document.querySelector("#evaluation");
-  let contribution = document.querySelector("#contribution");
-  let paperStrength = document.querySelector(".paperStrength textArea");
-  let paperWeakness = document.querySelector(".paperWeakness textArea");
-  let evaluateBtn = document.querySelector(".evaluateBtn");
+// Evaluate Paper Function
+function evaluatePaper(e) {
+  let id = e.target.parentElement.dataset.id;
+  console.log(id);
+
+  let evaluation = e.target.parentElement.querySelector("#evaluation");
+  let contribution = e.target.parentElement.querySelector("#contribution");
+  let paperStrength = e.target.parentElement.querySelector(
+    ".paperStrength textArea"
+  );
+  let paperWeakness = e.target.parentElement.querySelector(
+    ".paperWeakness textArea"
+  );
 
   let evaluateCartirea = {
     2: "Strong Accept",
@@ -200,33 +200,74 @@ function evaluatePaper(paperID) {
     1: "No Obvious",
   };
 
-  evaluateBtn.addEventListener("click", () => {
-    if (
-      evaluation.value == "" ||
-      contribution.value == "" ||
-      paperStrength.value == "" ||
-      paperWeakness.value == ""
-    ) {
-      alert("Please fill all fields");
-    } else {
-      let evaluateResult = {
-        evaluation: `${evaluation.value} ${
-          evaluateCartirea[`${evaluation.value}`]
-        }`,
-        contribution: `${contribution.value} ${
-          contributionCartirea[`${contribution.value}`]
-        }`,
-        paperStrength: paperStrength.value,
-        paperWeakness: paperWeakness.value,
-      };
+  if (
+    evaluation.value == "" ||
+    contribution.value == "" ||
+    paperStrength.value == "" ||
+    paperWeakness.value == ""
+  ) {
+    alert("Please fill all fields");
+  } else {
+    let evaluateResult = {
+      evaluation: `${evaluation.value} ${
+        evaluateCartirea[`${evaluation.value}`]
+      }`,
+      contribution: `${contribution.value} ${
+        contributionCartirea[`${contribution.value}`]
+      }`,
+      paperStrength: paperStrength.value,
+      paperWeakness: paperWeakness.value,
+    };
 
-      // Get Papers from Local Storage
-      let papers = JSON.parse(localStorage.getItem("papers"));
-      //Update Paper Evaluation
-      let target = papers.find((paper) => paper.id == paperID);
-      target.evaluation = evaluateResult;
-      //Update Local Storage papers
-      localStorage.setItem("papers", JSON.stringify(papers));
-    }
-  });
+    // Get Papers from Local Storage
+    let papers = JSON.parse(localStorage.getItem("papers"));
+    //Update Paper Evaluation
+    let target = papers.find((paper) => paper.id == id);
+    target.evaluation = evaluateResult;
+    //Update Local Storage papers
+    localStorage.setItem("papers", JSON.stringify(papers));
+  }
+}
+
+// Check if paper is evaluated or not, and return the evaluation
+function checkEvaluation(paperID) {
+  // Get Papers from Local Storage
+  let papers = JSON.parse(localStorage.getItem("papers"));
+
+  // Check if paper is evaluated or not
+  if (papers.find((paper) => paper.id == paperID).evaluation != null) {
+    return true;
+  }
+  return false;
+}
+
+// Get Evaluation of tartget paper from local storage and append it into the evaluation from
+function retriveEvaluation(e) {
+  //Select the evaluation form
+  let id = e.target.parentElement.parentElement.dataset.id;
+  let evaluation = e.target.parentElement.querySelector("#evaluation");
+  let contribution = e.target.parentElement.querySelector("#contribution");
+  let paperStrength = e.target.parentElement.querySelector(
+    ".paperStrength textArea"
+  );
+  let paperWeakness = e.target.parentElement.querySelector(
+    ".paperWeakness textArea"
+  );
+
+  // Match the target paper with the papers in local storage by id
+  let target = getPapers().find((paper) => paper.id == id);
+  // If paper is evaluated, retrive the evaluation from local storage and append it into the evaluation form
+  if (checkEvaluation(id)) {
+    evaluation.value = target.evaluation.evaluation.split(" ")[0];
+    contribution.value = target.evaluation.contribution[0];
+    paperStrength.value = target.evaluation.paperStrength;
+    paperWeakness.value = target.evaluation.paperWeakness;
+  }
+  // If paper is not evaluated, Nothing will be appended into the evaluation form
+  else if (checkEvaluation(id) == false) {
+    evaluation.value = "";
+    contribution.value = "";
+    paperStrength.value = "";
+    paperWeakness.value = "";
+  }
 }
