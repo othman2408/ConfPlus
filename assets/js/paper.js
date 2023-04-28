@@ -183,10 +183,12 @@ function deleteAuthor(
 
 // Assign tan random reviewer to the paper
 function assignReviewr(reviewersArray) {
-  return [
-    reviewersArray[Math.floor(Math.random() * reviewersArray.length)],
-    reviewersArray[Math.floor(Math.random() * reviewersArray.length)],
-  ];
+  let reviewer1 = reviewersArray[Math.floor(Math.random() * reviewersArray.length)];
+  let reviewer2 = reviewersArray[Math.floor(Math.random() * reviewersArray.length)];
+  while (reviewer2 === reviewer1) {
+    reviewer2 = reviewersArray[Math.floor(Math.random() * reviewersArray.length)];
+  }
+  return [reviewer1, reviewer2];
 }
 
 // Raetrive the reviewers from the repo
