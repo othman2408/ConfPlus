@@ -21,18 +21,57 @@ export async function organizer() {
   let sessions = document.querySelector(".sessions");
   let organizerConent = document.querySelector(".organizerContnet");
 
+  let locations = await getLocations();
+  let dates = await getDates();
   //Show Organizer form when the create session button is clicked
   createSessionBtn.addEventListener("click", () => {
-    organizerConent.innerHTML = sessionFormTemplate();
+    organizerConent.innerHTML = sessionFormTemplate(locations, dates);
+
+    //Selectors
+    let acceptedPapers = document.querySelector("#accptedPapers");
+    let location = document.querySelector("#location");
+    let date = document.querySelector("#date");
+    let startTime = document.querySelector("#startTime");
+    let endTime = document.querySelector("#endTime");
+    let addSessionBtn = document.querySelector(".addSessionBtn");
+
+    //Create Session when the add session button is clicked
+    addSessionBtn.addEventListener("click", () => {
+      if (
+        acceptedPapers.value == "" ||
+        location.value == "" ||
+        date.value == "" ||
+        startTime.value == "" ||
+        endTime.value == ""
+      ) {
+        alert("Please fill all fields");
+      } else {
+        let session = {
+          acceptedPapers: acceptedPapers.value,
+          location: location.value,
+          date: date.value,
+          startTime: startTime.value,
+          endTime: endTime.value,
+        };
+        console.log(session);
+        appendSession(session);
+
+        //Clear form
+        acceptedPapers.value = "";
+        location.value = "";
+        date.value = "";
+        startTime.value = "";
+        endTime.value = "";
+      }
+    });
   });
 
   //Get accepted papers
-  console.log(getAcceptedPapers());
-  console.log(await getLocations());
+  console.log(locations);
 }
 
 // Session Form Template
-function sessionFormTemplate() {
+function sessionFormTemplate(locations, dates) {
   return `
         <!-- Start Organizer Form -->
         <div class="organizerForm">
@@ -44,7 +83,7 @@ function sessionFormTemplate() {
                 <option value="" selected disabled>Select a Paper</option>
                 ${getAcceptedPapers()
                   .map((paper) => {
-                    return `<option value="">${paper.title}</option>`;
+                    return `<option value="${paper.title}">${paper.title}</option>`;
                   })
                   .join(" ")}
               </select>
@@ -56,9 +95,9 @@ function sessionFormTemplate() {
               <label for="">Location</label>
               <select name="" id="location">
                 <option value="" selected disabled>Select a Location</option>
-                ${getLocations()
+                ${locations
                   .map((location) => {
-                    return `<option value="">${location}</option>`;
+                    return `<option value="${location.location}">${location.location}</option>`;
                   })
                   .join(" ")}
               </select>
@@ -70,9 +109,11 @@ function sessionFormTemplate() {
               <label for="">Date</label>
               <select name="" id="date">
                 <option value="" selected disabled>Select a Date</option>
-                <option value="">date 1</option>
-                <option value="">date 2</option>
-                <option value="">date 3</option>
+                ${dates
+                  .map((date) => {
+                    return `<option value="${date.date}">${date.date}</option>`;
+                  })
+                  .join(" ")}
               </select>
             </div>
             <!-- End Date -->
@@ -87,7 +128,7 @@ function sessionFormTemplate() {
                 </div>
                 <div class="endTime">
                   <label for="">To:</label>
-                  <input type="time" name="" id="End Time" />
+                  <input type="time" name="" id="endTime" />
                 </div>
               </div>
             </div>
@@ -155,13 +196,32 @@ async function getLocations() {
 
   let response = await fetch(locations);
   let data = await response.json();
-  // return data
-  //   .map((location) => {
-  //     return `<option value="${location.location}">${location.location}</option>`;
-  //   })
-  //   .join(" ");
 
   return data;
+}
+
+//Get Dates
+async function getDates() {
+  const dates =
+    "https://gist.githubusercontent.com/Athman-aa1808162/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
+
+  let response = await fetch(dates);
+  let data = await response.json();
+
+  return data;
+}
+
+//Add the session to the shedule
+function appendSession(session) {
+  if (localStorage.getItem("shedule") != null) {
+    let sheduleArr = JSON.parse(localStorage.getItem("shedule"));
+    sheduleArr.push(session);
+    localStorage.setItem("shedule", JSON.stringify(sheduleArr));
+  } else {
+    let sheduleArr = [];
+    sheduleArr.push(session);
+    localStorage.setItem("shedule", JSON.stringify(sheduleArr));
+  }
 }
 
 // Create a Session
