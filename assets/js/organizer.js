@@ -1,7 +1,8 @@
+// Link: Locations and Dates
 const locations =
-  "https://raw.githubusercontent.com/Athman-aa1808162/ConfPlus/main/assets/json/locations.js?token=GHSAT0AAAAAAB357G3TCBL6BVJAAHGRS5N4ZCLZSYA";
+  "https://gist.githubusercontent.com/Athman-aa1808162/3f0f92091de211b973986d438ca65e01/raw/336154438004b7764da79427edf9b5b0829c2f2f/locations";
 const dates =
-  "https://raw.githubusercontent.com/Athman-aa1808162/ConfPlus/main/assets/json/conference-dates.js?token=GHSAT0AAAAAAB357G3SHDCRLEZDUB7DI6Q2ZCLZS7Q";
+  "https://gist.githubusercontent.com/Athman-aa1808162/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
 
 export async function organizer() {
   //Load page content
@@ -26,7 +27,8 @@ export async function organizer() {
   });
 
   //Get accepted papers
-  getAcceptedPapers();
+  console.log(getAcceptedPapers());
+  console.log(await getLocations());
 }
 
 // Session Form Template
@@ -54,9 +56,11 @@ function sessionFormTemplate() {
               <label for="">Location</label>
               <select name="" id="location">
                 <option value="" selected disabled>Select a Location</option>
-                <option value="">location 1</option>
-                <option value="">location 2</option>
-                <option value="">location 3</option>
+                ${getLocations()
+                  .map((location) => {
+                    return `<option value="">${location}</option>`;
+                  })
+                  .join(" ")}
               </select>
             </div>
             <!-- End Location -->
@@ -142,6 +146,22 @@ function getAcceptedPapers() {
   });
 
   return acceptedPapers;
+}
+
+//Get Locations
+async function getLocations() {
+  const locations =
+    "https://gist.githubusercontent.com/Athman-aa1808162/3f0f92091de211b973986d438ca65e01/raw/336154438004b7764da79427edf9b5b0829c2f2f/locations";
+
+  let response = await fetch(locations);
+  let data = await response.json();
+  // return data
+  //   .map((location) => {
+  //     return `<option value="${location.location}">${location.location}</option>`;
+  //   })
+  //   .join(" ");
+
+  return data;
 }
 
 // Create a Session
