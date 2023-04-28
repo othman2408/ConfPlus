@@ -1303,14 +1303,13 @@ a {
     align-items: center;
 }
 
-.organizer .organizerContnet .addSession {
-    margin-top: 3rem;
+.organizer .organizerContnet form .addSession {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.organizer .organizerContnet .addSession a {
+.organizer .organizerContnet form .addSession a {
     border-radius: 100px;
     line-height: 24px;
     color: #FCFCFD;
