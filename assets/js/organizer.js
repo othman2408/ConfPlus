@@ -21,11 +21,17 @@ export async function organizer() {
   let sessions = document.querySelector(".sessions");
   let organizerConent = document.querySelector(".organizerContnet");
 
+  // Locations and Dates Fetch
   let locations = await getLocations();
   let dates = await getDates();
+
   //Show Organizer form when the create session button is clicked
   createSessionBtn.addEventListener("click", () => {
-    organizerConent.innerHTML = sessionFormTemplate(locations, dates);
+    organizerConent.innerHTML = sessionFormTemplate(
+      locations,
+      dates,
+      getAcceptedPapers
+    );
 
     //Selectors
     let acceptedPapers = document.querySelector("#accptedPapers");
@@ -53,7 +59,12 @@ export async function organizer() {
           startTime: startTime.value,
           endTime: endTime.value,
         };
-        console.log(session);
+
+        // //Get the parent element of the selected option of the accepted papers
+        // let parent = acceptedPapers.options[acceptedPapers.selectedIndex];
+        // //Disable the selected option
+        // parent.disabled = true;
+
         appendSession(session);
 
         //Clear form
@@ -71,7 +82,7 @@ export async function organizer() {
 }
 
 // Session Form Template
-function sessionFormTemplate(locations, dates) {
+function sessionFormTemplate(locations, dates, acceptedPapers) {
   return `
         <!-- Start Organizer Form -->
         <div class="organizerForm">
@@ -81,7 +92,7 @@ function sessionFormTemplate(locations, dates) {
               <label for="">Accepted Papers</label>
               <select name="" id="accptedPapers">
                 <option value="" selected disabled>Select a Paper</option>
-                ${getAcceptedPapers()
+                ${acceptedPapers()
                   .map((paper) => {
                     return `<option value="${paper.title}">${paper.title}</option>`;
                   })
@@ -186,7 +197,16 @@ function getAcceptedPapers() {
     }
   });
 
-  return acceptedPapers;
+  if (localStorage.getItem("acceptedPapers")) {
+    let localAcceptedPapers = JSON.parse(
+      localStorage.getItem("acceptedPapers")
+    );
+    localAcceptedPapers = acceptedPapers;
+  } else {
+    localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
+  }
+
+  return JSON.parse(localStorage.getItem("acceptedPapers"));
 }
 
 //Get Locations
@@ -224,7 +244,17 @@ function appendSession(session) {
   }
 }
 
-// Create a Session
-function createSession(e) {
-  //Selectors
+//Disable selected paper from the accepted papers list
+function disableSelectedPaper() {
+  let acceptedPapers = document.getElementById("accptedPapers");
+
+  let parent = acceptedPapers.options[acceptedPapers.selectedIndex];
+
+  parent.disabled = true;
+
+  let updatedOptions = acceptedPapers.options;
+
+  let updatedOptionsArr = Array.from(updatedOptions);
+
+  return updatedOptionsArr;
 }
