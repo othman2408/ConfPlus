@@ -1202,3 +1202,123 @@ a {
 }
 
 /* End Reveiw */
+
+/* Start Organizer */
+.organizer {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.organizer .navigation-menu {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.organizer .navigation-menu ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 1rem;
+}
+
+.organizer .navigation-menu ul li {
+    background: #45B26B;
+    border-radius: 119px;
+    padding: .5rem 2rem;
+    cursor: pointer;
+}
+
+.organizer .navigation-menu ul li a {
+    color: #FCFCFD;
+}
+
+.organizer .organizerContnet {
+    width: 100%;
+    height: fit-content;
+    padding: 2rem 0;
+}
+
+.organizer .organizerContnet form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.organizer .organizerContnet form .acceptedPapers,
+.organizer .organizerContnet form .location,
+.organizer .organizerContnet form .date {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.organizer .organizerContnet form .acceptedPapers label,
+.organizer .organizerContnet form .location label,
+.organizer .organizerContnet form .date label,
+.organizer .organizerContnet form .time label {
+    color: #B1B5C3;
+    font-weight: 700;
+    font-family: var(--second-font);
+    line-height: 12px;
+    font-size: .8rem;
+    user-select: none;
+}
+
+.organizer .organizerContnet form .acceptedPapers select,
+.organizer .organizerContnet form .location select,
+.organizer .organizerContnet form .date select,
+.organizer .organizerContnet form .time input {
+    height: 3rem;
+    width: 100%;
+    background: rgb(38 38 38);
+    box-shadow: inset 0px 0px 0px 2px #353945;
+    border-radius: 12px;
+    color: white;
+    font-family: var(--second-font);
+    padding: .5rem .5rem .5rem 1rem;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+.organizer .organizerContnet form .time {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.organizer .organizerContnet form .time .timeInputs {
+    display: flex;
+    gap: 2rem;
+}
+
+.organizer .organizerContnet form .time .startTime,
+.organizer .organizerContnet form .time .endTime {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+.organizer .organizerContnet .addSession {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.organizer .organizerContnet .addSession a {
+    border-radius: 100px;
+    line-height: 24px;
+    color: #FCFCFD;
+    font-weight: 500;
+    background: #3772FF;
+    text-align: center;
+    width: -webkit-fill-available;
+    padding: .5rem;
+}
+
+/* End Organizer */
