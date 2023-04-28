@@ -14,8 +14,29 @@ export async function organizer() {
   mainContent.style.display = "flex";
   mainContent.style.justifyContent = "center";
   mainContent.style.margin = "0";
+
+  // Selectors
+  let createSessionBtn = document.querySelector(".createSessionBtn");
+  let sessions = document.querySelector(".sessions");
+  let organizerConent = document.querySelector(".organizerContnet");
+
+  //Show Organizer form when the create session button is clicked
+  createSessionBtn.addEventListener("click", () => {
+    organizerConent.innerHTML = sessionFormTemplate();
+  });
+
+  let papers = JSON.parse(localStorage.getItem("papers"));
+
+  let acc = [];
+
+  papers.forEach((paper) => {
+    acc.push(paper.evaluation.evaluation);
+  });
+
+  console.log(acc);
 }
 
+// Session Form Template
 function sessionFormTemplate() {
   return `
         <!-- Start Organizer Form -->
@@ -81,4 +102,51 @@ function sessionFormTemplate() {
           </div>
           <!-- End Organizer Form -->
   `;
+}
+
+// Session Card Template
+function sessionCardTemplate() {
+  return `
+    <!-- Start Session Card Template -->
+      <div class="sessionCard">
+        <!-- Start Session Card Title -->
+        <div class="title">
+          <h1>Title</h1>
+        </div>
+        <!-- End Session Card Title -->
+
+        <!-- Start Card Content -->
+        <div class="sessionContent">
+          <ul>
+            <li>Location:</li>
+            <li>Date:</li>
+            <li>Time:</li>
+          </ul>
+        </div>
+        <!-- End Card Content -->
+
+        <div class="cardButtons">
+          <button class="updateSession">Update</button>
+          <button class="deleteSession">Delete</button>
+        </div>
+      </div>
+    <!-- End Session Card Template -->
+  `;
+}
+
+//Get accepted papers
+function getAcceptedPapers() {
+  let papers = JSON.parse(localStorage.getItem("papers"));
+
+  let acceptedPapers = papers.filter(
+    (paper) => paper.evaluation.evaluation.match(/(\d+)/)[1] == 2
+  );
+
+  console.log(acceptedPapers);
+}
+
+// Create a Session
+function createSession(e) {
+  //Selectors
+  // let;
 }

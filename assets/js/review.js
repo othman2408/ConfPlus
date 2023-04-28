@@ -58,7 +58,7 @@ export async function paperReview(userID) {
 }
 
 // Fetch Assign Paper to specific Reviewer
-function getPapers() {
+export function getPapers() {
   if (localStorage.getItem("papers")) {
     // Get Papers from Local Storage
     let papers = JSON.parse(localStorage.getItem("papers"));
