@@ -40,9 +40,11 @@ function sessionFormTemplate() {
               <label for="">Accepted Papers</label>
               <select name="" id="accptedPapers">
                 <option value="" selected disabled>Select a Paper</option>
-                <option value="">Paper 1</option>
-                <option value="">Paper 2</option>
-                <option value="">Paper 3</option>
+                ${getAcceptedPapers()
+                  .map((paper) => {
+                    return `<option value="">${paper.title}</option>`;
+                  })
+                  .join(" ")}
               </select>
             </div>
             <!-- End Accepted Papers -->
@@ -139,11 +141,10 @@ function getAcceptedPapers() {
     }
   });
 
-  console.log(acceptedPapers);
+  return acceptedPapers;
 }
 
 // Create a Session
 function createSession(e) {
   //Selectors
-  // let;
 }
