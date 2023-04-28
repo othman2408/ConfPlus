@@ -31,81 +31,123 @@
     <title>Organizer</title>
   </head>
   <body>
-    <!-- Start Organizer -->
+    <!-- Start Organizer Container -->
     <div class="organizer">
       <!-- Start Navbar -->
       <div class="navigation-menu">
-        <ul>
-          <li><a href="#">Create Session</a></li>
-          <li><a href="#">Sessions</a></li>
-        </ul>
+        <a class="sessions">
+          <span><i class="ti ti-home"></i></span> Sessions
+        </a>
+        <a class="createSessionBtn"
+          ><span><i class="ti ti-plus"></i></span>Create Session</a
+        >
       </div>
       <!-- End Navbar -->
 
       <!-- Start Organizer Content -->
       <div class="organizerContnet">
-        <!-- Start Organizer Form -->
-        <div class="organizerForm">
-          <form action="">
-            <!-- Start Accepted Papers -->
-            <div class="acceptedPapers">
-              <label for="">Accepted Papers</label>
-              <select name="" id="accptedPapers">
-                <option value="">Paper 1</option>
-                <option value="">Paper 2</option>
-                <option value="">Paper 3</option>
-              </select>
-            </div>
-            <!-- End Accepted Papers -->
+        <!-- Start Session Card Template -->
+        <div class="sessionCard">
+          <!-- Start Session Card Title -->
+          <div class="title">
+            <h1>Title</h1>
+          </div>
+          <!-- End Session Card Title -->
 
-            <!-- Start Location -->
-            <div class="location">
-              <label for="">Location</label>
-              <select name="" id="location">
-                <option value="">location 1</option>
-                <option value="">location 2</option>
-                <option value="">location 3</option>
-              </select>
-            </div>
-            <!-- End Location -->
+          <!-- Start Card Content -->
+          <div class="sessionContent">
+            <ul>
+              <li>Location:</li>
+              <li>Date:</li>
+              <li>Time:</li>
+            </ul>
+          </div>
+          <!-- End Card Content -->
 
-            <!-- Start Date -->
-            <div class="date">
-              <label for="">Date</label>
-              <select name="" id="date">
-                <option value="">date 1</option>
-                <option value="">date 2</option>
-                <option value="">date 3</option>
-              </select>
-            </div>
-            <!-- End Date -->
-
-            <!-- Start Time -->
-            <div class="time">
-              <label for="">Select A Time</label>
-              <div class="timeInputs">
-                <div class="startTime">
-                  <label for="">From:</label>
-                  <input type="time" name="" id="startTime" />
-                </div>
-                <div class="endTime">
-                  <label for="">To:</label>
-                  <input type="time" name="" id="End Time" />
-                </div>
-              </div>
-            </div>
-            <!-- End Time -->
-            <!-- Start Submit -->
-            <div class="addSession">
-              <a class="addSessionBtn" href="#">ADD</a>
-            </div>
-            <!-- End Submit -->
-          </form>
+          <div class="cardButtons">
+            <button class="updateSession">Update</button>
+            <button class="deleteSession">Delete</button>
+          </div>
         </div>
-        <!-- End Organizer Form -->
-        <!-- End Organizer Content -->
+        <!-- End Session Card Template -->
+
+        <!-- Start Session Card Template -->
+        <div class="sessionCard">
+          <!-- Start Session Card Title -->
+          <div class="title">
+            <h1>Title</h1>
+          </div>
+          <!-- End Session Card Title -->
+
+          <!-- Start Card Content -->
+          <div class="sessionContent">
+            <ul>
+              <li>Location:</li>
+              <li>Date:</li>
+              <li>Time:</li>
+            </ul>
+          </div>
+          <!-- End Card Content -->
+
+          <div class="cardButtons">
+            <button class="updateSession">Update</button>
+            <button class="deleteSession">Delete</button>
+          </div>
+        </div>
+        <!-- End Session Card Template -->
+
+        <!-- Start Session Card Template -->
+        <div class="sessionCard">
+          <!-- Start Session Card Title -->
+          <div class="title">
+            <h1>Title</h1>
+          </div>
+          <!-- End Session Card Title -->
+
+          <!-- Start Card Content -->
+          <div class="sessionContent">
+            <ul>
+              <li>Location:</li>
+              <li>Date:</li>
+              <li>Time:</li>
+            </ul>
+          </div>
+          <!-- End Card Content -->
+
+          <div class="cardButtons">
+            <button class="updateSession">Update</button>
+            <button class="deleteSession">Delete</button>
+          </div>
+        </div>
+        <!-- End Session Card Template -->
+
+        <!-- Start Session Card Template -->
+        <div class="sessionCard">
+          <!-- Start Session Card Title -->
+          <div class="title">
+            <h1>Title</h1>
+          </div>
+          <!-- End Session Card Title -->
+
+          <!-- Start Card Content -->
+          <div class="sessionContent">
+            <ul>
+              <li>Location:</li>
+              <li>Date:</li>
+              <li>Time:</li>
+            </ul>
+          </div>
+          <!-- End Card Content -->
+
+          <div class="cardButtons">
+            <button class="updateSession">Update</button>
+            <button class="deleteSession">Delete</button>
+          </div>
+        </div>
+        <!-- End Session Card Template -->
       </div>
+      <!-- End Organizer Content -->
     </div>
-    <!-- End Organizer -->
+    <!-- End Organizer Container -->
   </body>
 </html>
