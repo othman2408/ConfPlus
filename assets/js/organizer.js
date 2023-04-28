@@ -27,11 +27,9 @@ export async function organizer() {
 
   //Show Organizer form when the create session button is clicked
   createSessionBtn.addEventListener("click", () => {
-    organizerConent.innerHTML = sessionFormTemplate(
-      locations,
-      dates,
-      getAcceptedPapers
-    );
+    let papers = getAcceptedPapers();
+
+    organizerConent.innerHTML = sessionFormTemplate(locations, dates, papers);
 
     //Selectors
     let acceptedPapers = document.querySelector("#accptedPapers");
@@ -60,11 +58,14 @@ export async function organizer() {
           endTime: endTime.value,
         };
 
-        // //Get the parent element of the selected option of the accepted papers
-        // let parent = acceptedPapers.options[acceptedPapers.selectedIndex];
-        // //Disable the selected option
-        // parent.disabled = true;
+        // Get the parent element of the selected option of the accepted papers
+        let parent =
+          acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id;
 
+        //Update the accepted papers, to disable the selected paper
+        updateAcceptedPapers(parent);
+
+        //Append the session to the sessions
         appendSession(session);
 
         //Clear form
@@ -76,13 +77,10 @@ export async function organizer() {
       }
     });
   });
-
-  //Get accepted papers
-  console.log(locations);
 }
 
 // Session Form Template
-function sessionFormTemplate(locations, dates, acceptedPapers) {
+function sessionFormTemplate(locations, dates, acceptedPapersArr) {
   return `
         <!-- Start Organizer Form -->
         <div class="organizerForm">
@@ -92,9 +90,13 @@ function sessionFormTemplate(locations, dates, acceptedPapers) {
               <label for="">Accepted Papers</label>
               <select name="" id="accptedPapers">
                 <option value="" selected disabled>Select a Paper</option>
-                ${acceptedPapers()
+                ${acceptedPapersArr
                   .map((paper) => {
-                    return `<option value="${paper.title}">${paper.title}</option>`;
+                    if (paper.selected == false) {
+                      return `<option data-id = "${paper.id}" value="${paper.title}">${paper.title}</option>`;
+                    } else {
+                      return `<option data-id = "${paper.id}" value="${paper.title}" disabled>${paper.title}</option>`;
+                    }
                   })
                   .join(" ")}
               </select>
@@ -189,22 +191,32 @@ function sessionCardTemplate(paper) {
 function getAcceptedPapers() {
   let papers = JSON.parse(localStorage.getItem("papers"));
 
-  let acceptedPapers = [];
+  let allAcceptedPapers = [];
 
-  papers.filter((paper) => {
-    if (paper.evaluation != null && paper.evaluation.evaluation == 2) {
-      acceptedPapers.push(paper);
-    }
+  if (localStorage.getItem("selectedPapers") == null) {
+    papers.filter((paper) => {
+      if (paper.evaluation != null && paper.evaluation.evaluation >= 2) {
+        // paper.selected = false;
+        allAcceptedPapers.push(paper);
+      }
+    });
+  } else {
+    let acceptedPapers = JSON.parse(localStorage.getItem("acceptedPapers"));
+    papers.forEach((paper) => {
+      acceptedPapers.forEach((acceptedPaper) => {
+        if (paper.id != acceptedPaper.id) {
+          allAcceptedPapers.push(paper);
+        }
+      });
+    });
+  }
+
+  //Set all accepted papers selected to false
+  allAcceptedPapers.forEach((paper) => {
+    paper.selected = false;
   });
 
-  if (localStorage.getItem("acceptedPapers")) {
-    let localAcceptedPapers = JSON.parse(
-      localStorage.getItem("acceptedPapers")
-    );
-    localAcceptedPapers = acceptedPapers;
-  } else {
-    localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
-  }
+  localStorage.setItem("acceptedPapers", JSON.stringify(allAcceptedPapers));
 
   return JSON.parse(localStorage.getItem("acceptedPapers"));
 }
@@ -244,17 +256,15 @@ function appendSession(session) {
   }
 }
 
-//Disable selected paper from the accepted papers list
-function disableSelectedPaper() {
-  let acceptedPapers = document.getElementById("accptedPapers");
+// Disable the selected paper, and update the accepted papers
+function updateAcceptedPapers(paperID) {
+  let acceptedPapers = getAcceptedPapers();
 
-  let parent = acceptedPapers.options[acceptedPapers.selectedIndex];
+  acceptedPapers.forEach((paper) => {
+    if (paper.id == paperID) {
+      paper.selected = true;
+    }
+  });
 
-  parent.disabled = true;
-
-  let updatedOptions = acceptedPapers.options;
-
-  let updatedOptionsArr = Array.from(updatedOptions);
-
-  return updatedOptionsArr;
+  localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
 }
