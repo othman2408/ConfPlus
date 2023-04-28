@@ -98,7 +98,7 @@ function paperTemplate(paper) {
         <!-- End Paper Title -->
         <!-- Start Author Section -->
         <div class="paperAuthors">
-          <h3>Authors:</h3>
+          <h3> Authors:</h3>
           <ul>
             ${paper.authors
               .map((author) => {

@@ -1025,6 +1025,19 @@ a {
 
 .papersContainer .paperTemplate .title {
     border-bottom: 2px solid #FCFCFD;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.papersContainer .paperTemplate .title .status {
+    padding: 0px 5px;
+    border-radius: 4px;
+    background-color: tomato;
+    border: 2px solid rgb(179, 51, 29);
+    font-size: 14px;
+    color: #FCFCFD;
+    font-family: var(--second-font);
 }
 
 .papersContainer .paperTemplate .paperAuthors {
@@ -1069,18 +1082,7 @@ a {
 
 .papersContainer .paperTemplate ul {
     list-style: none;
-    /* display: flex;
-    flex-direction: column;
-    gap: .3rem; */
 }
-
-/* .papersContainer .paperTemplate ul li {
-    background: #36363c;
-    padding: .5rem .5rem;
-    width: 13rem;
-    border-radius: .2rem;
-    white-space: nowrap;
-} */
 
 .papersContainer .paperTemplate .paperAbstract {
     display: flex;
