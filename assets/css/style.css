@@ -1205,11 +1205,20 @@ a {
 
 /* Start Organizer */
 .organizer {
-    width: 80%;
+    width: 100%;
+    padding: 0 8rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     margin-top: 2rem;
+}
+
+.organizer .organizerContnet {
+    display: flex;
+    justify-content: flex-start;
+    row-gap: 2rem;
+    flex-wrap: wrap;
+    column-gap: 4rem;
 }
 
 .organizer .navigation-menu {
@@ -1241,6 +1250,8 @@ a {
     padding: 2rem 0;
 }
 
+
+/* ----Start Session Form---- */
 .organizer .organizerContnet form {
     display: flex;
     flex-direction: column;
@@ -1319,5 +1330,82 @@ a {
     width: -webkit-fill-available;
     padding: .5rem;
 }
+
+/* ----End Session Form---- */
+
+/* ----Start Session Card ---- */
+.organizer .sessionCard {
+    background-color: #141416;
+    color: #FCFCFD;
+    padding: 1rem 1rem;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: 19rem;
+    height: 24rem;
+    max-height: 30rem;
+}
+
+.organizer .sessionCard .title {
+    border-bottom: 2px solid #ffffff;
+}
+
+.organizer .sessionCard .title h2 {
+    font-family: var(--second-font);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 24px;
+    text-align: center;
+}
+
+.organizer .sessionCard .sessionContent {
+    height: 100%;
+}
+
+.organizer .sessionCard .sessionContent ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.organizer .sessionCard .sessionContent li {
+    font-weight: 500;
+    line-height: 56px;
+    letter-spacing: -0.96px;
+    color: #FCFCFD;
+    font-family: var(--main-font);
+    font-size: 1.3rem;
+}
+
+.organizer .sessionCard .cardButtons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.organizer .sessionCard .cardButtons button {
+    border-radius: 20px;
+    border: none;
+    padding: 0.3rem 2rem;
+    color: #FCFCFD;
+    line-height: 24px;
+    font-weight: 500;
+    font-family: var(--second-font);
+    cursor: pointer;
+    font-size: .9rem;
+}
+
+.organizer .sessionCard .cardButtons .updateSession {
+    background-color: #3772FF;
+}
+
+.organizer .sessionCard .cardButtons .deleteSession {
+    background-color: #D75757;
+}
+
+/* ----End Session Card ---- */
 
 /* End Organizer */
