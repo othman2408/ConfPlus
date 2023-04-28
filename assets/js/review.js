@@ -48,7 +48,12 @@ export async function paperReview(userID) {
 
   // Evaluate Paper Onclick Action
   evaluateBtn.forEach((btn) => {
-    btn.addEventListener("click", (e) => evaluatePaper(e));
+    btn.addEventListener("click", (e) => {
+      evaluatePaper(e);
+
+      //Close the evaluation form
+      e.target.parentElement.classList.toggle("show");
+    });
   });
 }
 
@@ -180,8 +185,7 @@ function paperTemplate(paper) {
 
 // Evaluate Paper Function
 function evaluatePaper(e) {
-  let id = e.target.parentElement.dataset.id;
-  console.log(id);
+  let id = e.target.closest(".paperTemplate").dataset.id;
 
   let evaluation = e.target.parentElement.querySelector("#evaluation");
   let contribution = e.target.parentElement.querySelector("#contribution");
@@ -216,25 +220,28 @@ function evaluatePaper(e) {
   ) {
     alert("Please fill all fields");
   } else {
-    let evaluateResult = {
-      evaluation: `${evaluation.value} ${
-        evaluateCartirea[`${evaluation.value}`]
-      }`,
-      contribution: `${contribution.value} ${
-        contributionCartirea[`${contribution.value}`]
-      }`,
-      paperStrength: paperStrength.value,
-      paperWeakness: paperWeakness.value,
-    };
-
     // Get Papers from Local Storage
     let papers = JSON.parse(localStorage.getItem("papers"));
     //Update Paper Evaluation
     let target = papers.find((paper) => paper.id == id);
-    target.evaluation = evaluateResult;
-    target.status = true;
-    //Update Local Storage papers
-    localStorage.setItem("papers", JSON.stringify(papers));
+
+    if (target) {
+      target.evaluation = {
+        evaluation: `${evaluation.value} ${
+          evaluateCartirea[`${evaluation.value}`]
+        }`,
+        contribution: `${contribution.value} ${
+          contributionCartirea[`${contribution.value}`]
+        }`,
+        paperStrength: paperStrength.value,
+        paperWeakness: paperWeakness.value,
+      };
+      target.status = true;
+      //Update Local Storage papers
+      localStorage.setItem("papers", JSON.stringify(papers));
+    } else {
+      alert(`Paper with id ${id} not found`);
+    }
   }
 }
 
