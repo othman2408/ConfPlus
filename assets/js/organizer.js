@@ -25,15 +25,8 @@ export async function organizer() {
     organizerConent.innerHTML = sessionFormTemplate();
   });
 
-  let papers = JSON.parse(localStorage.getItem("papers"));
-
-  let acc = [];
-
-  papers.forEach((paper) => {
-    acc.push(paper.evaluation.evaluation);
-  });
-
-  console.log(acc);
+  //Get accepted papers
+  getAcceptedPapers();
 }
 
 // Session Form Template
@@ -105,13 +98,13 @@ function sessionFormTemplate() {
 }
 
 // Session Card Template
-function sessionCardTemplate() {
+function sessionCardTemplate(paper) {
   return `
     <!-- Start Session Card Template -->
       <div class="sessionCard">
         <!-- Start Session Card Title -->
         <div class="title">
-          <h1>Title</h1>
+          <h1>${paper.title}</h1>
         </div>
         <!-- End Session Card Title -->
 
@@ -138,9 +131,13 @@ function sessionCardTemplate() {
 function getAcceptedPapers() {
   let papers = JSON.parse(localStorage.getItem("papers"));
 
-  let acceptedPapers = papers.filter(
-    (paper) => paper.evaluation.evaluation.match(/(\d+)/)[1] == 2
-  );
+  let acceptedPapers = [];
+
+  papers.filter((paper) => {
+    if (paper.evaluation != null && paper.evaluation.evaluation == 2) {
+      acceptedPapers.push(paper);
+    }
+  });
 
   console.log(acceptedPapers);
 }

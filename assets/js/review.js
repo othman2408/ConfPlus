@@ -196,22 +196,7 @@ function evaluatePaper(e) {
     ".paperWeakness textArea"
   );
 
-  let evaluateCartirea = {
-    2: "Strong Accept",
-    1: "Accept",
-    0: "Borderline",
-    "-1": "Reject",
-    "-2": "Strong Reject",
-  };
-
-  let contributionCartirea = {
-    5: "major & significant",
-    4: "Clear",
-    3: "Minor",
-    2: "Obvious",
-    1: "No Obvious",
-  };
-
+  // Check if all fields are filled
   if (
     evaluation.value == "" ||
     contribution.value == "" ||
@@ -227,12 +212,8 @@ function evaluatePaper(e) {
 
     if (target) {
       target.evaluation = {
-        evaluation: `${evaluation.value} ${
-          evaluateCartirea[`${evaluation.value}`]
-        }`,
-        contribution: `${contribution.value} ${
-          contributionCartirea[`${contribution.value}`]
-        }`,
+        evaluation: evaluation.value,
+        contribution: contribution.value,
         paperStrength: paperStrength.value,
         paperWeakness: paperWeakness.value,
       };
