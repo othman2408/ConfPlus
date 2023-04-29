@@ -1360,8 +1360,8 @@ a {
     justify-content: space-between;
     gap: 1.5rem;
     width: 19rem;
-    height: 24rem;
-    max-height: 30rem;
+    min-height: 24rem;
+    /* max-height: 30rem; */
 }
 
 .organizer .sessionCard .title {
