@@ -49,125 +49,122 @@ export async function organizer() {
   });
 
   //Update Session
-  let sessionCards = document.querySelectorAll(".sessionCard");
-  let update = () => {
-    updateSession(sessionCards, organizerConent, locations, dates);
-  };
-
-  update();
+  updateSession(organizerConent, locations, dates);
 }
 
 // Update Session
-function updateSession(sessionCards, organizerConent, locations, dates) {
+function updateSession(organizerConent, locations, dates) {
   let papers = getAcceptedPapers();
   let formTemplate = sessionFormTemplate(locations, dates, papers);
+
+  // Add event listener to parent element
+  organizerConent.addEventListener("click", (e) => {
+    if (e.target.classList.contains("updateSession")) {
+      // Update button was clicked
+      updateFunction(e, formTemplate, organizerConent);
+    } else if (e.target.classList.contains("deleteSession")) {
+      // Delete button was clicked
+      deleteFunction(e, organizerConent);
+    }
+  });
+}
+
+//Update Function, to be called inside the updateSession function, when the update button is clicked
+function updateFunction(e, formTemplate, organizerConent) {
+  let sessionID = e.target.parentElement.parentElement.dataset.id;
+
   let sessionsArr = JSON.parse(localStorage.getItem("shedule"));
 
-  // const formTemplate = sessionFormTemplate(locations, dates, papers);
-  sessionCards.forEach((card) => {
-    // Selectors
-    let updateBtn = card.querySelector(".updateSession");
-    let deleteBtn = card.querySelector(".deleteSession");
+  //Find session in the sessions array by id
+  let targetSession = sessionsArr.find((session) => {
+    return session.id == sessionID;
+  });
 
-    //----------------------------------------------
+  // Load the form template
+  organizerConent.innerHTML = formTemplate;
 
-    // Update Session Action
-    updateBtn.addEventListener("click", (e) => {
-      let sessionID = e.target.parentElement.parentElement.dataset.id;
+  //Set the values of the selected session to the form
+  let paperSelect = document.querySelector("#accptedPapers");
+  paperSelect.disabled = true;
+  paperSelect.value = targetSession.title;
+  let locationSelect = document.querySelector("#location");
+  locationSelect.value = targetSession.location;
+  let dateSelect = document.querySelector("#date");
+  dateSelect.value = targetSession.date;
+  let startTime = document.querySelector("#startTime");
+  startTime.value = targetSession.startTime;
+  let endTime = document.querySelector("#endTime");
+  endTime.value = targetSession.endTime;
 
-      //Find session in the sessions array by id
-      let targetSession = sessionsArr.find((session) => {
-        return session.id == sessionID;
-      });
+  let addSessionBtn = document.querySelector(".addSessionBtn");
 
-      // Load the form template
-      organizerConent.innerHTML = formTemplate;
+  // Get new values from the form
+  addSessionBtn.addEventListener("click", () => {
+    let newSession = {
+      id: targetSession.id,
+      title: paperSelect.value,
+      location: locationSelect.value,
+      date: dateSelect.value,
+      startTime: startTime.value,
+      endTime: endTime.value,
+    };
 
-      //Set the values of the selected session to the form
-      let paperSelect = document.querySelector("#accptedPapers");
-      paperSelect.disabled = true;
-      paperSelect.value = targetSession.title;
-      let locationSelect = document.querySelector("#location");
-      locationSelect.value = targetSession.location;
-      let dateSelect = document.querySelector("#date");
-      dateSelect.value = targetSession.date;
-      let startTime = document.querySelector("#startTime");
-      startTime.value = targetSession.startTime;
-      let endTime = document.querySelector("#endTime");
-      endTime.value = targetSession.endTime;
+    // Check if the new values are valid, in terms of time and location
+    let isValid = checkSession(newSession, sessionsArr);
 
-      let addSessionBtn = document.querySelector(".addSessionBtn");
-
-      // Get new values from the form
-      addSessionBtn.addEventListener("click", (e) => {
-        let newSession = {
-          id: targetSession.id,
-          title: paperSelect.value,
-          location: locationSelect.value,
-          date: dateSelect.value,
-          startTime: startTime.value,
-          endTime: endTime.value,
-        };
-
-        // Check if the new values are valid, in terms of time and location
-        let isValid = checkSession(newSession, sessionsArr);
-
-        // If the new values are valid, update the session
-        if (isValid) {
-          // Find the index of the session in the sessions array
-          let index = sessionsArr.findIndex((session) => {
-            return session.id == sessionID;
-          });
-
-          // Update the session in the sessions array
-          sessionsArr[index] = newSession;
-
-          // Update the sessions array in the local storage
-          localStorage.setItem("shedule", JSON.stringify(sessionsArr));
-
-          // Show all sessions
-          getSessions(organizerConent);
-        } else {
-          alert("Time or Location is not valid");
-        }
-      });
-    });
-
-    // Delete Session Action
-    deleteBtn.addEventListener("click", (e) => {
-      let sessionID = e.target.parentElement.parentElement.dataset.id;
-
+    // If the new values are valid, update the session
+    if (isValid) {
       // Find the index of the session in the sessions array
       let index = sessionsArr.findIndex((session) => {
         return session.id == sessionID;
       });
 
-      //Accept the paper Array
-      let acceptedPapers = JSON.parse(localStorage.getItem("acceptedPapers"));
-
-      //Find the paper i want to delete, in the acceptedPapers array
-      let targetSession = acceptedPapers.findIndex((paper) => {
-        return paper.id == sessionID;
-      });
-
-      //Set the paper selected to false
-      acceptedPapers[targetSession].selected = false;
-
-      // Update the acceptedPapers array in the local storage
-      localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
-
-      // Delete the session from the sessions array
-      sessionsArr.splice(index, 1);
+      // Update the session in the sessions array
+      sessionsArr[index] = newSession;
 
       // Update the sessions array in the local storage
       localStorage.setItem("shedule", JSON.stringify(sessionsArr));
 
       // Show all sessions
       getSessions(organizerConent);
-    });
-
-    //----------------------------------------------
+    } else {
+      alert("Time or Location is not valid");
+    }
   });
+}
+
+// Delete Function, to be called inside the updateSession function, when the delete button is clicked
+function deleteFunction(e, organizerConent) {
+  let sessionID = e.target.parentElement.parentElement.dataset.id;
+  let sessionsArr = JSON.parse(localStorage.getItem("shedule"));
+
+  // Find the index of the session in the sessions array
+  let index = sessionsArr.findIndex((session) => {
+    return session.id == sessionID;
+  });
+
+  //Accept the paper Array
+  let acceptedPapers = JSON.parse(localStorage.getItem("acceptedPapers"));
+
+  //Find the paper i want to delete, in the acceptedPapers array
+  let targetSession = acceptedPapers.findIndex((paper) => {
+    return paper.id == sessionID;
+  });
+
+  //Set the paper selected to false
+  acceptedPapers[targetSession].selected = false;
+
+  // Update the acceptedPapers array in the local storage
+  localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
+
+  // Delete the session from the sessions array
+  sessionsArr.splice(index, 1);
+
+  // Update the sessions array in the local storage
+  localStorage.setItem("shedule", JSON.stringify(sessionsArr));
+
+  // Show all sessions
+  getSessions(organizerConent);
 }
 
 // Check if the new values are valid, in terms of time and location
