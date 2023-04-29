@@ -41,43 +41,7 @@ export async function organizer() {
 
     //Create Session when the add session button is clicked
     addSessionBtn.addEventListener("click", () => {
-      if (
-        acceptedPapers.value == "" ||
-        location.value == "" ||
-        date.value == "" ||
-        startTime.value == "" ||
-        endTime.value == ""
-      ) {
-        alert("Please fill all fields");
-      } else {
-        let session = {
-          acceptedPapers: acceptedPapers.value,
-          location: location.value,
-          date: date.value,
-          startTime: startTime.value,
-          endTime: endTime.value,
-        };
-
-        // Get the parent element of the selected option of the accepted papers
-        let selectedID =
-          acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id;
-
-        //Disable the selected paper option
-        acceptedPapers.options[acceptedPapers.selectedIndex].disabled = true;
-
-        //Update the accepted papers, to disable the selected paper
-        disbaleSelectedPaper(selectedID);
-
-        //Append the session to the sessions
-        appendSession(session);
-
-        //Clear form
-        acceptedPapers.value = "";
-        location.value = "";
-        date.value = "";
-        startTime.value = "";
-        endTime.value = "";
-      }
+      createSession(acceptedPapers, location, date, startTime, endTime);
     });
   });
 }
@@ -286,4 +250,68 @@ function disbaleSelectedPaper(id) {
   });
 
   localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
+}
+
+// Create Session
+function createSession(acceptedPapers, location, date, startTime, endTime) {
+  if (
+    acceptedPapers.value == "" ||
+    location.value == "" ||
+    date.value == "" ||
+    startTime.value == "" ||
+    endTime.value == ""
+  ) {
+    alert("Please fill all fields");
+  } else {
+    let session = {
+      acceptedPapers: acceptedPapers.value,
+      location: location.value,
+      date: date.value,
+      startTime: startTime.value,
+      endTime: endTime.value,
+    };
+
+    let exisingSessions = JSON.parse(localStorage.getItem("shedule")) || [];
+
+    //Check if there is already an exisiting session with same date and time, or within the same range
+    let found = exisingSessions.some((existingSession) => {
+      return (
+        (existingSession.date == session.date &&
+          existingSession.startTime <= session.startTime &&
+          existingSession.endTime >= session.startTime) ||
+        (existingSession.date == session.date &&
+          existingSession.startTime <= session.endTime &&
+          existingSession.endTime >= session.endTime) ||
+        (existingSession.date == session.date &&
+          existingSession.startTime >= session.startTime &&
+          existingSession.endTime <= session.endTime)
+      );
+    });
+
+    if (found) {
+      alert(
+        "Time conflixt, there is already a session at this time. Please choose another time"
+      );
+    } else {
+      // Get the parent element of the selected option of the accepted papers
+      let selectedID =
+        acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id;
+
+      //Disable the selected paper option
+      acceptedPapers.options[acceptedPapers.selectedIndex].disabled = true;
+
+      //Update the accepted papers, to disable the selected paper
+      disbaleSelectedPaper(selectedID);
+
+      //Append the session to the sessions
+      appendSession(session);
+
+      //Clear form
+      acceptedPapers.value = "";
+      location.value = "";
+      date.value = "";
+      startTime.value = "";
+      endTime.value = "";
+    }
+  }
 }
