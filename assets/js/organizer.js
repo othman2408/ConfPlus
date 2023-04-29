@@ -21,6 +21,9 @@ export async function organizer() {
   let sessions = document.querySelector(".sessions");
   let organizerConent = document.querySelector(".organizerContnet");
 
+  // Show all sessions when the organizer page is loaded
+  getSessions(organizerConent);
+
   // Locations and Dates Fetch
   let locations = await getLocations();
   let dates = await getDates();
@@ -44,6 +47,99 @@ export async function organizer() {
   sessions.addEventListener("click", () => {
     getSessions(organizerConent);
   });
+
+  //Update Session
+  let sessionCards = document.querySelectorAll(".sessionCard");
+  updateSession(sessionCards, organizerConent, locations, dates);
+}
+
+// Update Session
+function updateSession(sessionCards, organizerConent, locations, dates) {
+  let papers = getAcceptedPapers();
+  let formTemplate = sessionFormTemplate(locations, dates, papers);
+  let sessionsArr = JSON.parse(localStorage.getItem("shedule"));
+
+  // const formTemplate = sessionFormTemplate(locations, dates, papers);
+  sessionCards.forEach((card) => {
+    // Selectors
+    let updateBtn = card.querySelector(".updateSession");
+    let deleteBtn = card.querySelector(".deleteSession");
+
+    //----------------------------------------------
+
+    // Update Session Action
+    updateBtn.addEventListener("click", (e) => {
+      let sessionID = e.target.parentElement.parentElement.dataset.id;
+
+      //Find session in the sessions array by id
+      let targetSession = sessionsArr.find((session) => {
+        return session.id == sessionID;
+      });
+
+      // Load the form template
+      organizerConent.innerHTML = formTemplate;
+
+      //Set the values of the selected session to the form
+      let paperSelect = document.querySelector("#accptedPapers");
+      paperSelect.value = targetSession.title;
+      let locationSelect = document.querySelector("#location");
+      locationSelect.value = targetSession.location;
+      let dateSelect = document.querySelector("#date");
+      dateSelect.value = targetSession.date;
+      let startTime = document.querySelector("#startTime");
+      startTime.value = targetSession.startTime;
+      let endTime = document.querySelector("#endTime");
+      endTime.value = targetSession.endTime;
+
+      let addSessionBtn = document.querySelector(".addSessionBtn");
+
+      // Get new values from the form
+      addSessionBtn.addEventListener("click", (e) => {
+        let newSession = {
+          id: targetSession.id,
+          title: paperSelect.value,
+          location: locationSelect.value,
+          date: dateSelect.value,
+          startTime: startTime.value,
+          endTime: endTime.value,
+        };
+
+        // Check if the new values are valid, in terms of time and location
+        let isValid = checkSession(newSession, sessionsArr);
+
+        // If the new values are valid, update the session
+        if (!isValid) {
+          console.log("not valid");
+        }
+      });
+    });
+
+    // Delete Session Action
+    deleteBtn.addEventListener("click", (e) => {});
+
+    //----------------------------------------------
+  });
+}
+
+function checkSession(newSession, sessionsArr) {
+  let isValid = true;
+  sessionsArr.forEach((session) => {
+    if (
+      session.location == newSession.location &&
+      session.date == newSession.date
+    ) {
+      if (
+        (newSession.startTime >= session.startTime &&
+          newSession.startTime <= session.endTime) ||
+        (newSession.endTime >= session.startTime &&
+          newSession.endTime <= session.endTime)
+      ) {
+        isValid = false;
+        alert("This location is not available at this time");
+      }
+    }
+  });
+  return isValid;
 }
 
 // Session Form Template
@@ -128,7 +224,7 @@ function sessionFormTemplate(locations, dates, acceptedPapers) {
 function sessionCardTemplate(session) {
   return `
     <!-- Start Session Card Template -->
-      <div class="sessionCard">
+      <div class="sessionCard" data-id = ${session.id}>
         <!-- Start Session Card Title -->
         <div class="title">
           <h1>${session.title}</h1>
@@ -271,6 +367,7 @@ function createSession() {
     alert("Please fill all fields");
   } else {
     let session = {
+      id: acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id,
       title: acceptedPapers.value,
       location: location.value,
       date: date.value,
