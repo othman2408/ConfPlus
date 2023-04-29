@@ -31,17 +31,11 @@ export async function organizer() {
 
     organizerConent.innerHTML = sessionFormTemplate(locations, dates, papers);
 
-    //Selectors
-    let acceptedPapers = document.querySelector("#accptedPapers");
-    let location = document.querySelector("#location");
-    let date = document.querySelector("#date");
-    let startTime = document.querySelector("#startTime");
-    let endTime = document.querySelector("#endTime");
     let addSessionBtn = document.querySelector(".addSessionBtn");
 
     //Create Session when the add session button is clicked
     addSessionBtn.addEventListener("click", () => {
-      createSession(acceptedPapers, location, date, startTime, endTime);
+      createSession();
     });
   });
 }
@@ -253,7 +247,14 @@ function disbaleSelectedPaper(id) {
 }
 
 // Create Session
-function createSession(acceptedPapers, location, date, startTime, endTime) {
+function createSession() {
+  //Selectors
+  let acceptedPapers = document.querySelector("#accptedPapers");
+  let location = document.querySelector("#location");
+  let date = document.querySelector("#date");
+  let startTime = document.querySelector("#startTime");
+  let endTime = document.querySelector("#endTime");
+
   if (
     acceptedPapers.value == "" ||
     location.value == "" ||
