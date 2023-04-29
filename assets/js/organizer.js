@@ -50,7 +50,11 @@ export async function organizer() {
 
   //Update Session
   let sessionCards = document.querySelectorAll(".sessionCard");
-  updateSession(sessionCards, organizerConent, locations, dates);
+  let update = () => {
+    updateSession(sessionCards, organizerConent, locations, dates);
+  };
+
+  update();
 }
 
 // Update Session
@@ -130,7 +134,37 @@ function updateSession(sessionCards, organizerConent, locations, dates) {
     });
 
     // Delete Session Action
-    deleteBtn.addEventListener("click", (e) => {});
+    deleteBtn.addEventListener("click", (e) => {
+      let sessionID = e.target.parentElement.parentElement.dataset.id;
+
+      // Find the index of the session in the sessions array
+      let index = sessionsArr.findIndex((session) => {
+        return session.id == sessionID;
+      });
+
+      //Accept the paper Array
+      let acceptedPapers = JSON.parse(localStorage.getItem("acceptedPapers"));
+
+      //Find the paper i want to delete, in the acceptedPapers array
+      let targetSession = acceptedPapers.findIndex((paper) => {
+        return paper.id == sessionID;
+      });
+
+      //Set the paper selected to false
+      acceptedPapers[targetSession].selected = false;
+
+      // Update the acceptedPapers array in the local storage
+      localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
+
+      // Delete the session from the sessions array
+      sessionsArr.splice(index, 1);
+
+      // Update the sessions array in the local storage
+      localStorage.setItem("shedule", JSON.stringify(sessionsArr));
+
+      // Show all sessions
+      getSessions(organizerConent);
+    });
 
     //----------------------------------------------
   });
