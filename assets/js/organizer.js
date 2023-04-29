@@ -81,6 +81,7 @@ function updateSession(sessionCards, organizerConent, locations, dates) {
 
       //Set the values of the selected session to the form
       let paperSelect = document.querySelector("#accptedPapers");
+      paperSelect.disabled = true;
       paperSelect.value = targetSession.title;
       let locationSelect = document.querySelector("#location");
       locationSelect.value = targetSession.location;
@@ -108,8 +109,22 @@ function updateSession(sessionCards, organizerConent, locations, dates) {
         let isValid = checkSession(newSession, sessionsArr);
 
         // If the new values are valid, update the session
-        if (!isValid) {
-          console.log("not valid");
+        if (isValid) {
+          // Find the index of the session in the sessions array
+          let index = sessionsArr.findIndex((session) => {
+            return session.id == sessionID;
+          });
+
+          // Update the session in the sessions array
+          sessionsArr[index] = newSession;
+
+          // Update the sessions array in the local storage
+          localStorage.setItem("shedule", JSON.stringify(sessionsArr));
+
+          // Show all sessions
+          getSessions(organizerConent);
+        } else {
+          alert("Time or Location is not valid");
         }
       });
     });
@@ -121,24 +136,25 @@ function updateSession(sessionCards, organizerConent, locations, dates) {
   });
 }
 
+// Check if the new values are valid, in terms of time and location
 function checkSession(newSession, sessionsArr) {
   let isValid = true;
+
   sessionsArr.forEach((session) => {
     if (
-      session.location == newSession.location &&
-      session.date == newSession.date
+      session.location === newSession.location &&
+      session.date === newSession.date &&
+      ((session.startTime >= newSession.startTime &&
+        session.startTime < newSession.endTime) ||
+        (session.endTime > newSession.startTime &&
+          session.endTime <= newSession.endTime) ||
+        (session.startTime <= newSession.startTime &&
+          session.endTime >= newSession.endTime))
     ) {
-      if (
-        (newSession.startTime >= session.startTime &&
-          newSession.startTime <= session.endTime) ||
-        (newSession.endTime >= session.startTime &&
-          newSession.endTime <= session.endTime)
-      ) {
-        isValid = false;
-        alert("This location is not available at this time");
-      }
+      isValid = false;
     }
   });
+
   return isValid;
 }
 
@@ -382,13 +398,16 @@ function createSession() {
       return (
         (existingSession.date == session.date &&
           existingSession.startTime <= session.startTime &&
-          existingSession.endTime >= session.startTime) ||
+          existingSession.endTime >= session.startTime &&
+          existingSession.location == session.location) ||
         (existingSession.date == session.date &&
           existingSession.startTime <= session.endTime &&
-          existingSession.endTime >= session.endTime) ||
+          existingSession.endTime >= session.endTime &&
+          existingSession.location == session.location) ||
         (existingSession.date == session.date &&
           existingSession.startTime >= session.startTime &&
-          existingSession.endTime <= session.endTime)
+          existingSession.endTime <= session.endTime &&
+          existingSession.location == session.location)
       );
     });
 
