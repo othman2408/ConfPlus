@@ -412,6 +412,8 @@ function createSession() {
     endTime.value == ""
   ) {
     alert("Please fill all fields");
+  } else if ((startTime + 12).value >= (endTime + 12).value) {
+    alert("Start time must be before end time");
   } else {
     let session = {
       id: acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id,
