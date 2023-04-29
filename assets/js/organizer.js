@@ -59,11 +59,14 @@ export async function organizer() {
         };
 
         // Get the parent element of the selected option of the accepted papers
-        let parent =
+        let selectedID =
           acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id;
 
+        //Disable the selected paper option
+        acceptedPapers.options[acceptedPapers.selectedIndex].disabled = true;
+
         //Update the accepted papers, to disable the selected paper
-        updateAcceptedPapers(parent);
+        disbaleSelectedPaper(selectedID);
 
         //Append the session to the sessions
         appendSession(session);
@@ -80,7 +83,7 @@ export async function organizer() {
 }
 
 // Session Form Template
-function sessionFormTemplate(locations, dates, acceptedPapersArr) {
+function sessionFormTemplate(locations, dates, acceptedPapers) {
   return `
         <!-- Start Organizer Form -->
         <div class="organizerForm">
@@ -90,7 +93,7 @@ function sessionFormTemplate(locations, dates, acceptedPapersArr) {
               <label for="">Accepted Papers</label>
               <select name="" id="accptedPapers">
                 <option value="" selected disabled>Select a Paper</option>
-                ${acceptedPapersArr
+                ${acceptedPapers
                   .map((paper) => {
                     if (paper.selected == false) {
                       return `<option data-id = "${paper.id}" value="${paper.title}">${paper.title}</option>`;
@@ -187,38 +190,54 @@ function sessionCardTemplate(paper) {
   `;
 }
 
-//Get accepted papers
+//Check if there is an accepted paper array in the local storage, if yes, get it, if no, filter the papers array to get the accepted papers, then check if the papers when method calls more again, so do not duplicate the accepted papers
 function getAcceptedPapers() {
-  let papers = JSON.parse(localStorage.getItem("papers"));
+  let allPapers = JSON.parse(localStorage.getItem("papers"));
 
-  let allAcceptedPapers = [];
+  // Check if there are accepted papers in storage
+  if (localStorage.getItem("acceptedPapers")) {
+    let acceptedPapers = JSON.parse(localStorage.getItem("acceptedPapers"));
 
-  if (localStorage.getItem("selectedPapers") == null) {
-    papers.filter((paper) => {
-      if (paper.evaluation != null && paper.evaluation.evaluation >= 2) {
-        // paper.selected = false;
-        allAcceptedPapers.push(paper);
+    // Loop through all papers in local storage
+    allPapers.forEach((paper) => {
+      let found = false;
+
+      // Check if paper is already in accepted papers
+      for (let i = 0; i < acceptedPapers.length; i++) {
+        if (acceptedPapers[i].id === paper.id) {
+          found = true;
+          break;
+        }
+      }
+
+      // If paper is not in accepted papers, but it is accepted, add it
+      if (
+        !found &&
+        paper.evaluation != null &&
+        paper.evaluation.evaluation >= 2
+      ) {
+        paper.selected = false;
+        acceptedPapers.push(paper);
       }
     });
+
+    localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
+
+    return JSON.parse(localStorage.getItem("acceptedPapers"));
   } else {
-    let acceptedPapers = JSON.parse(localStorage.getItem("acceptedPapers"));
-    papers.forEach((paper) => {
-      acceptedPapers.forEach((acceptedPaper) => {
-        if (paper.id != acceptedPaper.id) {
-          allAcceptedPapers.push(paper);
-        }
-      });
+    // If there are no accepted papers in storage, create new array
+    let acceptedPapers = [];
+    allPapers.forEach((paper) => {
+      if (paper.evaluation != null && paper.evaluation.evaluation >= 2) {
+        paper.selected = false;
+        acceptedPapers.push(paper);
+      }
     });
+
+    localStorage.setItem("acceptedPapers", JSON.stringify(acceptedPapers));
+
+    return JSON.parse(localStorage.getItem("acceptedPapers"));
   }
-
-  //Set all accepted papers selected to false
-  allAcceptedPapers.forEach((paper) => {
-    paper.selected = false;
-  });
-
-  localStorage.setItem("acceptedPapers", JSON.stringify(allAcceptedPapers));
-
-  return JSON.parse(localStorage.getItem("acceptedPapers"));
 }
 
 //Get Locations
@@ -256,12 +275,12 @@ function appendSession(session) {
   }
 }
 
-// Disable the selected paper, and update the accepted papers
-function updateAcceptedPapers(paperID) {
+// Update Selected Paper, to disable it from being selected again
+function disbaleSelectedPaper(id) {
   let acceptedPapers = getAcceptedPapers();
 
   acceptedPapers.forEach((paper) => {
-    if (paper.id == paperID) {
+    if (paper.id == id) {
       paper.selected = true;
     }
   });
