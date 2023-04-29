@@ -25,18 +25,24 @@ export async function organizer() {
   let locations = await getLocations();
   let dates = await getDates();
 
-  //Show Organizer form when the create session button is clicked
+  //Show Organizer form when the create session button is clicked, to create a session
   createSessionBtn.addEventListener("click", () => {
     let papers = getAcceptedPapers();
 
     organizerConent.innerHTML = sessionFormTemplate(locations, dates, papers);
 
+    // Selectors
     let addSessionBtn = document.querySelector(".addSessionBtn");
 
     //Create Session when the add session button is clicked
     addSessionBtn.addEventListener("click", () => {
       createSession();
     });
+  });
+
+  //Show all sessions when the sessions button is clicked
+  sessions.addEventListener("click", () => {
+    getSessions(organizerConent);
   });
 }
 
@@ -119,22 +125,22 @@ function sessionFormTemplate(locations, dates, acceptedPapers) {
 }
 
 // Session Card Template
-function sessionCardTemplate(paper) {
+function sessionCardTemplate(session) {
   return `
     <!-- Start Session Card Template -->
       <div class="sessionCard">
         <!-- Start Session Card Title -->
         <div class="title">
-          <h1>${paper.title}</h1>
+          <h1>${session.title}</h1>
         </div>
         <!-- End Session Card Title -->
 
         <!-- Start Card Content -->
         <div class="sessionContent">
           <ul>
-            <li>Location:</li>
-            <li>Date:</li>
-            <li>Time:</li>
+            <li>Location: ${session.location}</li>
+            <li>Date: ${session.date}</li>
+            <li>Time: ${session.startTime} - ${session.endTime}</li>
           </ul>
         </div>
         <!-- End Card Content -->
@@ -265,7 +271,7 @@ function createSession() {
     alert("Please fill all fields");
   } else {
     let session = {
-      acceptedPapers: acceptedPapers.value,
+      title: acceptedPapers.value,
       location: location.value,
       date: date.value,
       startTime: startTime.value,
@@ -314,5 +320,16 @@ function createSession() {
       startTime.value = "";
       endTime.value = "";
     }
+  }
+}
+
+//Get the sessions from the local storage
+function getSessions(organizerConent) {
+  if (localStorage.getItem("shedule")) {
+    let sessions = JSON.parse(localStorage.getItem("shedule"));
+    let sessionsHTML = sessions.map((session) => {
+      return sessionCardTemplate(session);
+    });
+    organizerConent.innerHTML = sessionsHTML.join(" ");
   }
 }
