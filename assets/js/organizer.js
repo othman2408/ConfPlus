@@ -1,3 +1,6 @@
+// Import the success, Error, and Warning Alerts from the script.js file
+import { success, error, warning } from "./script.js";
+
 // Link: Locations and Dates
 const locations =
   "https://gist.githubusercontent.com/Athman-aa1808162/3f0f92091de211b973986d438ca65e01/raw/336154438004b7764da79427edf9b5b0829c2f2f/locations";
@@ -46,13 +49,10 @@ export async function organizer() {
       presenter.value = updatePresenterName(e);
     });
 
-    addSessionBtn.addEventListener("click", () => {
-      console.log("clicked");
-    });
-
     //Create Session when the add session button is clicked
     addSessionBtn.addEventListener("click", () => {
       createSession();
+      success("Session Created Successfully");
     });
   });
 
@@ -78,6 +78,7 @@ function updateSession(organizerConent, locations, dates) {
     } else if (e.target.classList.contains("deleteSession")) {
       // Delete button was clicked
       deleteFunction(e, organizerConent);
+      success("Session Deleted Successfully");
     }
   });
 }
@@ -140,8 +141,10 @@ function updateFunction(e, formTemplate, organizerConent) {
 
       // Show all sessions
       getSessions(organizerConent);
+      success("Session Updated Successfully");
     } else {
-      alert("Time or Location is not valid");
+      // alert("Time or Location is not valid");
+      warning("Time or Location is not valid");
     }
   });
 }
@@ -433,9 +436,9 @@ function createSession() {
     startTime.value == "" ||
     endTime.value == ""
   ) {
-    alert("Please fill all fields");
+    warning("Please fill in all fields");
   } else if ((startTime + 12).value >= (endTime + 12).value) {
-    alert("Start time must be before end time");
+    warning("Start time should be less than end time");
   } else {
     let session = {
       id: acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id,
@@ -468,8 +471,8 @@ function createSession() {
     });
 
     if (found) {
-      alert(
-        "Time conflixt, there is already a session at this time. Please choose another time"
+      warning(
+        "Time Conflict, there is already a session at this time. Please choose another time"
       );
     } else {
       // Get the parent element of the selected option of the accepted papers
@@ -491,6 +494,7 @@ function createSession() {
       date.value = "";
       startTime.value = "";
       endTime.value = "";
+      presenter.value = "Presenter Name";
     }
   }
 }

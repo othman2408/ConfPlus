@@ -1,3 +1,6 @@
+// Import the success, Error, and Warning Alerts from the script.js file
+import { success, error, warning } from "./script.js";
+
 // Paper class
 class paper {
   static counter = 1;
@@ -99,17 +102,16 @@ export async function paperSubmission() {
     //Add the new author to the presenters drop list
     appendAuthorsToPresenterList(authorsArray, presentersDropList);
 
-    console.log(authorsArray);
+    //Show A Success Alert
   });
 
   //Add the select presnter to the presenters container
   presentersDropList.addEventListener("change", (e) => {
     let id = e.target.options[e.target.selectedIndex].getAttribute("data-id");
+
     presentersContainer.innerHTML = `<li class = "selectedPresenter" data-id = ${id}>${
       e.target.options[e.target.selectedIndex].innerHTML
     }`;
-    //get thhe id from the attribute data-id
-    console.log();
   });
 
   // Close the add author form when clicking cancel
@@ -121,6 +123,16 @@ export async function paperSubmission() {
   // Submit the paper
   submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
+
+    //Check if the title and the abstract and the presnter are empty, if so show a warning alert
+    if (
+      titleInput.value == "" ||
+      abstractInput.value == "" ||
+      presentersContainer.innerHTML == ""
+    ) {
+      warning("Please fill all the fields");
+      return;
+    }
     let presenter = document.querySelector(".selectedPresenter").innerText;
     createPaper(
       titleInput,
@@ -129,6 +141,16 @@ export async function paperSubmission() {
       presenter,
       reviewrsArray
     );
+
+    //Show a success alert
+    success("Paper Submitted Successfully");
+
+    //Clear the form
+    titleInput.value = "";
+    abstractInput.value = "";
+    authorsContainer.innerHTML = "";
+    presentersContainer.innerHTML = "";
+    presentersDropList.innerHTML = `<option value="" selected disabled>Select Presenter</option>`;
   });
 }
 
@@ -266,7 +288,7 @@ function addAuthor(fname, lname, email, affiliationSelect, authorsArr) {
     email.value = "";
     affiliationSelect.value = "";
   } else {
-    alert("Please fill all the fields");
+    warning("Please fill all the fields");
   }
 }
 

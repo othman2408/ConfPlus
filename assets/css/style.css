@@ -35,31 +35,32 @@ a {
     text-decoration: none;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* End Global Rules */
 
 /* Start Media Query */
 
 
-@media (max-width: 797px) {
-    .header .nav ul {
-        display: none;
-    }
-
-    .header .nav .menu-icon {
-        display: block !important;
+@media (max-width: 815px) {
+    .header {
+        flex-direction: column;
+        gap: 2rem;
     }
 
     .main .schedule .row-1 {
-        flex-wrap: wrap;
-        justify-content: center !important;
-        align-items: center;
+        flex-direction: column;
         gap: 2rem;
+        justify-content: center;
     }
 
     .main .schedule .row-1 .title {
         text-align: center;
     }
 }
+
 
 @media (max-width: 992px) {
     .footer .footer-row-1 {
@@ -86,6 +87,12 @@ a {
     font-weight: bold;
     border-radius: 2rem;
     color: #D6D8DC;
+}
+
+.no-sessions {
+    color: #fcfcfd;
+    font-size: 2rem;
+    text-align: center;
 }
 
 /* End Media Query */
@@ -142,7 +149,8 @@ a {
 /* Start Main */
 .main {
     grid-area: main;
-    margin: 7rem 0 0 0;
+    margin: 5rem 0 0 0;
+    overflow: hidden;
 }
 
 .main .hero {
@@ -313,6 +321,7 @@ a {
 
 .main .schedule .card-container .card .card-image img {
     width: 300px;
+    border-radius: 16px;
 }
 
 .main .schedule .card-container .card .cardInfo {
@@ -1084,16 +1093,23 @@ a {
 /* End Paper */
 
 /* Start Reveiw */
+.reviewContainer {
+    width: 100%;
+}
+
+.reviewContainer h1 {
+    color: #777E90;
+    font-size: 3rem;
+    font-weight: 700;
+    margin: .5rem 1rem;
+    text-align: center;
+}
+
 .papersContainer {
-    /* display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 80%; */
     width: 100%;
     padding: 3rem 8rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
-    /* Make justify-content space between  */
     justify-items: center;
     gap: 1rem;
 }
@@ -1102,7 +1118,7 @@ a {
     background-color: #141416;
     color: #FCFCFD;
     padding: 1rem 1rem;
-    border-radius: 16px;
+    border-radius: 16px 5px 6px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1415,6 +1431,10 @@ a {
     border: none;
     outline: none;
     appearance: none;
+}
+
+.organizer .organizerContnet form .presenter input {
+    background-color: rgba(66, 66, 66, 0.829);
 }
 
 .organizer .organizerContnet form .time input::-webkit-calendar-picker-indicator {

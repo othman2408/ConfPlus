@@ -35,9 +35,14 @@ datesSelect.innerHTML =
   `<option value="" disabled selected>Choose a Date</option>` +
   datesArr.map((date) => `<option>${date.date}</option>`);
 
-sheduleContainer.innerHTML = sessions
-  .map((session) => cardTemplate(session))
-  .join("");
+// Check if there is no available sessions at this date, show a message
+if (sessions === null || sessions.length === 0) {
+  sheduleContainer.innerHTML = `<h1 class="no-sessions">No Sessions Available</h1>`;
+} else {
+  sheduleContainer.innerHTML = sessions
+    .map((session) => cardTemplate(session))
+    .join("");
+}
 
 // Add Event Listener to the dates select
 datesSelect.addEventListener("change", onDateSelect);
@@ -49,9 +54,15 @@ function onDateSelect(e) {
   //Get the sessions of the locla storage
   let sessions = JSON.parse(localStorage.getItem("shedule"));
   //Add the sessions to the container
-  sheduleContainer.innerHTML = getSessionsForDate(sessions, choosenDate)
-    .map(cardTemplate)
-    .join("");
+
+  //Check if there is no available sessions at this date, show a message
+  if (getSessionsForDate(sessions, choosenDate).length === 0) {
+    sheduleContainer.innerHTML = `<h1 class="no-sessions">No Sessions Available</h1>`;
+  } else {
+    sheduleContainer.innerHTML = getSessionsForDate(sessions, choosenDate)
+      .map((session) => cardTemplate(session))
+      .join("");
+  }
 }
 
 // Get Sessions
@@ -64,7 +75,7 @@ function cardTemplate(session) {
     <!-- Start Card -->
         <div class="card">
           <div class="card-image">
-            <img src="./assets/images/card-img.png" alt="" />
+            <img src="./assets/images/card-img.jpg" alt="" />
           </div>
           <!-- Start Card Info -->
           <div class="cardInfo">
@@ -129,4 +140,37 @@ function cardTemplate(session) {
     <!-- End Card Container -->
 
   `;
+}
+
+// Success Alert
+export function success(message) {
+  return Swal.fire({
+    icon: "success",
+    title: "Success!",
+    text: `${message}`,
+    timer: 2000,
+    showConfirmButton: false,
+  });
+}
+
+// Error Alert
+export function error(message) {
+  return Swal.fire({
+    icon: "error",
+    title: "Error!",
+    text: `${message}`,
+    timer: 2000,
+    showConfirmButton: false,
+  });
+}
+
+// Warning Alert
+export function warning(message) {
+  return Swal.fire({
+    icon: "warning",
+    title: "Warning!",
+    text: `${message}`,
+    timer: 2000,
+    showConfirmButton: false,
+  });
 }

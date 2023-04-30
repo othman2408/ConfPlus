@@ -1,3 +1,6 @@
+//Import the success, Error, and Warning Alerts from the script.js file
+import { success, error, warning } from "./script.js";
+
 export async function paperReview(userID) {
   //Load page content
   const mainContent = document.querySelector(".main");
@@ -203,7 +206,7 @@ function evaluatePaper(e) {
     paperStrength.value == "" ||
     paperWeakness.value == ""
   ) {
-    alert("Please fill all fields");
+    warning("Please fill all fields");
   } else {
     // Get Papers from Local Storage
     let papers = JSON.parse(localStorage.getItem("papers"));
@@ -221,7 +224,7 @@ function evaluatePaper(e) {
       //Update Local Storage papers
       localStorage.setItem("papers", JSON.stringify(papers));
     } else {
-      alert(`Paper with id ${id} not found`);
+      error(`Paper with id ${id} not found`);
     }
   }
 }
