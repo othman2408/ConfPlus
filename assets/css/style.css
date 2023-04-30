@@ -42,6 +42,33 @@ html {
 /* End Global Rules */
 
 /* Start Media Query */
+@media (max-width:500px) {
+    .schedule {
+        place-content: center;
+    }
+
+    .footer {
+        padding: 0 2rem !important;
+    }
+
+    .footer .footer-row-1 .news-letter .email-input input {
+        width: 20rem !important;
+    }
+}
+
+@media (max-width:700px) {
+    .header {
+        padding: 3rem 2rem !important;
+    }
+
+    .papersContainer {
+        padding: 3rem 0 !important;
+    }
+
+    .paper {
+        padding: 0 5rem !important;
+    }
+}
 
 
 @media (max-width: 815px) {
@@ -550,12 +577,12 @@ html {
 }
 
 .footer .footer-row-1 .news-letter p {
-    margin-top: 1rem;
+    argin-top: 1rem;
     color: #FCFCFD;
     font-weight: 400;
-    font-size: 14px;
+    font-size: .9rem;
     font-family: var(--second-font);
-
+    padding: .2rem;
 }
 
 .footer .footer-row-1 .news-letter .email-input {
@@ -735,7 +762,7 @@ html {
     font-weight: 600;
     font-family: var(--second-font);
     font-size: 16px;
-    padding: 11px 144.359px 13px 143.641px;
+    height: 2.6rem;
     cursor: pointer;
 }
 
@@ -980,7 +1007,7 @@ html {
     color: #FFFFFF;
     font-weight: 700;
     font-size: 16px;
-    padding: 11px 144.359px 13px 143.641px;
+    height: 2.6rem;
     cursor: pointer;
     border: none;
 }
