@@ -10,6 +10,7 @@ xxl: 1400px */
     --main-font: 'DM Sans', sans-serif;
     --second-font: 'Poppins', sans-serif;
     --blue: #3772FF;
+    --main-transition: all .2s ease;
 }
 
 * {
@@ -118,8 +119,22 @@ a {
     list-style-type: none;
 }
 
+.header nav ul li a {
+    transition: var(--main-transition);
+}
+
+.header nav ul li a:hover {
+    color: #3772ff;
+}
+
 .header .header-btns a {
     padding: .6rem 1.5rem;
+    transition: all 300ms ease;
+}
+
+.header .header-btns a:hover {
+    background-color: #044eff;
+
 }
 
 /* End Header */
@@ -173,6 +188,12 @@ a {
 .main .hero .hero-text .start {
     margin-top: 2rem;
     padding: .6rem 1.5rem;
+    transition: all 300ms ease;
+}
+
+.main .hero .hero-text .start:hover {
+    background-color: #1e57db;
+    box-shadow: -1px 2px 100px 20px rgb(32 73 172 / 40%)
 }
 
 .main .hero img {
@@ -392,6 +413,13 @@ a {
     font-size: 16px;
     color: #FCFCFD;
     padding: .5rem 2rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.main .schedule .row-3 a:hover {
+    border-color: #1a42a1;
+    background-color: transparent;
 }
 
 /* End Schedule */
@@ -416,6 +444,11 @@ a {
     width: 100%;
 }
 
+.footer .footer-row-1 .logo img {
+    user-select: none;
+    pointer-events: none;
+}
+
 .footer .footer-row-1 .list h4 {
     padding-bottom: 1rem;
     font-weight: 500;
@@ -436,6 +469,12 @@ a {
     font-weight: 700;
     font-size: 14px;
     color: #777E90;
+    transition: var(--main-transition);
+    border-bottom: 2px solid transparent;
+}
+
+.footer .footer-row-1 .list ul li a:hover {
+    border-color: var(--blue);
 }
 
 .footer .footer-row-1 .news-letter {
@@ -450,7 +489,7 @@ a {
 }
 
 .footer .footer-row-1 .news-letter p {
-    margin-top: 2rem;
+    margin-top: 1rem;
     color: #FCFCFD;
     font-weight: 400;
     font-size: 14px;
@@ -474,6 +513,16 @@ a {
     font-family: var(--second-font);
     color: #FCFCFD;
     font-weight: 500;
+    transition: var(--main-transition);
+}
+
+.footer .footer-row-1 .news-letter .email-input input:focus {
+    border-color: #3772FF;
+}
+
+.footer .footer-row-1 .news-letter .email-input input:focus+span {
+    background: #2a59c5;
+    transform: translateX(-5px);
 }
 
 .footer .footer-row-1 .news-letter .email-input span {
@@ -488,6 +537,7 @@ a {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: var(--main-transition);
 }
 
 .footer .footer-row-1 .news-letter .email-input span i {
@@ -1315,7 +1365,7 @@ a {
 .organizer .organizerContnet form .time {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.1rem;
 }
 
 .organizer .organizerContnet form .time .timeInputs {

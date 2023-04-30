@@ -284,6 +284,7 @@ function sessionCardTemplate(session) {
             <li>Location: ${session.location}</li>
             <li>Date: ${session.date}</li>
             <li>Time: ${session.startTime} - ${session.endTime}</li>
+            <li>Presenter: ${session.presenter}</li>
           </ul>
         </div>
         <!-- End Card Content -->
