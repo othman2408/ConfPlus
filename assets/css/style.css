@@ -315,92 +315,144 @@ a {
     width: 300px;
 }
 
-.main .schedule .card-container .card .card-links {
-    padding: .2rem;
+.main .schedule .card-container .card .cardInfo {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    justify-content: space-between;
 }
 
-.main .schedule .card-container .card .card-links .row1 {
+.main .schedule .card-container .card .cardInfo .cardTitle {
+    border-bottom: 1px solid #353945;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    padding-top: 1rem;
+}
+
+.main .schedule .card-container .card .cardInfo .cardTitle h2 {
+    text-align: center;
+    line-height: 24px;
+    font-weight: 500;
+    color: #FCFCFD;
+    font-family: var(--second-font);
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardPresenter,
+.main .schedule .card-container .card .cardInfo .cardContent .cardDate,
+.main .schedule .card-container .card .cardInfo .cardContent .cardTime {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardPresenter .presenter,
+.main .schedule .card-container .card .cardInfo .cardContent .cardDate .date,
+.main .schedule .card-container .card .cardInfo .cardContent .cardTime .time,
+.main .schedule .card-container .card .cardInfo .cardContent .cardLocation .location {
+    display: flex;
+    gap: .2rem;
+    align-items: center;
+    min-width: 110px;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardLocation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
-.main .schedule .card-container .card .card-links .row1 a {
+.main .schedule .card-container .card .cardInfo .cardContent .cardPresenter .presenter i,
+.main .schedule .card-container .card .cardInfo .cardContent .cardDate .date i,
+.main .schedule .card-container .card .cardInfo .cardContent .cardTime .time i,
+.main .schedule .card-container .card .cardInfo .cardContent .cardLocation .location i {
+    font-size: 1.4rem;
+    color: white;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardPresenter .presenter p,
+.main .schedule .card-container .card .cardInfo .cardContent .cardDate .date p,
+.main .schedule .card-container .card .cardInfo .cardContent .cardTime .time p,
+.main .schedule .card-container .card .cardInfo .cardContent .cardLocation .location p {
+    line-height: 24px;
+    font-weight: 600;
     color: #FCFCFD;
-    font-weight: 500;
-    font-size: 16px;
     font-family: var(--second-font);
+    font-size: 1.1rem;
 }
 
-.main .schedule .card-container .card .card-links .row1 span {
-    color: #45B26B;
-    font-weight: 700;
-    font-size: 12px;
-    font-family: var(--second-font);
-    padding: 2px 4px;
+.main .schedule .card-container .card .cardInfo .cardContent .cardPresenter .presenterContent,
+.main .schedule .card-container .card .cardInfo .cardContent .cardDate .dateContent,
+.main .schedule .card-container .card .cardInfo .cardContent .cardTime .timeContent {
+    padding: .3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardPresenter .presenterContent {
+    box-shadow: inset 0px 0px 0px 2px #F6B93B;
+    background: rgba(255, 255, 255, 0.002);
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardPresenter .presenterContent p {
+    color: #F6B93B;
+    line-height: 26px;
+    font-weight: 500;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardDate .dateContent {
     background: rgba(255, 255, 255, 0.002);
     box-shadow: inset 0px 0px 0px 2px #45B26B;
-    border-radius: 4px;
-    user-select: none;
-    pointer-events: none;
 }
 
-.main .schedule .card-container .card .card-links .row2 {
+.main .schedule .card-container .card .cardInfo .cardContent .cardDate .dateContent p {
+    color: #45B26B;
+    line-height: 26px;
+    font-weight: 500;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardTime .timeContent {
+    background: rgba(255, 255, 255, 0.002);
+    box-shadow: inset 0px 0px 0px 2px #AA7BDA;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardTime .timeContent p {
+    color: #AA7BDA;
+    line-height: 26px;
+    font-weight: 500;
+}
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardLocation {
+    border-top: 1px solid #353945;
+    padding-top: .5rem;
+}
+
+
+.main .schedule .card-container .card .cardInfo .cardContent .cardLocation .cardID {
+    background: #3772FF;
+    border-radius: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-
-.main .schedule .card-container .card .card-links .row2 p {
-    font-family: var(--second-font);
-    color: #E6E8EC;
-    font-weight: 400;
-    font-size: 14px;
-}
-
-.main .schedule .card-container .card .card-links .row3 {
-    border-top: 0.8px solid #353945;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.main .schedule .card-container .card .card-links .row3 a {
+    justify-content: center;
+    padding: .2rem .7rem;
+    line-height: 20px;
     color: #FCFCFD;
     font-weight: 600;
-    font-size: 12px;
     font-family: var(--second-font);
-}
-
-.main .schedule .card-container .card .card-links .row3 a i {
-    color: #777E90;
-    font-size: 14px;
-    padding-right: 4px;
-}
-
-.main .schedule .card-container .card .card-links .row3 span {
-    background: #9757D7;
-    border-radius: 33px;
-    padding: 0.2rem .5rem;
-    color: #FCFCFD;
-    font-weight: 600;
-    font-size: 12px;
+    font-size: 20px;
     user-select: none;
-    pointer-events: none;
-}
-
-.main .schedule .card-container .card .card-links .row3 a,
-.main .schedule .card-container .card .card-links .row3 span {
-    margin-top: 8px;
+    margin-right: .1rem;
 }
 
 .main .schedule .row-3 {
+    margin-top: 5rem;
     grid-area: row3;
-    margin-top: 5.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -555,12 +607,12 @@ a {
 .footer .copyright {
     width: 100%;
     border-top: 0.8px solid #353945;
-    margin: 2rem 0 2rem 0;
+    margin: 2rem 0 1rem 0;
     text-align: center;
 }
 
 .footer .copyright p {
-    margin-top: 30px;
+    margin-top: .8rem;
     color: #777E90;
     font-weight: 400;
     font-size: 12px;
@@ -1326,7 +1378,8 @@ a {
 
 .organizer .organizerContnet form .acceptedPapers,
 .organizer .organizerContnet form .location,
-.organizer .organizerContnet form .date {
+.organizer .organizerContnet form .date,
+.organizer .organizerContnet form .presenter {
     display: flex;
     flex-direction: column;
     gap: .5rem;
@@ -1335,7 +1388,8 @@ a {
 .organizer .organizerContnet form .acceptedPapers label,
 .organizer .organizerContnet form .location label,
 .organizer .organizerContnet form .date label,
-.organizer .organizerContnet form .time label {
+.organizer .organizerContnet form .time label,
+.organizer .organizerContnet form .presenter label {
     color: #B1B5C3;
     font-weight: 700;
     font-family: var(--second-font);
@@ -1347,7 +1401,8 @@ a {
 .organizer .organizerContnet form .acceptedPapers select,
 .organizer .organizerContnet form .location select,
 .organizer .organizerContnet form .date select,
-.organizer .organizerContnet form .time input {
+.organizer .organizerContnet form .time input,
+.organizer .organizerContnet form .presenter input {
     height: 3rem;
     width: 100%;
     background: rgb(38 38 38);
@@ -1356,10 +1411,14 @@ a {
     color: white;
     font-family: var(--second-font);
     padding: .5rem .5rem .5rem 1rem;
-    font-weight: 700;
+    font-weight: 500;
     border: none;
     outline: none;
     appearance: none;
+}
+
+.organizer .organizerContnet form .time input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 .organizer .organizerContnet form .time {
@@ -1445,6 +1504,17 @@ a {
     color: #FCFCFD;
     font-family: var(--main-font);
     font-size: 1.3rem;
+    min-height: 4rem;
+    display: flex;
+
+}
+
+.organizer .sessionCard .sessionContent li i {
+    margin-right: .5rem;
+}
+
+.organizer .sessionCard .sessionContent li p {
+    margin-left: .8rem;
 }
 
 .organizer .sessionCard .cardButtons {
@@ -1453,7 +1523,7 @@ a {
 }
 
 .organizer .sessionCard .cardButtons button {
-    border-radius: 20px;
+    border-radius: 50px;
     border: none;
     padding: 0.3rem 2rem;
     color: #FCFCFD;
@@ -1461,7 +1531,12 @@ a {
     font-weight: 500;
     font-family: var(--second-font);
     cursor: pointer;
-    font-size: .9rem;
+    font-size: 1rem;
+    width: 7.5rem;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .organizer .sessionCard .cardButtons .updateSession {

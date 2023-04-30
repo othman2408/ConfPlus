@@ -30,12 +30,25 @@ export async function organizer() {
 
   //Show Organizer form when the create session button is clicked, to create a session
   createSessionBtn.addEventListener("click", () => {
+    console.log("clicked");
     let papers = getAcceptedPapers();
 
     organizerConent.innerHTML = sessionFormTemplate(locations, dates, papers);
 
     // Selectors
     let addSessionBtn = document.querySelector(".addSessionBtn");
+    let presenter = document.querySelector("#presenter");
+    let paperSelect = document.querySelector("#accptedPapers");
+
+    //Update presenter name when the paper is selected
+    paperSelect.addEventListener("change", (e) => {
+      //Update presenter name when the presenter name input is changed
+      presenter.value = updatePresenterName(e);
+    });
+
+    addSessionBtn.addEventListener("click", () => {
+      console.log("clicked");
+    });
 
     //Create Session when the add session button is clicked
     addSessionBtn.addEventListener("click", () => {
@@ -213,6 +226,13 @@ function sessionFormTemplate(locations, dates, acceptedPapers) {
             </div>
             <!-- End Accepted Papers -->
 
+            <!-- Start Presenter -->
+            <div class="presenter">
+              <label for="">Presenter</label>
+              <input type="text" value="${"Presenter Name"}" name="" id="presenter" disabled/>
+            </div>
+            <!-- End Presenter -->
+
             <!-- Start Location -->
             <div class="location">
               <label for="">Location</label>
@@ -281,10 +301,10 @@ function sessionCardTemplate(session) {
         <!-- Start Card Content -->
         <div class="sessionContent">
           <ul>
-            <li>Location: ${session.location}</li>
-            <li>Date: ${session.date}</li>
-            <li>Time: ${session.startTime} - ${session.endTime}</li>
-            <li>Presenter: ${session.presenter}</li>
+            <li><i class="bi bi-person"></i> Presenter: <p>${session.presenter}</p></li>
+            <li><i class="bi bi-geo-alt"></i> Location: <p>${session.location}</p></li>
+            <li><i class="bi bi-calendar3"></i> Date: <p>${session.date}</p></li>
+            <li><i class="bi bi-clock-history"></i> Time: <p>${session.startTime} - ${session.endTime}</p></li>
           </ul>
         </div>
         <!-- End Card Content -->
@@ -351,7 +371,7 @@ function getAcceptedPapers() {
 //Get Locations
 async function getLocations() {
   const locations =
-    "https://gist.githubusercontent.com/Athman-aa1808162/3f0f92091de211b973986d438ca65e01/raw/336154438004b7764da79427edf9b5b0829c2f2f/locations";
+    "https://gist.githubusercontent.com/Athman-aa1808162/3f0f92091de211b973986d438ca65e01/raw/271b581b9c16265988cbf4dd7938285328449a3c/locations";
 
   let response = await fetch(locations);
   let data = await response.json();
@@ -404,6 +424,7 @@ function createSession() {
   let date = document.querySelector("#date");
   let startTime = document.querySelector("#startTime");
   let endTime = document.querySelector("#endTime");
+  let presenter = document.querySelector("#presenter");
 
   if (
     acceptedPapers.value == "" ||
@@ -419,10 +440,11 @@ function createSession() {
     let session = {
       id: acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id,
       title: acceptedPapers.value,
+      presenter: presenter.value,
       location: location.value,
       date: date.value,
-      startTime: startTime.value,
-      endTime: endTime.value,
+      startTime: formatTime(startTime.value),
+      endTime: formatTime(endTime.value),
     };
 
     let exisingSessions = JSON.parse(localStorage.getItem("shedule")) || [];
@@ -482,4 +504,28 @@ function getSessions(organizerConent) {
     });
     organizerConent.innerHTML = sessionsHTML.join(" ");
   }
+}
+
+//Updaed Presenter name, based on selected paper
+function updatePresenterName(e) {
+  let paperID = e.target.options[e.target.selectedIndex].dataset.id;
+  let paperPresenter = getAcceptedPapers().find((paper) => {
+    return paper.id == paperID;
+  });
+
+  return paperPresenter.presenter;
+}
+
+// Format time to AM/PM
+function formatTime(inputTime) {
+  const [hours, minutes] = inputTime.split(":");
+  const date = new Date();
+  date.setHours(hours);
+  date.setMinutes(minutes);
+  const timeString = date.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+  return timeString;
 }
