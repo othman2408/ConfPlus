@@ -8,6 +8,10 @@ const dates =
   "https://gist.githubusercontent.com/Athman-aa1808162/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
 
 export async function organizer() {
+  // Change the login to logout
+  let login = document.querySelector(".login");
+  login.innerHTML = "Logout";
+
   //Load page content
   const mainContent = document.querySelector(".main");
   const page = await fetch("../../organizer.html");

@@ -25,6 +25,8 @@ export async function loadPage(pageUrl) {
   let request = await fetch(url);
   let data = await request.json();
 
+  let login = document.querySelector(".login");
+  login.innerHTML = "Login";
   // Action done after click the login button
   loginBtn.addEventListener("click", async (e) => {
     e.preventDefault();

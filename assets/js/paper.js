@@ -32,6 +32,9 @@ class author {
 }
 
 export async function paperSubmission() {
+  //Chnage the login to logout
+  let login = document.querySelector(".login");
+  login.innerHTML = "Logout";
   //Load page content
   const mainContent = document.querySelector(".main");
   const page = await fetch("../../paper.html");

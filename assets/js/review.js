@@ -2,6 +2,9 @@
 import { success, error, warning } from "./script.js";
 
 export async function paperReview(userID) {
+  //change the login to logout
+  let login = document.querySelector(".login");
+  login.innerHTML = "Logout";
   //Load page content
   const mainContent = document.querySelector(".main");
   const page = await fetch("../../review.html");
