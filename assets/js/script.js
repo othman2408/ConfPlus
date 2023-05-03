@@ -70,6 +70,7 @@ function getSessionsForDate(sessions, date) {
   return sessions.filter((session) => session.date === date);
 }
 
+// Card Template
 function cardTemplate(session) {
   return `
     <!-- Start Card -->

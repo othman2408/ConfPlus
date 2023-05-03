@@ -1,6 +1,7 @@
 //Import the success, Error, and Warning Alerts from the script.js file
 import { success, error, warning } from "./script.js";
 
+// Login Function
 export async function paperReview(userID) {
   //change the login to logout
   let login = document.querySelector(".login");
@@ -226,9 +227,10 @@ function evaluatePaper(e) {
       target.status = true;
       //Update Local Storage papers
       localStorage.setItem("papers", JSON.stringify(papers));
-    } else {
-      error(`Paper with id ${id} not found`);
     }
+
+    // Show Success Message
+    success("Paper Evaluated Successfully");
   }
 }
 
