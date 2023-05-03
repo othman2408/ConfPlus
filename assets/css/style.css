@@ -175,7 +175,7 @@ html {
 }
 
 .header .header-btns a:hover {
-    background-color: #044eff;
+    background-color: #215cd1;
 
 }
 
@@ -661,7 +661,7 @@ html {
     font-weight: 400;
     font-size: 12px;
     font-family: var(--second-font);
-
+    user-select: none;
 }
 
 /* End Footer */
@@ -772,6 +772,11 @@ html {
     font-size: 16px;
     height: 2.6rem;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.login-container .login-form form button:hover {
+    background: #215cd1;
 }
 
 .login-container .login-form form a {
@@ -1424,6 +1429,7 @@ html {
 .organizer .organizerContnet .organizerForm {
     width: 100%;
     margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 .organizer .organizerContnet form {
@@ -1514,6 +1520,11 @@ html {
     text-align: center;
     width: -webkit-fill-available;
     padding: .5rem;
+    transition: all 200ms ease-in-out;
+}
+
+.organizer .organizerContnet form .addSession a:hover {
+    background: #215cd1;
 }
 
 /* ----End Session Form---- */
@@ -1597,7 +1608,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 200ms cubic-bezier(0.215, 0.610, 0.355, 1);
+    transition: all 100ms ease-in-out;
 }
 
 .organizer .sessionCard .cardButtons .updateSession {

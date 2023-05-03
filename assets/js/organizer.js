@@ -121,8 +121,8 @@ function updateFunction(e, formTemplate, organizerConent) {
       title: paperSelect.value,
       location: locationSelect.value,
       date: dateSelect.value,
-      startTime: startTime.value,
-      endTime: endTime.value,
+      startTime: formatTime(startTime.value),
+      endTime: formatTime(endTime.value),
       presenter: presenter.value,
     };
 
