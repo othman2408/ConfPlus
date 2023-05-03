@@ -151,6 +151,9 @@ export async function paperSubmission() {
     authorsContainer.innerHTML = "";
     presentersContainer.innerHTML = "";
     presentersDropList.innerHTML = `<option value="" selected disabled>Select Presenter</option>`;
+
+    // Clear the authors array
+    authorsArray = [];
   });
 }
 

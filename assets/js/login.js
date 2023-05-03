@@ -1,6 +1,7 @@
 import * as paper from "./paper.js";
 import * as review from "./review.js";
 import * as organizer from "./organizer.js";
+import { success, warning, error } from "./script.js";
 const url =
   "https://raw.githubusercontent.com/cmps350s2023/cmps350-content-m/main/project/users.json";
 
@@ -28,7 +29,12 @@ export async function loadPage(pageUrl) {
   loginBtn.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    if (checker(emailInput.value, passwordInput.value, data)[0] == "author") {
+    if (emailInput.value == "" && passwordInput.value == "") {
+      warning("Please fill all the fields");
+      return;
+    } else if (
+      checker(emailInput.value, passwordInput.value, data)[0] == "author"
+    ) {
       userID = checker(emailInput.value, passwordInput.value, data)[1];
       paper.paperSubmission();
     } else if (
@@ -41,7 +47,7 @@ export async function loadPage(pageUrl) {
     ) {
       organizer.organizer();
     } else {
-      alert("Wrong Email or Password");
+      error("Wrong Email or Password");
     }
   });
 }

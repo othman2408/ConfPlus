@@ -109,6 +109,8 @@ function updateFunction(e, formTemplate, organizerConent) {
   startTime.value = targetSession.startTime;
   let endTime = document.querySelector("#endTime");
   endTime.value = targetSession.endTime;
+  let presenter = document.querySelector("#presenter");
+  presenter.value = targetSession.presenter;
 
   let addSessionBtn = document.querySelector(".addSessionBtn");
 
@@ -121,6 +123,7 @@ function updateFunction(e, formTemplate, organizerConent) {
       date: dateSelect.value,
       startTime: startTime.value,
       endTime: endTime.value,
+      presenter: presenter.value,
     };
 
     // Check if the new values are valid, in terms of time and location
