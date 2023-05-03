@@ -56,7 +56,6 @@ export async function organizer() {
     //Create Session when the add session button is clicked
     addSessionBtn.addEventListener("click", () => {
       createSession();
-      success("Session Created Successfully");
     });
   });
 
@@ -89,8 +88,10 @@ function updateSession(organizerConent, locations, dates) {
 
 //Update Function, to be called inside the updateSession function, when the update button is clicked
 function updateFunction(e, formTemplate, organizerConent) {
+  // Get the id of the session to be updated
   let sessionID = e.target.parentElement.parentElement.dataset.id;
 
+  // Get the sessions array from the local storage
   let sessionsArr = JSON.parse(localStorage.getItem("shedule"));
 
   //Find session in the sessions array by id
@@ -110,9 +111,9 @@ function updateFunction(e, formTemplate, organizerConent) {
   let dateSelect = document.querySelector("#date");
   dateSelect.value = targetSession.date;
   let startTime = document.querySelector("#startTime");
-  startTime.value = targetSession.startTime;
+  startTime.value = extractHours(targetSession.startTime);
   let endTime = document.querySelector("#endTime");
-  endTime.value = targetSession.endTime;
+  endTime.value = extractHours(targetSession.endTime);
   let presenter = document.querySelector("#presenter");
   presenter.value = targetSession.presenter;
 
@@ -441,8 +442,10 @@ function createSession() {
     location.value == "" ||
     date.value == "" ||
     startTime.value == "" ||
-    endTime.value == ""
+    endTime.value == "" ||
+    presenter.value == ""
   ) {
+    //Show warning
     warning("Please fill in all fields");
   } else if ((startTime + 12).value >= (endTime + 12).value) {
     warning("Start time should be less than end time");
@@ -502,6 +505,9 @@ function createSession() {
       startTime.value = "";
       endTime.value = "";
       presenter.value = "Presenter Name";
+
+      //Show success message
+      success("Session Added Successfully");
     }
   }
 }
@@ -539,4 +545,13 @@ function formatTime(inputTime) {
     hour12: true,
   });
   return timeString;
+}
+
+//Extract the number of hours from "AM/PM" time
+function extractHours(time) {
+  const timeRegex = /(\d{1,2}):(\d{2})/;
+  let match = time.match(timeRegex)[0];
+  let [hours, minutes] = match.split(":");
+  hours = hours.padStart(2, "0");
+  return `${hours}:${minutes}`;
 }
