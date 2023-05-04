@@ -197,6 +197,7 @@ function checkSession(newSession, sessionsArr) {
 
   sessionsArr.forEach((session) => {
     if (
+      session.id !== newSession.id &&
       session.location === newSession.location &&
       session.date === newSession.date &&
       ((session.startTime >= newSession.startTime &&
@@ -447,8 +448,11 @@ function createSession() {
   ) {
     //Show warning
     warning("Please fill in all fields");
-  } else if ((startTime + 12).value >= (endTime + 12).value) {
-    warning("Start time should be less than end time");
+  } //Check if the start time is less than the end time
+  else if (startTime.value >= endTime.value) {
+    warning(
+      "The start time must be less than the end time, please chose another time"
+    );
   } else {
     let session = {
       id: acceptedPapers.options[acceptedPapers.selectedIndex].dataset.id,
@@ -463,22 +467,7 @@ function createSession() {
     let exisingSessions = JSON.parse(localStorage.getItem("shedule")) || [];
 
     //Check if there is already an exisiting session with same date and time, or within the same range
-    let found = exisingSessions.some((existingSession) => {
-      return (
-        (existingSession.date == session.date &&
-          existingSession.startTime <= session.startTime &&
-          existingSession.endTime >= session.startTime &&
-          existingSession.location == session.location) ||
-        (existingSession.date == session.date &&
-          existingSession.startTime <= session.endTime &&
-          existingSession.endTime >= session.endTime &&
-          existingSession.location == session.location) ||
-        (existingSession.date == session.date &&
-          existingSession.startTime >= session.startTime &&
-          existingSession.endTime <= session.endTime &&
-          existingSession.location == session.location)
-      );
-    });
+    let found = timeAndLocationChecker(session, exisingSessions);
 
     if (found) {
       warning(
@@ -554,4 +543,24 @@ function extractHours(time) {
   let [hours, minutes] = match.split(":");
   hours = hours.padStart(2, "0");
   return `${hours}:${minutes}`;
+}
+
+//Validate the time and location of the session
+function timeAndLocationChecker(session, exisingSessions) {
+  let found = false;
+  exisingSessions.forEach((exisingSession) => {
+    if (
+      exisingSession.date == session.date &&
+      exisingSession.location == session.location &&
+      ((exisingSession.startTime >= session.startTime &&
+        exisingSession.startTime <= session.endTime) ||
+        (exisingSession.endTime >= session.startTime &&
+          exisingSession.endTime <= session.endTime))
+    ) {
+      found = true;
+    } else if (session.startTime == session.endTime) {
+      found = true;
+    }
+  });
+  return found;
 }

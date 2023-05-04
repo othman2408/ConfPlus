@@ -115,7 +115,7 @@ function cardTemplate(session) {
                   <p>Time</p>
                 </div>
                 <div class="timeContent">
-                  <p>${session.endTime} - ${session.endTime}</p>
+                  <p>${session.startTime} - ${session.endTime}</p>
                 </div>
               </div>
               <!-- End Time -->
