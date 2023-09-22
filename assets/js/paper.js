@@ -266,7 +266,7 @@ function getPapersFromLocal() {
 // Fetch the affiliations from the repo and add them to the affiliation select
 async function getAffiliations(affiliationSelect) {
   let request = await fetch(
-    "https://gist.githubusercontent.com/Athman-aa1808162/d7f5f9c884b3f26f5e490912cdb6713d/raw/81ce86423c51339f1ff2986c11b94da240cb9c30/institutions"
+    "https://gist.githubusercontent.com/othman2408/d7f5f9c884b3f26f5e490912cdb6713d/raw/81ce86423c51339f1ff2986c11b94da240cb9c30/institutions"
   );
   let data = await request.json();
 
