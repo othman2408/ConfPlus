@@ -3,9 +3,9 @@ import { success, error, warning } from "./script.js";
 
 // Link: Locations and Dates
 const locations =
-  "https://gist.githubusercontent.com/Athman-aa1808162/3f0f92091de211b973986d438ca65e01/raw/336154438004b7764da79427edf9b5b0829c2f2f/locations";
+  "https://gist.githubusercontent.com/othman2408/3f0f92091de211b973986d438ca65e01/raw/336154438004b7764da79427edf9b5b0829c2f2f/locations";
 const dates =
-  "https://gist.githubusercontent.com/Athman-aa1808162/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
+  "https://gist.githubusercontent.com/othman2408/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
 
 export async function organizer() {
   // Change the login to logout
@@ -383,7 +383,7 @@ function getAcceptedPapers() {
 //Get Locations
 async function getLocations() {
   const locations =
-    "https://gist.githubusercontent.com/Athman-aa1808162/3f0f92091de211b973986d438ca65e01/raw/271b581b9c16265988cbf4dd7938285328449a3c/locations";
+    "https://gist.githubusercontent.com/othman2408/3f0f92091de211b973986d438ca65e01/raw/271b581b9c16265988cbf4dd7938285328449a3c/locations";
 
   let response = await fetch(locations);
   let data = await response.json();
@@ -394,7 +394,7 @@ async function getLocations() {
 //Get Dates
 async function getDates() {
   const dates =
-    "https://gist.githubusercontent.com/Athman-aa1808162/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
+    "https://gist.githubusercontent.com/othman2408/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
 
   let response = await fetch(dates);
   let data = await response.json();
