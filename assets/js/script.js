@@ -19,7 +19,7 @@ let sessions = JSON.parse(localStorage.getItem("shedule"));
 //Get Dates
 async function getDates() {
   const dates =
-    "https://gist.githubusercontent.com/Athman-aa1808162/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
+    "https://gist.githubusercontent.com/othman2408/61e619e221c2e44ad579b3ea0df7716b/raw/0b094e6bebedd9ea7369133739e0959362179a6b/Dates";
 
   let response = await fetch(dates);
   let data = await response.json();
